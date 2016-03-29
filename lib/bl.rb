@@ -27,6 +27,24 @@ module Bl
       end
     end
 
+    desc "search QUERY", "search issues by QUERY"
+    def search(query)
+      issues = Bl::CLI.client.get('issues', keyword: query).body.each do |i|
+        puts [
+          i.issueType.name,
+          i.issueKey,
+          i.summary,
+          i.priority.name,
+          i.created,
+          i.dueDate,
+          i.updated,
+          i.createdUser.name,
+          i.assignee.name,
+          i.status.name
+        ].join("\t")
+      end
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: ENV['BACKLOG_SPACE_ID'],

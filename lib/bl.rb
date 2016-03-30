@@ -64,6 +64,13 @@ module Bl
       end
     end
 
+    desc "types PROJECT_KEY", "list issue types in the project"
+    def types(pkey)
+      types = Bl::CLI.client.get("projects/#{pkey}/issueTypes").body.each do |t|
+        puts t.name
+      end
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: ENV['BACKLOG_SPACE_ID'],

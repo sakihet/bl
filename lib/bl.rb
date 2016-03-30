@@ -45,6 +45,13 @@ module Bl
       end
     end
 
+    desc "show KEY", "show an issue's details"
+    def show(key)
+      i = Bl::CLI.client.get("issues/#{key}")
+      str = i.body.pretty_inspect
+      puts str
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: ENV['BACKLOG_SPACE_ID'],

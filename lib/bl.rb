@@ -52,6 +52,11 @@ module Bl
       puts str
     end
 
+    desc "close KEY", "close an issue"
+    def close(key)
+      Bl::CLI.client.patch("issues/#{key}", statusId: 4)
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: ENV['BACKLOG_SPACE_ID'],

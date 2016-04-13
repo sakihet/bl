@@ -76,6 +76,13 @@ module Bl
       end
     end
 
+    desc "priorities", "list priorities"
+    def priorities
+      priorities = Bl::CLI.client.get("priorities").body.each do |p|
+        puts [p.id, p.name].join("\t")
+      end
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: ENV['BACKLOG_SPACE_ID'],

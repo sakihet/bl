@@ -9,6 +9,11 @@ module Bl
       puts Bl::VERSION
     end
 
+    desc "config", "show config"
+    def config
+      p Bl::CLI.client
+    end
+
     desc "list", "list issues"
     def list
       issues = Bl::CLI.client.get('issues').body.each do |i|

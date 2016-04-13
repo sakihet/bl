@@ -65,14 +65,14 @@ module Bl
     desc "projects", "list projects"
     def projects
       projects = Bl::CLI.client.get('projects').body.each do |p|
-        puts [p.projectKey, p.name].join("\t")
+        puts [p.id, p.projectKey, p.name].join("\t")
       end
     end
 
     desc "types PROJECT_KEY", "list issue types in the project"
     def types(pkey)
       types = Bl::CLI.client.get("projects/#{pkey}/issueTypes").body.each do |t|
-        puts t.name
+        puts [t.id, t.name].join("\t")
       end
     end
 

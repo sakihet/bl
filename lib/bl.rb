@@ -1,8 +1,11 @@
 require "thor"
 require "backlog_kit"
 require "bl/version"
+require "yaml"
 
 module Bl
+  CONFIG_FILE = '.bl.yml'
+
   class CLI < Thor
     desc "version", "show version"
     def version
@@ -12,6 +15,22 @@ module Bl
     desc "config", "show config"
     def config
       p Bl::CLI.client
+    end
+
+    desc "init", "initialize a default config file"
+    def init
+      filename = File.join(Dir.home, CONFIG_FILE)
+      if File.exists?(filename)
+        puts "#{filename} exits."
+      else
+        config = {
+          space_id: '',
+          api_key: ''
+        }
+        f = File.new(filename, 'w')
+        f.write(config.to_yaml)
+        puts "#{filename} generated."
+      end
     end
 
     desc "list", "list issues"

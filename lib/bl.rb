@@ -95,6 +95,13 @@ module Bl
       end
     end
 
+    desc "statuses", "list statuses"
+    def statuses
+      statuses = Bl::CLI.client.get("statuses").body.each do |s|
+        puts [s.id, s.name].join("\t")
+      end
+    end
+
     desc "priorities", "list priorities"
     def priorities
       priorities = Bl::CLI.client.get("priorities").body.each do |p|

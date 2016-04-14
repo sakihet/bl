@@ -103,9 +103,10 @@ module Bl
     end
 
     def self.client
+      config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
       BacklogKit::Client.new(
-        space_id: ENV['BACKLOG_SPACE_ID'],
-        api_key: ENV['BACKLOG_API_KEY']
+        space_id: config[:space_id],
+        api_key: config[:api_key]
       )
     end
   end

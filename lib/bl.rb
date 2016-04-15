@@ -98,6 +98,13 @@ module Bl
       end
     end
 
+    desc "categories", "list issue categories"
+    def categories(pkey)
+      categories = Bl::CLI.client.get("projects/#{pkey}/categories").body.each do |c|
+        puts [c.id, c.name].join("\t")
+      end
+    end
+
     desc "statuses", "list statuses"
     def statuses
       statuses = Bl::CLI.client.get("statuses").body.each do |s|

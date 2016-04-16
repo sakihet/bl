@@ -36,6 +36,11 @@ module Bl
       end
     end
 
+    desc "count", "count issues"
+    def count
+      puts Bl::CLI.client.get('issues/count').body.count
+    end
+
     desc "list", "list issues"
     def list
       issues = Bl::CLI.client.get('issues').body.each do |i|

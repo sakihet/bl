@@ -126,6 +126,13 @@ module Bl
       end
     end
 
+    desc "resolutions", "list resolutions"
+    def resolutions
+      resolutions = Bl::CLI.client.get("resolutions").body.each do |r|
+        puts [r.id, r.name].join("\t")
+      end
+    end
+
     def self.client
       @config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
       BacklogKit::Client.new(

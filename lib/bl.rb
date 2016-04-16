@@ -54,9 +54,11 @@ module Bl
       end
     end
 
-    desc "search QUERY", "search issues by QUERY"
-    def search(query)
-      issues = Bl::CLI.client.get('issues', keyword: query).body.each do |i|
+    desc "search", "search issues"
+    option :keyword
+    option :categoryId, type: :array
+    def search
+      issues = Bl::CLI.client.get('issues', options.to_h).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,

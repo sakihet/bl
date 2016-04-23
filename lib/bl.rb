@@ -42,8 +42,14 @@ module Bl
     end
 
     desc "list", "list issues"
+    option :all, type: :boolean
     def list
-      issues = Bl::CLI.client.get('issues').body.each do |i|
+      if options[:all]
+        issues = Bl::CLI.client.get('issues').body
+      else
+        issues = Bl::CLI.client.get('issues', statusId: [1, 2, 3]).body
+      end
+      issues.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,

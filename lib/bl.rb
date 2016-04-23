@@ -89,6 +89,8 @@ module Bl
     desc "close KEY", "close an issue"
     def close(key)
       Bl::CLI.client.patch("issues/#{key}", statusId: 4)
+      issue = Bl::CLI.client.get("issues/#{key}")
+      puts "issue closed: #{issue.body.issueKey}\t#{issue.body.summary}"
     end
 
     desc "projects", "list projects"

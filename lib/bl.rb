@@ -65,7 +65,7 @@ module Bl
           i.dueDate,
           i.updated,
           i.createdUser.name,
-          i.assignee.name,
+          i.assignee&.name,
           i.status.name
         ].join("\t")
       end
@@ -85,7 +85,7 @@ module Bl
           i.dueDate,
           i.updated,
           i.createdUser.name,
-          i.assignee.name,
+          i.assignee&.name,
           i.status.name
         ].join("\t")
       end

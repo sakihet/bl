@@ -103,10 +103,10 @@ module Bl
       @config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
       Bl::CLI.client.post(
         "issues",
-        projectId: @config[:issue][:default_project_id],
+        projectId: @config[:issue][:default_project_id].to_i,
         summary: subject,
-        issueTypeId: @config[:issue][:default_issue_type_id],
-        priorityId: @config[:issue][:defafult_priority_id]
+        issueTypeId: @config[:issue][:default_issue_type_id].to_i,
+        priorityId: @config[:issue][:default_priority_id].to_i
       )
     end
 

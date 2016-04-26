@@ -97,6 +97,18 @@ module Bl
       puts str
     end
 
+    desc "add SUBJECT", "add an issue"
+    def add(subject)
+      @config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
+      Bl::CLI.client.post(
+        "issues",
+        projectId: @config[:issue][:default_project_id],
+        summary: subject,
+        issueTypeId: @config[:issue][:default_issue_type_id],
+        priorityId: @config[:issue][:defafult_priority_id]
+      )
+    end
+
     desc "close KEY", "close an issue"
     def close(key)
       Bl::CLI.client.patch("issues/#{key}", statusId: 4)

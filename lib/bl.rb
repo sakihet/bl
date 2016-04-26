@@ -28,7 +28,12 @@ module Bl
       else
         config = {
           space_id: '',
-          api_key: ''
+          api_key: '',
+          project_key: '',
+          issue: {
+            default_type: '',
+            default_priority: ''
+          }
         }
         f = File.new(filename, 'w')
         f.write(config.to_yaml)

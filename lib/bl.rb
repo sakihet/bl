@@ -7,7 +7,7 @@ module Bl
   CONFIG_FILE = '.bl.yml'
 
   class CLI < Thor
-    @config = nil
+    @@config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
 
     desc "version", "show version"
     def version
@@ -16,7 +16,7 @@ module Bl
 
     desc "config", "show config"
     def config
-      p Bl::CLI.client
+      puts @@config
     end
 
     desc "init", "initialize a default config file"
@@ -99,13 +99,12 @@ module Bl
 
     desc "add SUBJECT", "add an issue"
     def add(subject)
-      @config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
       Bl::CLI.client.post(
         "issues",
-        projectId: @config[:issue][:default_project_id].to_i,
+        projectId: @@config[:issue][:default_project_id].to_i,
         summary: subject,
-        issueTypeId: @config[:issue][:default_issue_type_id].to_i,
-        priorityId: @config[:issue][:default_priority_id].to_i
+        issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
+        priorityId: @@config[:issue][:default_priority_id].to_i
       )
     end
 
@@ -123,16 +122,16 @@ module Bl
       end
     end
 
-    desc "types PROJECT_KEY", "list issue types in the project"
-    def types(pkey)
-      types = Bl::CLI.client.get("projects/#{pkey}/issueTypes").body.each do |t|
+    desc "types", "list issue types"
+    def types
+      types = Bl::CLI.client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
     desc "categories", "list issue categories"
-    def categories(pkey)
-      categories = Bl::CLI.client.get("projects/#{pkey}/categories").body.each do |c|
+    def categories
+      categories = Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end
@@ -159,10 +158,9 @@ module Bl
     end
 
     def self.client
-      @config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
       BacklogKit::Client.new(
-        space_id: @config[:space_id],
-        api_key: @config[:api_key]
+        space_id: @@config[:space_id],
+        api_key: @@config[:api_key]
       )
     end
   end

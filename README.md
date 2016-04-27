@@ -1,18 +1,34 @@
 # bl
 
-bl is a command line tool for Backlog.
+bl is a command line tool for Backlog[http://www.backlog.jp/].
 
 ## Installation
 
-    $ gem install bl
+    gem install bl
 
 ## Configuration
 
-TODO
+    bl init
+    $EDITOR ~/.bl.yml
 
 ## Usage
 
-TODO
+    bl add SUBJECT        # add an issue
+    bl categories         # list issue categories
+    bl close KEY          # close an issue
+    bl config             # show config
+    bl count              # count issues
+    bl help [COMMAND]     # Describe available commands or one specific command
+    bl init               # initialize a default config file
+    bl list               # list issues
+    bl priorities         # list priorities
+    bl projects           # list projects
+    bl resolutions        # list resolutions
+    bl search             # search issues
+    bl show KEY           # show an issue's details
+    bl statuses           # list statuses
+    bl types PROJECT_KEY  # list issue types in the project
+    bl version            # show version
 
 ## Development
 

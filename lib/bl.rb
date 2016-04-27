@@ -2,6 +2,7 @@ require "thor"
 require "backlog_kit"
 require "bl/version"
 require "yaml"
+require "pp"
 
 module Bl
   CONFIG_FILE = '.bl.yml'

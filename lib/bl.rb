@@ -158,6 +158,13 @@ module Bl
       end
     end
 
+    desc 'users', 'list space users'
+    def users
+      users = Bl::CLI.client.get('users').body.each do |u|
+        puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
+      end
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: @@config[:space_id],

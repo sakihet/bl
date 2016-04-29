@@ -49,12 +49,14 @@ module Bl
 
     desc "list", "list issues"
     option :all, type: :boolean
+    option :assigneeId, type: :array
     def list
+      opts = {}
       if options[:all]
-        issues = Bl::CLI.client.get('issues').body
       else
-        issues = Bl::CLI.client.get('issues', statusId: [1, 2, 3]).body
+        opts[:statusId] = [1, 2, 3]
       end
+      issues = Bl::CLI.client.get('issues', opts.merge(options)).body
       issues.each do |i|
         puts [
           i.issueType.name,

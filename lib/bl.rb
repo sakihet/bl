@@ -180,6 +180,13 @@ module Bl
       end
     end
 
+    desc 'activities', 'list activities'
+    def activities
+      activities = Bl::CLI.client.get('/space/activities').body.each do |a|
+        puts a.pretty_inspect
+      end
+    end
+
     def self.client
       BacklogKit::Client.new(
         space_id: @@config[:space_id],

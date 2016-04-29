@@ -76,6 +76,7 @@ module Bl
     desc "search", "search issues"
     option :keyword
     option :categoryId, type: :array
+    option :assigneeId, type: :array
     def search
       issues = Bl::CLI.client.get('issues', options.to_h).body.each do |i|
         puts [

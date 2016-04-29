@@ -102,13 +102,25 @@ module Bl
     end
 
     desc "add SUBJECT", "add an issue"
+    option :description, type: :string
+    option :issueTypeId, type: :numeric
+    option :categoryId, type: :array
+    option :versionId, type: :array
+    option :milestoneId, type: :array
+    option :priorityId, type: :numeric
+    # TODO: status
+    # TODO: resolution
+    option :assigneeId, type: :numeric
     def add(subject)
-      Bl::CLI.client.post(
-        "issues",
+      base_options = {
         projectId: @@config[:issue][:default_project_id].to_i,
         summary: subject,
         issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
         priorityId: @@config[:issue][:default_priority_id].to_i
+      }
+      Bl::CLI.client.post(
+        "issues",
+        base_options.merge(options)
       )
     end
 

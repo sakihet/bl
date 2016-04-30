@@ -1,8 +1,8 @@
-require "thor"
-require "backlog_kit"
-require "bl/version"
-require "yaml"
-require "pp"
+require 'thor'
+require 'backlog_kit'
+require 'bl/version'
+require 'yaml'
+require 'pp'
 
 module Bl
   CONFIG_FILE = '.bl.yml'
@@ -10,20 +10,20 @@ module Bl
   class CLI < Thor
     @@config = YAML.load_file(File.join(Dir.home, CONFIG_FILE))
 
-    desc "version", "show version"
+    desc 'version', 'show version'
     def version
       puts Bl::VERSION
     end
 
-    desc "config", "show config"
+    desc 'config', 'show config'
     def config
       puts @@config
     end
 
-    desc "init", "initialize a default config file"
+    desc 'init', 'initialize a default config file'
     def init
       filename = File.join(Dir.home, CONFIG_FILE)
-      if File.exists?(filename)
+      if File.exist?(filename)
         puts "#{filename} exits."
       else
         config = {
@@ -42,12 +42,12 @@ module Bl
       end
     end
 
-    desc "count", "count issues"
+    desc 'count', 'count issues'
     def count
       puts Bl::CLI.client.get('issues/count').body.count
     end
 
-    desc "list", "list issues"
+    desc 'list', 'list issues'
     option :all, type: :boolean
     option :assigneeId, type: :array
     def list
@@ -73,7 +73,7 @@ module Bl
       end
     end
 
-    desc "search", "search issues"
+    desc 'search', 'search issues'
     option :keyword
     option :categoryId, type: :array
     option :assigneeId, type: :array
@@ -94,14 +94,14 @@ module Bl
       end
     end
 
-    desc "show KEY", "show an issue's details"
+    desc 'show KEY', "show an issue's details"
     def show(key)
       i = Bl::CLI.client.get("issues/#{key}")
       str = i.body.pretty_inspect
       puts str
     end
 
-    desc "add SUBJECT", "add an issue"
+    desc 'add SUBJECT', 'add an issue'
     option :description, type: :string
     option :issueTypeId, type: :numeric
     option :categoryId, type: :array
@@ -119,56 +119,56 @@ module Bl
         priorityId: @@config[:issue][:default_priority_id].to_i
       }
       Bl::CLI.client.post(
-        "issues",
+        'issues',
         base_options.merge(options)
       )
     end
 
-    desc "close KEY", "close an issue"
+    desc 'close KEY', 'close an issue'
     def close(key)
       Bl::CLI.client.patch("issues/#{key}", statusId: 4)
       issue = Bl::CLI.client.get("issues/#{key}")
       puts "issue closed: #{issue.body.issueKey}\t#{issue.body.summary}"
     end
 
-    desc "projects", "list projects"
+    desc 'projects', 'list projects'
     def projects
       projects = Bl::CLI.client.get('projects').body.each do |p|
         puts [p.id, p.projectKey, p.name].join("\t")
       end
     end
 
-    desc "types", "list issue types"
+    desc 'types', 'list issue types'
     def types
       types = Bl::CLI.client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
-    desc "categories", "list issue categories"
+    desc 'categories', 'list issue categories'
     def categories
       categories = Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end
 
-    desc "statuses", "list statuses"
+    desc 'statuses', 'list statuses'
     def statuses
-      statuses = Bl::CLI.client.get("statuses").body.each do |s|
+      statuses = Bl::CLI.client.get('statuses').body.each do |s|
         puts [s.id, s.name].join("\t")
       end
     end
 
-    desc "priorities", "list priorities"
+    desc 'priorities', 'list priorities'
     def priorities
-      priorities = Bl::CLI.client.get("priorities").body.each do |p|
+      priorities = Bl::CLI.client.get('priorities').body.each do |p|
         puts [p.id, p.name].join("\t")
       end
     end
 
-    desc "resolutions", "list resolutions"
+    desc 'resolutions', 'list resolutions'
     def resolutions
-      resolutions = Bl::CLI.client.get("resolutions").body.each do |r|
+      resolutions = Bl::CLI.client.get('resolutions').body.each do |r|
         puts [r.id, r.name].join("\t")
       end
     end

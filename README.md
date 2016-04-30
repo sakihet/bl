@@ -1,6 +1,6 @@
 # bl
 
-bl is a command line tool for Backlog[http://www.backlog.jp/].
+bl is a command line tool for [Backlog](http://www.backlog.jp/).
 
 ## Installation
 
@@ -8,27 +8,31 @@ bl is a command line tool for Backlog[http://www.backlog.jp/].
 
 ## Configuration
 
+bl uses `~/.bl.yml` for configuration.
+
     bl init
     $EDITOR ~/.bl.yml
 
 ## Usage
 
-    bl add SUBJECT        # add an issue
-    bl categories         # list issue categories
-    bl close KEY          # close an issue
-    bl config             # show config
-    bl count              # count issues
-    bl help [COMMAND]     # Describe available commands or one specific command
-    bl init               # initialize a default config file
-    bl list               # list issues
-    bl priorities         # list priorities
-    bl projects           # list projects
-    bl resolutions        # list resolutions
-    bl search             # search issues
-    bl show KEY           # show an issue's details
-    bl statuses           # list statuses
-    bl types PROJECT_KEY  # list issue types in the project
-    bl version            # show version
+    bl activities      # list activities
+    bl add SUBJECT     # add an issue
+    bl categories      # list issue categories
+    bl close KEY       # close an issue
+    bl config          # show config
+    bl count           # count issues
+    bl help [COMMAND]  # Describe available commands or one specific command
+    bl init            # initialize a default config file
+    bl list            # list issues
+    bl priorities      # list priorities
+    bl projects        # list projects
+    bl resolutions     # list resolutions
+    bl search          # search issues
+    bl show KEY        # show an issue's details
+    bl statuses        # list statuses
+    bl types           # list issue types
+    bl users           # list space users
+    bl version         # show version
 
 ## Development
 
@@ -42,4 +46,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/sakihe
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+[MIT](http://opensource.org/licenses/MIT).

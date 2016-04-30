@@ -56,8 +56,7 @@ module Bl
       else
         opts[:statusId] = [1, 2, 3]
       end
-      issues = Bl::CLI.client.get('issues', opts.merge(options)).body
-      issues.each do |i|
+      Bl::CLI.client.get('issues', opts.merge(options)).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -78,7 +77,7 @@ module Bl
     option :categoryId, type: :array
     option :assigneeId, type: :array
     def search
-      issues = Bl::CLI.client.get('issues', options.to_h).body.each do |i|
+      Bl::CLI.client.get('issues', options.to_h).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -133,56 +132,56 @@ module Bl
 
     desc 'projects', 'list projects'
     def projects
-      projects = Bl::CLI.client.get('projects').body.each do |p|
+      Bl::CLI.client.get('projects').body.each do |p|
         puts [p.id, p.projectKey, p.name].join("\t")
       end
     end
 
     desc 'types', 'list issue types'
     def types
-      types = Bl::CLI.client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
+      Bl::CLI.client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
     desc 'categories', 'list issue categories'
     def categories
-      categories = Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
+      Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end
 
     desc 'statuses', 'list statuses'
     def statuses
-      statuses = Bl::CLI.client.get('statuses').body.each do |s|
+      Bl::CLI.client.get('statuses').body.each do |s|
         puts [s.id, s.name].join("\t")
       end
     end
 
     desc 'priorities', 'list priorities'
     def priorities
-      priorities = Bl::CLI.client.get('priorities').body.each do |p|
+      Bl::CLI.client.get('priorities').body.each do |p|
         puts [p.id, p.name].join("\t")
       end
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
-      resolutions = Bl::CLI.client.get('resolutions').body.each do |r|
+      Bl::CLI.client.get('resolutions').body.each do |r|
         puts [r.id, r.name].join("\t")
       end
     end
 
     desc 'users', 'list space users'
     def users
-      users = Bl::CLI.client.get('users').body.each do |u|
+      Bl::CLI.client.get('users').body.each do |u|
         puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
       end
     end
 
     desc 'activities', 'list activities'
     def activities
-      activities = Bl::CLI.client.get('/space/activities').body.each do |a|
+      Bl::CLI.client.get('/space/activities').body.each do |a|
         puts a.pretty_inspect
       end
     end

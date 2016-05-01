@@ -2,11 +2,11 @@ module Bl
   CONFIG_FILE = '.bl.yml'
 
   class CLI < Thor
-    @@config = YAML.load_file(File.join(Dir.home, Bl::CONFIG_FILE))
     def initialize(*)
+      @config = YAML.load_file(File.join(Dir.home, Bl::CONFIG_FILE))
       @client = BacklogKit::Client.new(
-        space_id: @@config[:space_id],
-        api_key: @@config[:api_key]
+        space_id: @config[:space_id],
+        api_key: @config[:api_key]
       )
       super
     end
@@ -18,7 +18,7 @@ module Bl
 
     desc 'config', 'show config'
     def config
-      puts @@config
+      puts @config
     end
 
     desc 'init', 'initialize a default config file'
@@ -103,7 +103,7 @@ module Bl
 
     desc 'browse KEY', 'browse an issue'
     def browse(key)
-      url = 'https://' + @@config[:space_id] + '.backlog.jp/view/' + key
+      url = 'https://' + @config[:space_id] + '.backlog.jp/view/' + key
       system("open #{url}")
     end
 
@@ -120,10 +120,10 @@ module Bl
     def add(*subjects)
       subjects.each do |s|
         base_options = {
-          projectId: @@config[:issue][:default_project_id].to_i,
+          projectId: @config[:issue][:default_project_id].to_i,
           summary: s,
-          issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
-          priorityId: @@config[:issue][:default_priority_id].to_i
+          issueTypeId: @config[:issue][:default_issue_type_id].to_i,
+          priorityId: @config[:issue][:default_priority_id].to_i
         }
         res = @client.post(
           'issues',
@@ -166,14 +166,14 @@ module Bl
 
     desc 'types', 'list issue types'
     def types
-      @client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
+      @client.get("projects/#{@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
     desc 'milestones', 'list milestones'
     def milestones
-      @client.get("projects/#{@@config[:project_key]}/versions").body.each do |v|
+      @client.get("projects/#{@config[:project_key]}/versions").body.each do |v|
         puts [
           v.id,
           v.projectId,
@@ -188,7 +188,7 @@ module Bl
 
     desc 'categories', 'list issue categories'
     def categories
-      @client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
+      @client.get("projects/#{@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end

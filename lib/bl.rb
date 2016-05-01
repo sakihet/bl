@@ -169,6 +169,21 @@ module Bl
       end
     end
 
+    desc 'milestones', 'list milestones'
+    def milestones
+      Bl::CLI.client.get("projects/#{@@config[:project_key]}/versions").body.each do |v|
+        puts [
+          v.id,
+          v.projectId,
+          v.name,
+          v.description,
+          v.startDate,
+          v.releaseDueDate,
+          v.archived
+        ].join("\t")
+      end
+    end
+
     desc 'categories', 'list issue categories'
     def categories
       Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|

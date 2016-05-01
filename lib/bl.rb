@@ -130,6 +130,22 @@ module Bl
       puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
     end
 
+    desc 'update KEY', 'update an issue'
+    option :summary, type: :string
+    option :description, type: :string
+    option :issueTypeId, type: :numeric
+    option :categoryId, type: :array
+    option :versionId, type: :array
+    option :milestoneId, type: :array
+    option :priorityId, type: :numeric
+    # TODO: status
+    # TODO: resolution
+    option :assigneeId, type: :numeric
+    def update(key)
+      res = Bl::CLI.client.patch("issues/#{key}", options.to_h)
+      puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
+    end
+
     desc 'close KEY', 'close an issue'
     def close(key)
       Bl::CLI.client.patch("issues/#{key}", statusId: 4)

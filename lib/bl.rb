@@ -100,6 +100,12 @@ module Bl
       puts str
     end
 
+    desc 'browse KEY', 'browse an issue'
+    def browse(key)
+      url = 'https://' + @@config[:space_id] + '.backlog.jp/view/' + key
+      system("open #{url}")
+    end
+
     desc 'add SUBJECT', 'add an issue'
     option :description, type: :string
     option :issueTypeId, type: :numeric

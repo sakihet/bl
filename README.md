@@ -16,14 +16,16 @@ bl uses `~/.bl.yml` for configuration.
 ## Usage
 
     bl activities      # list activities
-    bl add SUBJECT     # add an issue
+    bl add *SUBJECTS   # add issues
+    bl browse KEY      # browse an issue
     bl categories      # list issue categories
-    bl close KEY       # close an issue
+    bl close *KEYS     # close issues
     bl config          # show config
     bl count           # count issues
     bl help [COMMAND]  # Describe available commands or one specific command
     bl init            # initialize a default config file
     bl list            # list issues
+    bl milestones      # list milestones
     bl priorities      # list priorities
     bl projects        # list projects
     bl resolutions     # list resolutions
@@ -31,6 +33,7 @@ bl uses `~/.bl.yml` for configuration.
     bl show KEY        # show an issue's details
     bl statuses        # list statuses
     bl types           # list issue types
+    bl update KEY      # update an issue
     bl users           # list space users
     bl version         # show version
 

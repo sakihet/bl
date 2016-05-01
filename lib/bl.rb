@@ -106,7 +106,7 @@ module Bl
       system("open #{url}")
     end
 
-    desc 'add SUBJECT', 'add an issue'
+    desc 'add *SUBJECTS', 'add issues'
     option :description, type: :string
     option :issueTypeId, type: :numeric
     option :categoryId, type: :array
@@ -116,18 +116,20 @@ module Bl
     # TODO: status
     # TODO: resolution
     option :assigneeId, type: :numeric
-    def add(subject)
-      base_options = {
-        projectId: @@config[:issue][:default_project_id].to_i,
-        summary: subject,
-        issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
-        priorityId: @@config[:issue][:default_priority_id].to_i
-      }
-      res = Bl::CLI.client.post(
-        'issues',
-        base_options.merge(options)
-      )
-      puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
+    def add(*subjects)
+      subjects.each do |s|
+        base_options = {
+          projectId: @@config[:issue][:default_project_id].to_i,
+          summary: s,
+          issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
+          priorityId: @@config[:issue][:default_priority_id].to_i
+        }
+        res = Bl::CLI.client.post(
+          'issues',
+          base_options.merge(options)
+        )
+        puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
+      end
     end
 
     desc 'update KEY', 'update an issue'

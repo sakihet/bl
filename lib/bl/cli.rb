@@ -142,11 +142,12 @@ module Bl
       puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
     end
 
-    desc 'close KEY', 'close an issue'
-    def close(key)
-      Bl::CLI.client.patch("issues/#{key}", statusId: 4)
-      issue = Bl::CLI.client.get("issues/#{key}")
-      puts "issue closed: #{issue.body.issueKey}\t#{issue.body.summary}"
+    desc 'close *KEYS', 'close issues'
+    def close(*keys)
+      keys.each do |k|
+        res = Bl::CLI.client.patch("issues/#{k}", statusId: 4)
+        puts "issue closed: #{res.body.issueKey}\t#{res.body.summary}"
+      end
     end
 
     desc 'projects', 'list projects'

@@ -3,6 +3,13 @@ module Bl
 
   class CLI < Thor
     @@config = YAML.load_file(File.join(Dir.home, Bl::CONFIG_FILE))
+    def initialize(*)
+      @client = BacklogKit::Client.new(
+        space_id: @@config[:space_id],
+        api_key: @@config[:api_key]
+      )
+      super
+    end
 
     desc 'version', 'show version'
     def version
@@ -38,7 +45,7 @@ module Bl
 
     desc 'count', 'count issues'
     def count
-      puts Bl::CLI.client.get('issues/count').body.count
+      puts @client.get('issues/count').body.count
     end
 
     desc 'list', 'list issues'
@@ -50,7 +57,7 @@ module Bl
       else
         opts[:statusId] = [1, 2, 3]
       end
-      Bl::CLI.client.get('issues', opts.merge(options)).body.each do |i|
+      @client.get('issues', opts.merge(options)).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -71,7 +78,7 @@ module Bl
     option :categoryId, type: :array
     option :assigneeId, type: :array
     def search
-      Bl::CLI.client.get('issues', options.to_h).body.each do |i|
+      @client.get('issues', options.to_h).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -89,7 +96,7 @@ module Bl
 
     desc 'show KEY', "show an issue's details"
     def show(key)
-      i = Bl::CLI.client.get("issues/#{key}")
+      i = @client.get("issues/#{key}")
       str = i.body.pretty_inspect
       puts str
     end
@@ -118,7 +125,7 @@ module Bl
           issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
           priorityId: @@config[:issue][:default_priority_id].to_i
         }
-        res = Bl::CLI.client.post(
+        res = @client.post(
           'issues',
           base_options.merge(options)
         )
@@ -138,35 +145,35 @@ module Bl
     # TODO: resolution
     option :assigneeId, type: :numeric
     def update(key)
-      res = Bl::CLI.client.patch("issues/#{key}", options.to_h)
+      res = @client.patch("issues/#{key}", options.to_h)
       puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
     end
 
     desc 'close *KEYS', 'close issues'
     def close(*keys)
       keys.each do |k|
-        res = Bl::CLI.client.patch("issues/#{k}", statusId: 4)
+        res = @client.patch("issues/#{k}", statusId: 4)
         puts "issue closed: #{res.body.issueKey}\t#{res.body.summary}"
       end
     end
 
     desc 'projects', 'list projects'
     def projects
-      Bl::CLI.client.get('projects').body.each do |p|
+      @client.get('projects').body.each do |p|
         puts [p.id, p.projectKey, p.name].join("\t")
       end
     end
 
     desc 'types', 'list issue types'
     def types
-      Bl::CLI.client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
+      @client.get("projects/#{@@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
     desc 'milestones', 'list milestones'
     def milestones
-      Bl::CLI.client.get("projects/#{@@config[:project_key]}/versions").body.each do |v|
+      @client.get("projects/#{@@config[:project_key]}/versions").body.each do |v|
         puts [
           v.id,
           v.projectId,
@@ -181,51 +188,44 @@ module Bl
 
     desc 'categories', 'list issue categories'
     def categories
-      Bl::CLI.client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
+      @client.get("projects/#{@@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end
 
     desc 'statuses', 'list statuses'
     def statuses
-      Bl::CLI.client.get('statuses').body.each do |s|
+      @client.get('statuses').body.each do |s|
         puts [s.id, s.name].join("\t")
       end
     end
 
     desc 'priorities', 'list priorities'
     def priorities
-      Bl::CLI.client.get('priorities').body.each do |p|
+      @client.get('priorities').body.each do |p|
         puts [p.id, p.name].join("\t")
       end
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
-      Bl::CLI.client.get('resolutions').body.each do |r|
+      @client.get('resolutions').body.each do |r|
         puts [r.id, r.name].join("\t")
       end
     end
 
     desc 'users', 'list space users'
     def users
-      Bl::CLI.client.get('users').body.each do |u|
+      @client.get('users').body.each do |u|
         puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
       end
     end
 
     desc 'activities', 'list activities'
     def activities
-      Bl::CLI.client.get('/space/activities').body.each do |a|
+      @client.get('/space/activities').body.each do |a|
         puts a.pretty_inspect
       end
-    end
-
-    def self.client
-      BacklogKit::Client.new(
-        space_id: @@config[:space_id],
-        api_key: @@config[:api_key]
-      )
     end
   end
 end

@@ -123,10 +123,11 @@ module Bl
         issueTypeId: @@config[:issue][:default_issue_type_id].to_i,
         priorityId: @@config[:issue][:default_priority_id].to_i
       }
-      Bl::CLI.client.post(
+      res = Bl::CLI.client.post(
         'issues',
         base_options.merge(options)
       )
+      puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
     end
 
     desc 'close KEY', 'close an issue'

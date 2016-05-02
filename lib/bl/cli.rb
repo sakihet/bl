@@ -136,7 +136,7 @@ module Bl
       end
     end
 
-    desc 'update KEY', 'update an issue'
+    desc 'update *KEYS', 'update issues'
     option :summary, type: :string
     option :description, type: :string
     option :issueTypeId, type: :numeric
@@ -147,9 +147,11 @@ module Bl
     # TODO: status
     # TODO: resolution
     option :assigneeId, type: :numeric
-    def update(key)
-      res = @client.patch("issues/#{key}", options.to_h)
-      puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
+    def update(*keys)
+      keys.each do |k|
+        res = @client.patch("issues/#{k}", options.to_h)
+        puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
+      end
     end
 
     desc 'close *KEYS', 'close issues'

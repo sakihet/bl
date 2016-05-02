@@ -50,14 +50,17 @@ module Bl
 
     desc 'list', 'list issues'
     option :all, type: :boolean
-    option :assigneeId, type: :array
+    option :unassigned, type: :boolean
     def list
       opts = {}
       if options[:all]
       else
         opts[:statusId] = [1, 2, 3]
       end
-      @client.get('issues', opts.merge(options)).body.each do |i|
+      if options[:unassigned]
+        opts[:assigneeId] = [-1]
+      end
+      @client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,

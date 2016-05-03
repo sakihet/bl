@@ -52,6 +52,7 @@ module Bl
     option :all, type: :boolean
     option :unassigned, type: :boolean
     option :today, type: :boolean
+    option :overdue, type: :boolean
     def list
       opts = {}
       opts[:statusId] = [1, 2, 3] unless options[:all]
@@ -60,6 +61,7 @@ module Bl
         opts[:dueDateSince] = Date.today.to_s
         opts[:dueDateUntil] = Date.today.next.to_s
       end
+      opts[:dueDateUntil] = Date.today.to_s
       @client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,

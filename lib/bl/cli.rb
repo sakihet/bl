@@ -227,5 +227,12 @@ module Bl
         puts a.pretty_inspect
       end
     end
+
+    desc 'project-status PROJECT_ID', 'show project status'
+    def project_status(pid)
+      closed_issues_count = @client.get('issues/count', projectId: [pid], statusId: [4]).body.count
+      all_issues_count = @client.get('issues/count', projectId: [pid]).body.count
+      puts "#{closed_issues_count} / #{all_issues_count}"
+    end
   end
 end

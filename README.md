@@ -43,6 +43,17 @@ bl uses `~/.bl.yml` for configuration.
     bl users           # list space users
     bl version         # show version
 
+### Example
+
+update unassigned issues
+
+    bl list --unassigned | awk '{print $2}' | xargs -L 1 bl update --assigneeId 12345
+
+add multi issues on list.txt
+
+    cat list.txt | xargs -I {} bl add {}
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec bl` to use the gem in this directory, ignoring other installed copies of this gem.

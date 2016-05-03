@@ -230,9 +230,16 @@ module Bl
 
     desc 'project-status PROJECT_ID', 'show project status'
     def project_status(pid)
-      closed_issues_count = @client.get('issues/count', projectId: [pid], statusId: [4]).body.count
       all_issues_count = @client.get('issues/count', projectId: [pid]).body.count
+      open_issues_count = @client.get('issues/count', projectId: [pid], statusId: [1]).body.count
+      in_progress_issues_count = @client.get('issues/count', projectId: [pid], statusId: [2]).body.count
+      resolved_issues_count = @client.get('issues/count', projectId: [pid], statusId: [3]).body.count
+      closed_issues_count = @client.get('issues/count', projectId: [pid], statusId: [4]).body.count
       puts "#{closed_issues_count} / #{all_issues_count}"
+      puts "open: #{open_issues_count}"
+      puts "in progress: #{in_progress_issues_count}"
+      puts "resolved: #{resolved_issues_count}"
+      puts "closed: #{closed_issues_count}"
     end
   end
 end

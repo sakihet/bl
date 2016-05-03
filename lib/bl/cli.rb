@@ -51,10 +51,15 @@ module Bl
     desc 'list', 'list issues'
     option :all, type: :boolean
     option :unassigned, type: :boolean
+    option :today, type: :boolean
     def list
       opts = {}
       opts[:statusId] = [1, 2, 3] unless options[:all]
       opts[:assigneeId] = [-1] if options[:unassigned]
+      if options[:today]
+        opts[:dueDateSince] = Date.today.to_s
+        opts[:dueDateUntil] = Date.today.next.to_s
+      end
       @client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,

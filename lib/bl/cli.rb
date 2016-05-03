@@ -53,13 +53,8 @@ module Bl
     option :unassigned, type: :boolean
     def list
       opts = {}
-      if options[:all]
-      else
-        opts[:statusId] = [1, 2, 3]
-      end
-      if options[:unassigned]
-        opts[:assigneeId] = [-1]
-      end
+      opts[:statusId] = [1, 2, 3] unless options[:all]
+      opts[:assigneeId] = [-1] if options[:unassigned]
       @client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,

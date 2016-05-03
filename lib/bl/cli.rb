@@ -61,7 +61,7 @@ module Bl
         opts[:dueDateSince] = Date.today.to_s
         opts[:dueDateUntil] = Date.today.next.to_s
       end
-      opts[:dueDateUntil] = Date.today.to_s
+      opts[:dueDateUntil] = Date.today.to_s if options[:overdue]
       @client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,

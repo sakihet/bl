@@ -235,6 +235,9 @@ module Bl
       end
     end
 
+    desc 'category SUBCOMMAND ...ARGS', 'manage categoryies'
+    subcommand 'category', Category
+
     desc 'project-status PROJECT_ID', 'show project status'
     def project_status(pid)
       all_issues_count = @client.get('issues/count', projectId: [pid]).body.count

@@ -6,6 +6,7 @@ require 'bl/version'
 require 'bl/config'
 require 'bl/requestable'
 require 'bl/category'
+require 'bl/milestone'
 require 'bl/cli'
 
 Bl::CLI.start(ARGV)

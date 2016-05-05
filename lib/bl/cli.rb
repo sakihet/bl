@@ -3,6 +3,20 @@ module Bl
   class CLI < Thor
     include Bl::Requestable
 
+    ISSUE_BASE_ATTRIBUTES = {
+      summary: :string,
+      description: :string,
+      statusId: :numeric,
+      resolutionId: :numeric,
+      dueDate: :string,
+      issueTypeId: :numeric,
+      categoryId: :array,
+      versionId: :array,
+      milestoneId: :array,
+      priorityId: :numeric,
+      assigneeId: :numeric
+    }
+
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -115,15 +129,7 @@ module Bl
     end
 
     desc 'add *SUBJECTS', 'add issues'
-    option :description, type: :string
-    option :issueTypeId, type: :numeric
-    option :categoryId, type: :array
-    option :versionId, type: :array
-    option :milestoneId, type: :array
-    option :priorityId, type: :numeric
-    # TODO: status
-    # TODO: resolution
-    option :assigneeId, type: :numeric
+    options ISSUE_BASE_ATTRIBUTES
     def add(*subjects)
       subjects.each do |s|
         base_options = {
@@ -141,16 +147,8 @@ module Bl
     end
 
     desc 'update *KEYS', 'update issues'
-    option :summary, type: :string
-    option :description, type: :string
-    option :issueTypeId, type: :numeric
-    option :categoryId, type: :array
-    option :versionId, type: :array
-    option :milestoneId, type: :array
-    option :priorityId, type: :numeric
-    # TODO: status
-    # TODO: resolution
-    option :assigneeId, type: :numeric
+    options ISSUE_BASE_ATTRIBUTES
+    option :comment, type: :string
     def update(*keys)
       keys.each do |k|
         res = client.patch("issues/#{k}", options.to_h)

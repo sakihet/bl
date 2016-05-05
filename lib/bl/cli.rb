@@ -248,5 +248,12 @@ module Bl
       puts "resolved: #{resolved_issues_count}"
       puts "closed: #{closed_issues_count}"
     end
+
+    desc 'wikis', 'list wikis'
+    def wikis
+      client.get('wikis', projectIdOrKey: @config[:project_key]).body.each do |w|
+        puts [w.id, w.projectId, w.name, w.updated].join("\t")
+      end
+    end
   end
 end

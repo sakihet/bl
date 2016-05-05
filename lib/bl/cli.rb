@@ -255,5 +255,17 @@ module Bl
         puts [w.id, w.projectId, w.name, w.updated].join("\t")
       end
     end
+
+    desc 'wiki WIKI_ID', "show a wiki's content"
+    def wiki(wiki_id)
+      body = client.get("wikis/#{wiki_id}").body
+      puts "id: #{body.id}"
+      puts "projectId: #{body.projectId}"
+      puts "name: #{body.name}"
+      puts "updated: #{body.updated}"
+      puts '--'
+      puts 'content:'
+      puts body.content
+    end
   end
 end

@@ -15,6 +15,12 @@ module Bl
       end
     end
 
+    desc 'update ID NEW_NAME', 'update a category'
+    def update(id, name)
+      res = client.patch("projects/#{@config[:project_key]}/categories/#{id}", name: name)
+      puts "category updated: #{res.body.id}\t#{res.body.name}"
+    end
+
     desc 'delete CATEGORY_ID', 'delete categories'
     def delete(*ids)
       ids.each do |id|

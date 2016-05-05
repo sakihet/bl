@@ -1,7 +1,7 @@
 module Bl
   class Category < Thor
     def initialize(*)
-      @config = YAML.load_file(File.join(Dir.home, Bl::CONFIG_FILE))
+      @config = Bl::Config.instance
       @client = BacklogKit::Client.new(
         space_id: @config[:space_id],
         api_key: @config[:api_key]

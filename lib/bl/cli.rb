@@ -235,6 +235,9 @@ module Bl
       end
     end
 
+    desc 'type SUBCOMMAND ...ARGS', 'manage types'
+    subcommand 'type', Type
+
     desc 'category SUBCOMMAND ...ARGS', 'manage categoryies'
     subcommand 'category', Category
 

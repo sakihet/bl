@@ -1,12 +1,10 @@
 module Bl
 
   class CLI < Thor
+    include Bl::Requestable
+
     def initialize(*)
       @config = Bl::Config.instance
-      @client = BacklogKit::Client.new(
-        space_id: @config[:space_id],
-        api_key: @config[:api_key]
-      )
       super
     end
 
@@ -44,7 +42,7 @@ module Bl
 
     desc 'count', 'count issues'
     def count
-      puts @client.get('issues/count').body.count
+      puts client.get('issues/count').body.count
     end
 
     desc 'list', 'list issues'
@@ -61,7 +59,7 @@ module Bl
         opts[:dueDateUntil] = Date.today.next.to_s
       end
       opts[:dueDateUntil] = Date.today.to_s if options[:overdue]
-      @client.get('issues', opts).body.each do |i|
+      client.get('issues', opts).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -82,7 +80,7 @@ module Bl
     option :categoryId, type: :array
     option :assigneeId, type: :array
     def search
-      @client.get('issues', options.to_h).body.each do |i|
+      client.get('issues', options.to_h).body.each do |i|
         puts [
           i.issueType.name,
           i.issueKey,
@@ -100,7 +98,7 @@ module Bl
 
     desc 'show KEY', "show an issue's details"
     def show(key)
-      i = @client.get("issues/#{key}")
+      i = client.get("issues/#{key}")
       str = i.body.pretty_inspect
       puts str
     end
@@ -129,7 +127,7 @@ module Bl
           issueTypeId: @config[:issue][:default_issue_type_id].to_i,
           priorityId: @config[:issue][:default_priority_id].to_i
         }
-        res = @client.post(
+        res = client.post(
           'issues',
           base_options.merge(options)
         )
@@ -150,7 +148,7 @@ module Bl
     option :assigneeId, type: :numeric
     def update(*keys)
       keys.each do |k|
-        res = @client.patch("issues/#{k}", options.to_h)
+        res = client.patch("issues/#{k}", options.to_h)
         puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
       end
     end
@@ -158,28 +156,28 @@ module Bl
     desc 'close *KEYS', 'close issues'
     def close(*keys)
       keys.each do |k|
-        res = @client.patch("issues/#{k}", statusId: 4)
+        res = client.patch("issues/#{k}", statusId: 4)
         puts "issue closed: #{res.body.issueKey}\t#{res.body.summary}"
       end
     end
 
     desc 'projects', 'list projects'
     def projects
-      @client.get('projects').body.each do |p|
+      client.get('projects').body.each do |p|
         puts [p.id, p.projectKey, p.name].join("\t")
       end
     end
 
     desc 'types', 'list issue types'
     def types
-      @client.get("projects/#{@config[:project_key]}/issueTypes").body.each do |t|
+      client.get("projects/#{@config[:project_key]}/issueTypes").body.each do |t|
         puts [t.id, t.name].join("\t")
       end
     end
 
     desc 'milestones', 'list milestones'
     def milestones
-      @client.get("projects/#{@config[:project_key]}/versions").body.each do |v|
+      client.get("projects/#{@config[:project_key]}/versions").body.each do |v|
         puts [
           v.id,
           v.projectId,
@@ -194,42 +192,42 @@ module Bl
 
     desc 'categories', 'list issue categories'
     def categories
-      @client.get("projects/#{@config[:project_key]}/categories").body.each do |c|
+      client.get("projects/#{@config[:project_key]}/categories").body.each do |c|
         puts [c.id, c.name].join("\t")
       end
     end
 
     desc 'statuses', 'list statuses'
     def statuses
-      @client.get('statuses').body.each do |s|
+      client.get('statuses').body.each do |s|
         puts [s.id, s.name].join("\t")
       end
     end
 
     desc 'priorities', 'list priorities'
     def priorities
-      @client.get('priorities').body.each do |p|
+      client.get('priorities').body.each do |p|
         puts [p.id, p.name].join("\t")
       end
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
-      @client.get('resolutions').body.each do |r|
+      client.get('resolutions').body.each do |r|
         puts [r.id, r.name].join("\t")
       end
     end
 
     desc 'users', 'list space users'
     def users
-      @client.get('users').body.each do |u|
+      client.get('users').body.each do |u|
         puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
       end
     end
 
     desc 'activities', 'list activities'
     def activities
-      @client.get('/space/activities').body.each do |a|
+      client.get('/space/activities').body.each do |a|
         puts a.pretty_inspect
       end
     end
@@ -239,11 +237,11 @@ module Bl
 
     desc 'project-status PROJECT_ID', 'show project status'
     def project_status(pid)
-      all_issues_count = @client.get('issues/count', projectId: [pid]).body.count
-      open_issues_count = @client.get('issues/count', projectId: [pid], statusId: [1]).body.count
-      in_progress_issues_count = @client.get('issues/count', projectId: [pid], statusId: [2]).body.count
-      resolved_issues_count = @client.get('issues/count', projectId: [pid], statusId: [3]).body.count
-      closed_issues_count = @client.get('issues/count', projectId: [pid], statusId: [4]).body.count
+      all_issues_count = client.get('issues/count', projectId: [pid]).body.count
+      open_issues_count = client.get('issues/count', projectId: [pid], statusId: [1]).body.count
+      in_progress_issues_count = client.get('issues/count', projectId: [pid], statusId: [2]).body.count
+      resolved_issues_count = client.get('issues/count', projectId: [pid], statusId: [3]).body.count
+      closed_issues_count = client.get('issues/count', projectId: [pid], statusId: [4]).body.count
       puts "#{closed_issues_count} / #{all_issues_count}"
       puts "open: #{open_issues_count}"
       puts "in progress: #{in_progress_issues_count}"

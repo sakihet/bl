@@ -164,13 +164,6 @@ module Bl
       end
     end
 
-    desc 'projects', 'list projects'
-    def projects
-      client.get('projects').body.each do |p|
-        puts [p.id, p.projectKey, p.name].join("\t")
-      end
-    end
-
     desc 'statuses', 'list statuses'
     def statuses
       client.get('statuses').body.each do |s|
@@ -218,18 +211,7 @@ module Bl
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
     subcommand 'wiki', Wiki
 
-    desc 'project-status PROJECT_ID', 'show project status'
-    def project_status(pid)
-      all_issues_count = client.get('issues/count', projectId: [pid]).body.count
-      open_issues_count = client.get('issues/count', projectId: [pid], statusId: [1]).body.count
-      in_progress_issues_count = client.get('issues/count', projectId: [pid], statusId: [2]).body.count
-      resolved_issues_count = client.get('issues/count', projectId: [pid], statusId: [3]).body.count
-      closed_issues_count = client.get('issues/count', projectId: [pid], statusId: [4]).body.count
-      puts "#{closed_issues_count} / #{all_issues_count}"
-      puts "open: #{open_issues_count}"
-      puts "in progress: #{in_progress_issues_count}"
-      puts "resolved: #{resolved_issues_count}"
-      puts "closed: #{closed_issues_count}"
-    end
+    desc 'project SUBCOMMAND ...ARGS', 'manage projects'
+    subcommand 'project', Project
   end
 end

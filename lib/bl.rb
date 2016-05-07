@@ -9,6 +9,7 @@ require 'bl/type'
 require 'bl/category'
 require 'bl/milestone'
 require 'bl/wiki'
+require 'bl/project'
 require 'bl/cli'
 
 Bl::CLI.start(ARGV)

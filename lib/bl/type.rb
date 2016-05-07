@@ -8,7 +8,14 @@ module Bl
       super
     end
 
-    desc 'add NAMES', 'add types'
+    desc 'list', 'list issue types'
+    def list
+      client.get(@url).body.each do |t|
+        puts [t.id, t.name, t.color].join("\t")
+      end
+    end
+
+    desc 'add [NAME...]', 'add types'
     option :color, type: :string, required: true
     def add(*names)
       names.each do |name|
@@ -17,7 +24,7 @@ module Bl
       end
     end
 
-    desc 'update TYPE_IDS', 'update types'
+    desc 'update [ID...]', 'update types'
     option :name, type: :string
     option :color, color: :color
     def update(*ids)
@@ -27,7 +34,7 @@ module Bl
       end
     end
 
-    desc 'delete TYPE_IDS', 'delete types'
+    desc 'delete [ID...]', 'delete types'
     option :substituteIssueTypeId, type: :numeric, required: true
     def delete(*ids)
       ids.each do |id|

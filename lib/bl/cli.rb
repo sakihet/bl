@@ -29,7 +29,7 @@ module Bl
 
     desc 'config', 'show config'
     def config
-      puts @config
+      p @config
     end
 
     desc 'init', 'initialize a default config file'

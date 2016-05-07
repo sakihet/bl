@@ -171,35 +171,6 @@ module Bl
       end
     end
 
-    desc 'types', 'list issue types'
-    def types
-      client.get("projects/#{@config[:project_key]}/issueTypes").body.each do |t|
-        puts [t.id, t.name].join("\t")
-      end
-    end
-
-    desc 'milestones', 'list milestones'
-    def milestones
-      client.get("projects/#{@config[:project_key]}/versions").body.each do |v|
-        puts [
-          v.id,
-          v.projectId,
-          v.name,
-          v.description,
-          v.startDate,
-          v.releaseDueDate,
-          v.archived
-        ].join("\t")
-      end
-    end
-
-    desc 'categories', 'list issue categories'
-    def categories
-      client.get("projects/#{@config[:project_key]}/categories").body.each do |c|
-        puts [c.id, c.name].join("\t")
-      end
-    end
-
     desc 'statuses', 'list statuses'
     def statuses
       client.get('statuses').body.each do |s|

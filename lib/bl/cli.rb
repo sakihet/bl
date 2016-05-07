@@ -215,6 +215,9 @@ module Bl
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
     subcommand 'milestone', Milestone
 
+    desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
+    subcommand 'wiki', Wiki
+
     desc 'project-status PROJECT_ID', 'show project status'
     def project_status(pid)
       all_issues_count = client.get('issues/count', projectId: [pid]).body.count
@@ -227,25 +230,6 @@ module Bl
       puts "in progress: #{in_progress_issues_count}"
       puts "resolved: #{resolved_issues_count}"
       puts "closed: #{closed_issues_count}"
-    end
-
-    desc 'wikis', 'list wikis'
-    def wikis
-      client.get('wikis', projectIdOrKey: @config[:project_key]).body.each do |w|
-        puts [w.id, w.projectId, w.name, w.updated].join("\t")
-      end
-    end
-
-    desc 'wiki WIKI_ID', "show a wiki's content"
-    def wiki(wiki_id)
-      body = client.get("wikis/#{wiki_id}").body
-      puts "id: #{body.id}"
-      puts "projectId: #{body.projectId}"
-      puts "name: #{body.name}"
-      puts "updated: #{body.updated}"
-      puts '--'
-      puts 'content:'
-      puts body.content
     end
   end
 end

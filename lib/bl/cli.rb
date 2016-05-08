@@ -128,7 +128,7 @@ module Bl
       system("open #{url}")
     end
 
-    desc 'add *SUBJECTS', 'add issues'
+    desc 'add [SUBJECT...]', 'add issues'
     options ISSUE_BASE_ATTRIBUTES
     def add(*subjects)
       subjects.each do |s|
@@ -146,7 +146,7 @@ module Bl
       end
     end
 
-    desc 'update *KEYS', 'update issues'
+    desc 'update [KEY...]', 'update issues'
     options ISSUE_BASE_ATTRIBUTES
     option :comment, type: :string
     def update(*keys)
@@ -156,7 +156,7 @@ module Bl
       end
     end
 
-    desc 'close *KEYS', 'close issues'
+    desc 'close [KEY...]', 'close issues'
     def close(*keys)
       keys.each do |k|
         res = client.patch("issues/#{k}", statusId: 4)

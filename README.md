@@ -21,27 +21,29 @@ bl uses `~/.bl.yml` for configuration.
 
 ## Usage
 
-    bl activities      # list activities
-    bl add *SUBJECTS   # add issues
-    bl browse KEY      # browse an issue
-    bl categories      # list issue categories
-    bl close *KEYS     # close issues
-    bl config          # show config
-    bl count           # count issues
-    bl help [COMMAND]  # Describe available commands or one specific command
-    bl init            # initialize a default config file
-    bl list            # list issues
-    bl milestones      # list milestones
-    bl priorities      # list priorities
-    bl projects        # list projects
-    bl resolutions     # list resolutions
-    bl search          # search issues
-    bl show KEY        # show an issue's details
-    bl statuses        # list statuses
-    bl types           # list issue types
-    bl update KEY      # update an issue
-    bl users           # list space users
-    bl version         # show version
+    bl activities                    # list activities
+    bl add [SUBJECT...]              # add issues
+    bl browse KEY                    # browse an issue
+    bl category SUBCOMMAND ...ARGS   # manage categoryies
+    bl close [KEY...]                # close issues
+    bl config                        # show config
+    bl count                         # count issues
+    bl help [COMMAND]                # Describe available commands or one specific command
+    bl init                          # initialize a default config file
+    bl list                          # list issues
+    bl milestone SUBCOMMAND ...ARGS  # manage milestones
+    bl priorities                    # list priorities
+    bl project SUBCOMMAND ...ARGS    # manage projects
+    bl resolutions                   # list resolutions
+    bl search                        # search issues
+    bl show KEY                      # show an issue's details
+    bl statuses                      # list statuses
+    bl type SUBCOMMAND ...ARGS       # manage types
+    bl update [KEY...]               # update issues
+    bl users                         # list space users
+    bl version                       # show version
+    bl wiki SUBCOMMAND ...ARGS       # manage wikis
+
 
 ### Example
 

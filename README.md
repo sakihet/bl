@@ -49,7 +49,7 @@ bl uses `~/.bl.yml` for configuration.
 
 update unassigned issues
 
-    bl list --unassigned | awk '{print $2}' | xargs -L 1 bl update --assigneeId 12345
+    bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
 
 add multi issues on list.txt
 

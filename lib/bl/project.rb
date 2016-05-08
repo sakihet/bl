@@ -28,5 +28,12 @@ module Bl
       puts "resolved: #{resolved_issues_count}"
       puts "closed: #{closed_issues_count}"
     end
+
+    desc 'users ID', 'show project users'
+    def users(id)
+      client.get("#{@url}/#{id}/users").body.each do |u|
+        puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
+      end
+    end
   end
 end

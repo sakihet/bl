@@ -117,9 +117,23 @@ module Bl
 
     desc 'show KEY', "show an issue's details"
     def show(key)
-      i = client.get("issues/#{key}")
-      str = i.body.pretty_inspect
-      puts str
+      body = client.get("issues/#{key}").body
+      puts "type: #{body.issueType.name}"
+      puts "key: #{body.issueKey}"
+      puts "created: #{body.created}"
+      puts "due date: #{body.dueDate}"
+      puts "summary: #{body.summary}"
+      puts "priority: #{body.priority.name}"
+      puts "category: #{body.category}"
+      puts "resolution: #{body.resolution}"
+      puts "version: #{body.versions}"
+      puts "status: #{body.status.name}"
+      puts "milestone: #{body.milestone}"
+      puts "assignee: #{body.assignee.name}"
+      puts "created user: #{body.createdUser.name}"
+      puts '--'
+      puts "description:"
+      puts body.description
     end
 
     desc 'browse KEY', 'browse an issue'

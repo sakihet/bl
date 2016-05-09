@@ -1,6 +1,7 @@
 require 'date'
 require 'pp'
 require 'backlog_kit'
+require 'paint'
 require 'thor'
 require 'bl/version'
 require 'bl/config'

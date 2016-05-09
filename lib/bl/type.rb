@@ -11,7 +11,7 @@ module Bl
     desc 'list', 'list issue types'
     def list
       client.get(@url).body.each do |t|
-        puts [t.id, t.name, t.color].join("\t")
+        puts [t.id, Paint[t.name, :white, t.color], t.color].join("\t")
       end
     end
 

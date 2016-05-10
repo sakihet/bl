@@ -90,7 +90,7 @@ module Bl
           i.updated,
           i.createdUser.name,
           i.assignee&.name,
-          i.status.name
+          colorize_status(i.status.id, i.status.name)
         ].join("\t")
       end
     end

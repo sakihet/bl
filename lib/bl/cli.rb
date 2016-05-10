@@ -2,6 +2,7 @@ module Bl
 
   class CLI < Thor
     include Bl::Requestable
+    include Bl::Formatting
 
     ISSUE_BASE_ATTRIBUTES = {
       summary: :string,
@@ -80,7 +81,7 @@ module Bl
       end
       client.get('issues', opts).body.each do |i|
         puts [
-          i.issueType.name,
+          colorize_type(i.issueType.name, i.issueType.color),
           i.issueKey,
           i.summary,
           i.priority.name,

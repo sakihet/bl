@@ -1,4 +1,8 @@
 module Bl
-  module Formatting
+  module Formatting extend self
+
+    def colorize_type(name, color)
+      Paint[name, :white, color]
+    end
   end
 end

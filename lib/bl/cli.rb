@@ -84,7 +84,7 @@ module Bl
           colorize_type(i.issueType.name, i.issueType.color),
           i.issueKey,
           i.summary,
-          i.priority.name,
+          colorize_priority(i.priority.id, i.priority.name),
           i.created,
           i.dueDate,
           i.updated,

@@ -228,5 +228,8 @@ module Bl
 
     desc 'project SUBCOMMAND ...ARGS', 'manage projects'
     subcommand 'project', Project
+
+    desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
+    subcommand 'recent', Recent
   end
 end

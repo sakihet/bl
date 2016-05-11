@@ -1,5 +1,6 @@
 module Bl
-  module Requestable extend self
+  module Requestable
+    module_function
 
     def client
       BacklogKit::Client.new(

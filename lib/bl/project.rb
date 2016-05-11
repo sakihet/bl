@@ -17,11 +17,11 @@ module Bl
 
     desc 'status ID', 'show project status'
     def status(id)
-      all_issues_count = client.get('issues/count', projectId: [id]).body.count
-      open_issues_count = client.get('issues/count', projectId: [id], statusId: [1]).body.count
-      in_progress_issues_count = client.get('issues/count', projectId: [id], statusId: [2]).body.count
-      resolved_issues_count = client.get('issues/count', projectId: [id], statusId: [3]).body.count
-      closed_issues_count = client.get('issues/count', projectId: [id], statusId: [4]).body.count
+      all_issues_count = count_issues(id)
+      open_issues_count = count_issues(id, 1)
+      in_progress_issues_count = count_issues(id, 2)
+      resolved_issues_count = count_issues(id, 3)
+      closed_issues_count = count_issues(id, 4)
       puts "#{closed_issues_count} / #{all_issues_count}"
       puts "open: #{open_issues_count}"
       puts "in progress: #{in_progress_issues_count}"
@@ -32,8 +32,25 @@ module Bl
     desc 'users ID', 'show project users'
     def users(id)
       client.get("#{@url}/#{id}/users").body.each do |u|
-        puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
+        puts [
+          u.id,
+          u.userId,
+          u.name,
+          u.roleType,
+          u.lang,
+          u.mailAddress
+        ].join("\t")
       end
+    end
+
+    private
+
+    def count_issues(project_id, *status)
+      client.get(
+        'issues/count',
+        projectId: [project_id],
+        statusId: status
+      ).body.count
     end
   end
 end

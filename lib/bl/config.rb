@@ -2,7 +2,7 @@ require 'singleton'
 require 'yaml'
 
 module Bl
-  CONFIG_FILE = '.bl.yml'
+  CONFIG_FILE = '.bl.yml'.freeze
 
   class Config
     include Singleton

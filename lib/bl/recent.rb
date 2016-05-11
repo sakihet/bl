@@ -13,5 +13,12 @@ module Bl
         puts [i.issue.issueKey, i.issue.summary].join("\t")
       end
     end
+
+    desc 'wikis COUNT', 'list recently viewed wikis'
+    def wikis(count=nil)
+      client.get('users/myself/recentlyViewedWikis', count: count).body.each do |w|
+        puts [w.page.id, w.page.name].join("\t")
+      end
+    end
   end
 end

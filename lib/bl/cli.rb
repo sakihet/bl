@@ -39,16 +39,7 @@ module Bl
       if File.exist?(filename)
         puts "#{filename} exits."
       else
-        config = {
-          space_id: '',
-          api_key: '',
-          project_key: '',
-          issue: {
-            default_project_id: '',
-            default_issue_type_id: '',
-            default_priority_id: ''
-          }
-        }
+        config = Bl::Config.instance.default_config
         f = File.new(filename, 'w')
         f.write(config.to_yaml)
         puts "#{filename} generated."

@@ -19,5 +19,18 @@ module Bl
     def [](key)
       @config[key]
     end
+
+    def default_config
+      {
+        space_id: '',
+        api_key: '',
+        project_key: '',
+        issue: {
+          default_project_id: '',
+          default_issue_type_id: '',
+          default_priority_id: ''
+        }
+      }
+    end
   end
 end

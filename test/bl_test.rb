@@ -5,7 +5,8 @@ class BlTest < Minitest::Test
     refute_nil ::Bl::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
+  def test_version_command
+    out = capture_io{Bl::CLI.start %w{version}}.join('')
+    assert(false == out.nil?, 'should not nil')
   end
 end

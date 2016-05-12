@@ -208,7 +208,7 @@ module Bl
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 
-    desc 'category SUBCOMMAND ...ARGS', 'manage categoryies'
+    desc 'category SUBCOMMAND ...ARGS', 'manage categories'
     subcommand 'category', Category
 
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'

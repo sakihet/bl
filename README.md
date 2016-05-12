@@ -45,15 +45,30 @@ bl uses `~/.bl.yml` for configuration.
     bl wiki SUBCOMMAND ...ARGS       # manage wikis
 
 
-### Example
+### Examples
 
-update unassigned issues
+view global or command specific help:
 
-    bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
+    bl help
+    bl help list
+    bl help search
+    bl help add
+
+list overdue issues
+
+    bl list --overdue
+
+add an issue
+
+    bl add "Update OpenSSL immediately" --priorityId 2 --assigneeId 11111 --dueDate 2014-04-07
 
 add multi issues on list.txt
 
     cat list.txt | xargs -I {} bl add {}
+
+update unassigned issues
+
+    bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
 
 
 ## Backlog API

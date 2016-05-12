@@ -24,7 +24,7 @@ bl uses `~/.bl.yml` for configuration.
     bl activities                    # list activities
     bl add [SUBJECT...]              # add issues
     bl browse KEY                    # browse an issue
-    bl category SUBCOMMAND ...ARGS   # manage categoryies
+    bl category SUBCOMMAND ...ARGS   # manage categories
     bl close [KEY...]                # close issues
     bl config                        # show config
     bl count                         # count issues

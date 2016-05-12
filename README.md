@@ -56,6 +56,10 @@ add multi issues on list.txt
     cat list.txt | xargs -I {} bl add {}
 
 
+## Backlog API
+
+http://developer.nulab-inc.com/docs/backlog
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/sakihet/bl.

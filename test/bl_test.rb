@@ -9,4 +9,9 @@ class BlTest < Minitest::Test
     out = capture_io{Bl::CLI.start %w{version}}.join('')
     assert(false == out.nil?, 'should not nil')
   end
+
+  def test_config_command
+    out = capture_io{Bl::CLI.start %w{config}}.join('')
+    assert(false == out.nil?, 'should not nil')
+  end
 end

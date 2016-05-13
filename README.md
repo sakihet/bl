@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/bl.svg)](https://badge.fury.io/rb/bl)
+
 # bl
 
 bl is a command line tool for [Backlog](http://www.backlog.jp/).

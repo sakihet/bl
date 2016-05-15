@@ -46,6 +46,12 @@ module Bl
       end
     end
 
+    desc 'space', 'show space info'
+    def space
+      res = client.get('space').body
+      puts res.inspect
+    end
+
     desc 'count', 'count issues'
     def count
       puts client.get('issues/count').body.count

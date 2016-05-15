@@ -211,6 +211,13 @@ module Bl
       end
     end
 
+    desc 'notifications', 'list notifications'
+    def notifications
+      client.get('notifications').body.each do |n|
+        puts n.pretty_inspect
+      end
+    end
+
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 

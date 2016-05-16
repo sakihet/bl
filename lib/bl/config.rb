@@ -26,9 +26,11 @@ module Bl
         api_key: '',
         project_key: '',
         issue: {
-          default_project_id: '',
-          default_issue_type_id: '',
-          default_priority_id: ''
+          default: {
+            projectId: nil,
+            issueTypeId: nil,
+            priorityId: 3
+          }
         }
       }
     end

@@ -144,15 +144,10 @@ module Bl
     options ISSUE_BASE_ATTRIBUTES
     def add(*subjects)
       subjects.each do |s|
-        base_options = {
-          projectId: @config[:issue][:default_project_id].to_i,
-          summary: s,
-          issueTypeId: @config[:issue][:default_issue_type_id].to_i,
-          priorityId: @config[:issue][:default_priority_id].to_i
-        }
+        issue_default_options = @config[:issue][:default]
         res = client.post(
           'issues',
-          base_options.merge(options)
+          issue_default_options.merge({summary: s}).merge(options)
         )
         puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
       end

@@ -20,6 +20,11 @@ bl uses `~/.bl.yml` for configuration.
     :space_id: '***'    # your backlog space id
     :api_key: '***'     # your backlog api key
     :project_key: '***' # your backlog project key
+    :issue:
+      :default:         # issue default parameters(add command use this for easiness)
+        :projectId:
+        :issueTypeId:
+        :priorityId:
 
 ## Usage
 

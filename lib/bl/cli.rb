@@ -63,6 +63,7 @@ module Bl
     option :today, type: :boolean
     option :overdue, type: :boolean
     option :priority, type: :boolean
+    option :nocategory, type: :boolean
     def list
       opts = {}
       opts[:statusId] = [1, 2, 3] unless options[:all]
@@ -76,6 +77,7 @@ module Bl
         opts[:sort] = "priority"
         opts[:order] = "asc"
       end
+      opts[:categoryId] = [-1] if options[:nocategory]
       client.get('issues', opts).body.each do |i|
         puts [
           colorize_type(i.issueType.name, i.issueType.color),

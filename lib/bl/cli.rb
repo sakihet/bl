@@ -176,7 +176,7 @@ module Bl
     desc 'statuses', 'list statuses'
     def statuses
       client.get('statuses').body.each do |s|
-        puts [s.id, s.name].join("\t")
+        puts [s.id, colorize_status(s.id, s.name)].join("\t")
       end
     end
 

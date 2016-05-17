@@ -6,12 +6,12 @@ class BlTest < Minitest::Test
   end
 
   def test_version_command
-    out = capture_io{Bl::CLI.start %w{version}}.join('')
+    out = capture_io { Bl::CLI.start %w(version) }.join('')
     assert(false == out.nil?, 'should not nil')
   end
 
   def test_config_command
-    out = capture_io{Bl::CLI.start %w{config}}.join('')
+    out = capture_io { Bl::CLI.start %w(config) }.join('')
     assert(false == out.nil?, 'should not nil')
   end
 end

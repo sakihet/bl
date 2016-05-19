@@ -230,6 +230,7 @@ module Bl
         puts [
           ACTIVITY_TYPES[a.type],
           "#{a.project.projectKey}-#{a.content.key_id}",
+          a.content.summary,
           a.createdUser.name,
           a.created
         ].join("\t")

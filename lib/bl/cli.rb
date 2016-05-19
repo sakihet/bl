@@ -4,6 +4,37 @@ module Bl
     include Bl::Requestable
     include Bl::Formatting
 
+    ISSUES_COUNT_PARAMS = {
+      projectId: :array,
+      issueTypeId: :array,
+      categoryId: :array,
+      versionId: :array,
+      milestoneId: :array,
+      statusId: :array,
+      priorityId: :array,
+      assigneeId: :array,
+      createdUserId: :array,
+      resolutionId: :array,
+      parentChild: :numeric,
+      attachment: :boolean,
+      sharedFile: :boolean,
+      sort: :string,
+      order: :string,
+      offset: :numeric,
+      count: :numeric,
+      createdSince: :string,
+      createUntil: :string,
+      updatedSince: :string,
+      updatedUntil: :string,
+      startDateSince: :string,
+      startDateUntil: :string,
+      dueDateSince: :string,
+      dueDateUntil: :string,
+      id: :array,
+      parentIssueId: :array,
+      keyword: :string
+    }
+
     ISSUE_BASE_ATTRIBUTES = {
       summary: :string,
       description: :string,
@@ -76,8 +107,9 @@ module Bl
     end
 
     desc 'count', 'count issues'
+    options ISSUES_COUNT_PARAMS
     def count
-      puts client.get('issues/count').body.count
+      puts client.get('issues/count', {}.merge(options)).body.count
     end
 
     desc 'list', 'list issues'

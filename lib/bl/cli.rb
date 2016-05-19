@@ -4,7 +4,7 @@ module Bl
     include Bl::Requestable
     include Bl::Formatting
 
-    ISSUES_COUNT_PARAMS = {
+    ISSUES_PARAMS = {
       projectId: :array,
       issueTypeId: :array,
       categoryId: :array,
@@ -107,12 +107,31 @@ module Bl
     end
 
     desc 'count', 'count issues'
-    options ISSUES_COUNT_PARAMS
+    options ISSUES_PARAMS
     def count
       puts client.get('issues/count', {}.merge(options)).body.count
     end
 
-    desc 'list', 'list issues'
+    desc 'issues', 'list issues'
+    options ISSUES_PARAMS
+    def issues
+      client.get('issues', {}.merge(options)).body.each do |i|
+        puts [
+          colorize_type(i.issueType.name, i.issueType.color),
+          i.issueKey,
+          i.summary,
+          colorize_priority(i.priority.id, i.priority.name),
+          i.created,
+          i.dueDate,
+          i.updated,
+          i.createdUser.name,
+          i.assignee&.name,
+          colorize_status(i.status.id, i.status.name)
+        ].join("\t")
+      end
+    end
+
+    desc 'list', 'list issues by typical ways'
     option :all, type: :boolean
     option :unassigned, type: :boolean
     option :today, type: :boolean

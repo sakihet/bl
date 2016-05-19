@@ -34,5 +34,19 @@ module Bl
       end
     end
 
+    def print_issue(issue)
+      puts [
+        colorize_type(issue.issueType.name, issue.issueType.color),
+        issue.issueKey,
+        issue.summary,
+        colorize_priority(issue.priority.id, issue.priority.name),
+        issue.created,
+        issue.dueDate,
+        issue.updated,
+        issue.createdUser.name,
+        issue.assignee&.name,
+        colorize_status(issue.status.id, issue.status.name)
+      ].join("\t")
+    end
   end
 end

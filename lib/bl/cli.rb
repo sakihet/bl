@@ -116,18 +116,7 @@ module Bl
     options ISSUES_PARAMS
     def issues
       client.get('issues', {}.merge(options)).body.each do |i|
-        puts [
-          colorize_type(i.issueType.name, i.issueType.color),
-          i.issueKey,
-          i.summary,
-          colorize_priority(i.priority.id, i.priority.name),
-          i.created,
-          i.dueDate,
-          i.updated,
-          i.createdUser.name,
-          i.assignee&.name,
-          colorize_status(i.status.id, i.status.name)
-        ].join("\t")
+        print_issue(i)
       end
     end
 
@@ -153,18 +142,7 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       client.get('issues', opts).body.each do |i|
-        puts [
-          colorize_type(i.issueType.name, i.issueType.color),
-          i.issueKey,
-          i.summary,
-          colorize_priority(i.priority.id, i.priority.name),
-          i.created,
-          i.dueDate,
-          i.updated,
-          i.createdUser.name,
-          i.assignee&.name,
-          colorize_status(i.status.id, i.status.name)
-        ].join("\t")
+        print_issue(i)
       end
     end
 
@@ -174,18 +152,7 @@ module Bl
     option :assigneeId, type: :array
     def search
       client.get('issues', options.to_h).body.each do |i|
-        puts [
-          i.issueType.name,
-          i.issueKey,
-          i.summary,
-          i.priority.name,
-          i.created,
-          i.dueDate,
-          i.updated,
-          i.createdUser.name,
-          i.assignee&.name,
-          i.status.name
-        ].join("\t")
+        print_issue(i)
       end
     end
 

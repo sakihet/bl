@@ -132,8 +132,9 @@ module Bl
       opts[:statusId] = [1, 2, 3] unless options[:all]
       opts[:assigneeId] = [-1] if options[:unassigned]
       if options[:today]
-        opts[:dueDateSince] = Date.today.to_s
-        opts[:dueDateUntil] = Date.today.next.to_s
+        today = Date.today
+        opts[:dueDateSince] = today.to_s
+        opts[:dueDateUntil] = today.next.to_s
       end
       opts[:dueDateUntil] = Date.today.to_s if options[:overdue]
       if options[:priority]

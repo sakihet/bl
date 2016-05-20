@@ -248,8 +248,7 @@ module Bl
       client.get('/space/activities').body.each do |a|
         puts [
           ACTIVITY_TYPES[a.type],
-          "#{a.project.projectKey}-#{a.content.key_id}",
-          a.content.summary,
+          a.content.inspect,
           a.createdUser.name,
           a.created
         ].join("\t")

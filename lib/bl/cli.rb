@@ -109,7 +109,7 @@ module Bl
     desc 'count', 'count issues'
     options ISSUES_PARAMS
     def count
-      puts client.get('issues/count', {}.merge(options)).body.count
+      puts client.get('issues/count', options.to_h).body.count
     end
 
     desc 'list', 'list issues by typical ways'

@@ -148,9 +148,7 @@ module Bl
     end
 
     desc 'search', 'search issues'
-    option :keyword
-    option :categoryId, type: :array
-    option :assigneeId, type: :array
+    options ISSUES_PARAMS
     def search
       client.get('issues', options.to_h).body.each do |i|
         print_issue(i)

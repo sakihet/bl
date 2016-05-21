@@ -112,14 +112,6 @@ module Bl
       puts client.get('issues/count', {}.merge(options)).body.count
     end
 
-    desc 'issues', 'list issues'
-    options ISSUES_PARAMS
-    def issues
-      client.get('issues', {}.merge(options)).body.each do |i|
-        print_issue(i)
-      end
-    end
-
     desc 'list', 'list issues by typical ways'
     option :all, type: :boolean
     option :unassigned, type: :boolean

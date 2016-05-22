@@ -215,7 +215,7 @@ module Bl
     desc 'priorities', 'list priorities'
     def priorities
       client.get('priorities').body.each do |p|
-        puts [p.id, p.name].join("\t")
+        puts [p.id, colorize_priority(p.id, p.name)].join("\t")
       end
     end
 

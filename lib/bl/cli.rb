@@ -134,17 +134,13 @@ module Bl
         opts[:order] = "asc"
       end
       opts[:categoryId] = [-1] if options[:nocategory]
-      client.get('issues', opts).body.each do |i|
-        print_issue(i)
-      end
+      client.get('issues', opts).body.map {|i| print_issue(i)}
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      client.get('issues', options.to_h).body.each do |i|
-        print_issue(i)
-      end
+      client.get('issues', options.to_h).body.map {|i| print_issue(i)}
     end
 
     desc 'show KEY', "show an issue's details"

@@ -25,6 +25,7 @@ bl uses `~/.bl.yml` for configuration.
         :projectId:
         :issueTypeId:
         :priorityId:
+        :assigneeId:
 
 ## Usage
 
@@ -35,15 +36,19 @@ bl uses `~/.bl.yml` for configuration.
     bl close [KEY...]                # close issues
     bl config                        # show config
     bl count                         # count issues
+    bl doctor                        # check issues
     bl help [COMMAND]                # Describe available commands or one specific command
     bl init                          # initialize a default config file
-    bl list                          # list issues
+    bl list                          # list issues by typical ways
     bl milestone SUBCOMMAND ...ARGS  # manage milestones
+    bl notifications                 # list notifications
     bl priorities                    # list priorities
     bl project SUBCOMMAND ...ARGS    # manage projects
+    bl recent SUBCOMMAND ...ARGS     # list recent stuff
     bl resolutions                   # list resolutions
     bl search                        # search issues
     bl show KEY                      # show an issue's details
+    bl space                         # show space info
     bl statuses                      # list statuses
     bl type SUBCOMMAND ...ARGS       # manage types
     bl update [KEY...]               # update issues
@@ -51,29 +56,28 @@ bl uses `~/.bl.yml` for configuration.
     bl version                       # show version
     bl wiki SUBCOMMAND ...ARGS       # manage wikis
 
-
 ### Examples
 
-view global or command specific help:
+View global or command specific help:
 
     bl help
     bl help list
     bl help search
     bl help add
 
-list overdue issues
+List overdue issues:
 
     bl list --overdue
 
-add an issue
+Add an issue:
 
     bl add "Update OpenSSL immediately" --priorityId 2 --assigneeId 11111 --dueDate 2014-04-07
 
-add multi issues on list.txt
+Add multi issues:
 
     cat list.txt | xargs -I {} bl add {}
 
-update unassigned issues
+Update unassigned issues:
 
     bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
 

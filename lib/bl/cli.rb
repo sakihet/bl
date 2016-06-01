@@ -250,7 +250,7 @@ module Bl
 
     desc 'doctor', 'check issues'
     def doctor
-      unassigned_issues = client.get('issues', {assigneeId: [-1]}).body
+      unassigned_issues = client.get('issues', assigneeId: [-1]).body
       overdue_issues = client.get(
         'issues',
         statusId: [1, 2, 3],

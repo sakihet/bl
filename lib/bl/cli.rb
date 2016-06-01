@@ -248,6 +248,26 @@ module Bl
       end
     end
 
+    desc 'doctor', 'check issues'
+    def doctor
+      unassigned_issues = client.get('issues', {assigneeId: [-1]}).body
+      overdue_issues = client.get(
+        'issues',
+        statusId: [1, 2, 3],
+        dueDateUntil: Date.today.to_s,
+      ).body
+      unless unassigned_issues.empty?
+        puts 'warning: unassigned issues found.'
+        puts 'issues:'
+        unassigned_issues.map {|i| print_issue(i)}
+      end
+      unless overdue_issues.empty?
+        puts 'warning: overdue issues found.'
+        puts 'issues:'
+        overdue_issues.map {|i| print_issue(i)}
+      end
+    end
+
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 

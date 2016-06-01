@@ -29,7 +29,8 @@ module Bl
           default: {
             projectId: nil,
             issueTypeId: nil,
-            priorityId: 3
+            priorityId: 3,
+            assigneeId: nil
           }
         }
       }

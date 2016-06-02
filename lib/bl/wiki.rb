@@ -26,5 +26,23 @@ module Bl
       puts 'content:'
       puts body.content
     end
+
+    desc 'edit ID', 'edit a wiki by $EDITOR'
+    def edit(id)
+      wiki_content = client.get("#{@url}/#{id}").body.content
+      file = Tempfile.new
+      file.puts(wiki_content)
+      file.close
+      begin
+        file.open
+        system("$EDITOR #{file.path}")
+        new_content = file.read
+        client.patch("#{@url}/#{id}", content: new_content)
+        puts "wiki #{id} updated."
+      ensure
+        file.close
+        file.unlink
+      end
+    end
   end
 end

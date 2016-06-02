@@ -81,6 +81,9 @@ Update unassigned issues:
 
     bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
 
+Edit wiki page by $EDITOR:
+
+    bl wiki edit 12345
 
 ## Backlog API
 

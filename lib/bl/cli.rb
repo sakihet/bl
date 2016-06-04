@@ -285,5 +285,8 @@ module Bl
 
     desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
     subcommand 'recent', Recent
+
+    desc 'file SUBCOMMAND ...ARGS', 'manage files'
+    subcommand 'file', File
   end
 end

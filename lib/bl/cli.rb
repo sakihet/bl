@@ -201,6 +201,24 @@ module Bl
       end
     end
 
+    desc 'edit KEY', "edit issues' description by $EDITOR"
+    def edit(key)
+      issue_description = client.get("issues/#{key}").body.description
+      file = Tempfile.new
+      file.puts(issue_description)
+      file.close
+      begin
+        file.open
+        system("$EDITOR #{file.path}")
+        new_content = file.read
+        client.patch("issues/#{key}", description: new_content)
+        puts "issue #{key} updated."
+      ensure
+        file.close
+        file.unlink
+      end
+    end
+
     desc 'statuses', 'list statuses'
     def statuses
       client.get('statuses').body.each do |s|

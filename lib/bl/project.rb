@@ -38,29 +38,15 @@ module Bl
       puts '--milestone--'
       versions = client.get("projects/#{@config[:project_key]}/versions").body
       versions.each do |version|
-        all_issues_count = client.get(
-          'issues/count',
-          versionId: [version.id]
-        ).body.count
-        closed_issues_count = client.get(
-          'issues/count',
-          versionId: [version.id],
-          statusId: [4]
-        ).body.count
+        all_issues_count = count_issues(id, versionId: [version.id])
+        closed_issues_count = count_issues(id, versionId: [version.id], statusId: [4])
         puts "#{version.name}: #{closed_issues_count} / #{all_issues_count}"
       end
       puts '--category--'
       categories = client.get("projects/#{@config[:project_key]}/categories").body
       categories.each do |category|
-        all_issues_count = client.get(
-          'issues/count',
-          categoryId: [category.id]
-        ).body.count
-        closed_issues_count = client.get(
-          'issues/count',
-          categoryId: [category.id],
-          statusId: [4]
-        ).body.count
+        all_issues_count = count_issues(id, categoryId: [category.id])
+        closed_issues_count = count_issues(id, categoryId: [category.id], statusId: [4])
         puts "#{category.name}: #{closed_issues_count} / #{all_issues_count}"
       end
     end

@@ -18,10 +18,10 @@ module Bl
     desc 'status ID', 'show project status'
     def status(id)
       all_issues_count = count_issues(id)
-      open_issues_count = count_issues(id, 1)
-      in_progress_issues_count = count_issues(id, 2)
-      resolved_issues_count = count_issues(id, 3)
-      closed_issues_count = count_issues(id, 4)
+      open_issues_count = count_issues(id, statusId: [1])
+      in_progress_issues_count = count_issues(id, statusId: [2])
+      resolved_issues_count = count_issues(id, statusId: [3])
+      closed_issues_count = count_issues(id, statusId: [4])
       puts "#{closed_issues_count} / #{all_issues_count}"
       puts "open: #{open_issues_count}"
       puts "in progress: #{in_progress_issues_count}"
@@ -33,7 +33,7 @@ module Bl
     def progress(id)
       puts '--status--'
       all_issues_count = count_issues(id)
-      closed_issues_count = count_issues(id, 4)
+      closed_issues_count = count_issues(id, statusId: [4])
       puts "#{closed_issues_count} / #{all_issues_count}"
       puts '--milestone--'
       versions = client.get("projects/#{@config[:project_key]}/versions").body
@@ -81,11 +81,13 @@ module Bl
 
     private
 
-    def count_issues(project_id, *status)
+    def count_issues(project_id, args={})
+      args = {
+        projectId: [project_id],
+      }.merge(args)
       client.get(
         'issues/count',
-        projectId: [project_id],
-        statusId: status
+        args
       ).body.count
     end
   end

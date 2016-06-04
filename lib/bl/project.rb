@@ -29,6 +29,28 @@ module Bl
       puts "closed: #{closed_issues_count}"
     end
 
+    desc 'progress ID', 'show project progress'
+    def progress(id)
+      puts '--status--'
+      all_issues_count = count_issues(id)
+      closed_issues_count = count_issues(id, 4)
+      puts "#{closed_issues_count} / #{all_issues_count}"
+      puts '--category--'
+      categories = client.get("projects/#{@config[:project_key]}/categories").body
+      categories.each do |category|
+        all_issues_count = client.get(
+          'issues/count',
+          categoryId: [category.id]
+        ).body.count
+        closed_issues_count = client.get(
+          'issues/count',
+          categoryId: [category.id],
+          statusId: [4]
+        ).body.count
+        puts "#{category.name}: #{closed_issues_count} / #{all_issues_count}"
+      end
+    end
+
     desc 'users ID', 'show project users'
     def users(id)
       client.get("#{@url}/#{id}/users").body.each do |u|

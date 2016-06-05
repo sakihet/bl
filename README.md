@@ -37,6 +37,8 @@ bl uses `~/.bl.yml` for configuration.
     bl config                        # show config
     bl count                         # count issues
     bl doctor                        # check issues
+    bl edit KEY                      # edit issues' description by $EDITOR
+    bl file SUBCOMMAND ...ARGS       # manage files
     bl help [COMMAND]                # Describe available commands or one specific command
     bl init                          # initialize a default config file
     bl list                          # list issues by typical ways
@@ -56,7 +58,7 @@ bl uses `~/.bl.yml` for configuration.
     bl version                       # show version
     bl wiki SUBCOMMAND ...ARGS       # manage wikis
 
-### Examples
+### Issue
 
 View global or command specific help:
 
@@ -64,6 +66,10 @@ View global or command specific help:
     bl help list
     bl help search
     bl help add
+
+List unclosed issues:
+
+    bl list
 
 List overdue issues:
 
@@ -77,13 +83,43 @@ Add multi issues:
 
     cat list.txt | xargs -I {} bl add {}
 
+Edit issue by your favorite $EDITOR:
+
+    bl edit ISSUE-12
+
 Update unassigned issues:
 
     bl list --unassigned | awk '{print $2}' | xargs bl update --assigneeId 12345
 
+### Project
+
+List projects:
+
+    bl project list
+
+Show project progress:
+
+    bl project progress 12345
+
+### Wiki
+
+List wiki pages:
+
+    bl wiki list
+
 Edit wiki page by $EDITOR:
 
     bl wiki edit 12345
+
+### File
+
+List files:
+
+    bl file list
+
+Download file:
+
+    bl file get 12345
 
 ## Backlog API
 

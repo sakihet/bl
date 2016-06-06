@@ -58,14 +58,14 @@ bl uses `~/.bl.yml` for configuration.
     bl version                       # show version
     bl wiki SUBCOMMAND ...ARGS       # manage wikis
 
-### Issue
-
 View global or command specific help:
 
     bl help
     bl help list
     bl help search
     bl help add
+
+### Issue
 
 List unclosed issues:
 

@@ -3,7 +3,7 @@
 bl is a command line tool for Nulab's [Backlog](http://www.backlog.jp/).
 
 [![Gem Version](https://badge.fury.io/rb/bl.svg)](https://badge.fury.io/rb/bl)
-[![License](https://img.shields.io/github/license/sakihet/bl.svg)]
+![License](https://img.shields.io/github/license/sakihet/bl.svg)
 
 ## Table of Contents
 - [Installation](https://github.com/sakihet/bl#installation)

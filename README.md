@@ -1,8 +1,20 @@
-[![Gem Version](https://badge.fury.io/rb/bl.svg)](https://badge.fury.io/rb/bl)
-
 # bl
 
-bl is a command line tool for [Backlog](http://www.backlog.jp/).
+bl is a command line tool for Nulab's [Backlog](http://www.backlog.jp/).
+
+[![Gem Version](https://badge.fury.io/rb/bl.svg)](https://badge.fury.io/rb/bl)
+[![License](https://img.shields.io/github/license/sakihet/bl.svg)]
+
+## Table of Contents
+- [Installation](https://github.com/sakihet/bl#installation)
+- [Configuration](https://github.com/sakihet/bl#configuration)
+- [Usage](https://github.com/sakihet/bl#usage)
+- [Contributing](https://github.com/sakihet/bl#contributing)
+- [License](https://github.com/sakihet/bl#license)
+
+## Requirements
+
+- ruby 2.3+
 
 ## Installation
 

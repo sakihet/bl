@@ -133,6 +133,16 @@ Download file:
 
     bl file get 12345
 
+### Git repository
+
+List repositories:
+
+    bl gitrepo list
+
+Show repository:
+
+    bl gitrepo show 12345
+
 ## Backlog API
 
 http://developer.nulab-inc.com/docs/backlog

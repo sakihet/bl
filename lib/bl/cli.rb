@@ -306,5 +306,8 @@ module Bl
 
     desc 'file SUBCOMMAND ...ARGS', 'manage files'
     subcommand 'file', File
+
+    desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
+    subcommand 'gitrepo', GitRepo
   end
 end

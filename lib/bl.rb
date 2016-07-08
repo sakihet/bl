@@ -14,6 +14,7 @@ require 'bl/wiki'
 require 'bl/project'
 require 'bl/recent'
 require 'bl/file'
+require 'bl/gitrepo'
 require 'bl/cli'
 
 Bl::CLI.start(ARGV)

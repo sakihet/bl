@@ -157,7 +157,7 @@ module Bl
       puts "version: #{body.versions}"
       puts "status: #{body.status.name}"
       puts "milestone: #{body.milestone}"
-      puts "assignee: #{body.assignee.name}"
+      puts "assignee: #{body.assignee&.name}"
       puts "created user: #{body.createdUser.name}"
       puts '--'
       puts "description:"

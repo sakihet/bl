@@ -113,12 +113,12 @@ module Bl
     end
 
     desc 'list', 'list issues by typical ways'
-    option :all, type: :boolean
-    option :unassigned, type: :boolean
-    option :today, type: :boolean
-    option :overdue, type: :boolean
-    option :priority, type: :boolean
-    option :nocategory, type: :boolean
+    option :all
+    option :unassigned
+    option :today
+    option :overdue
+    option :priority
+    option :nocategory
     def list
       opts = {}
       opts[:statusId] = [1, 2, 3] unless options[:all]

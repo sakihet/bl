@@ -162,6 +162,17 @@ module Bl
       puts '--'
       puts "description:"
       puts body.description
+      puts "attachments:"
+      body.attachments.each do |file|
+        puts ['-', file.id, file.name, file.size].join("\t")
+        puts "\tview url: https://#{@config[:space_id]}.backlog.jp/ViewAttachment.action?attachmentId=#{file.id}"
+        puts "\tdownload url: https://#{@config[:space_id]}.backlog.jp/downloadAttachment/#{file.id}/#{file.name}"
+      end
+      puts "shared files:"
+      body.sharedFiles.each do |file|
+        puts ['-', file.id, file.name, file.size].join("\t")
+        puts "\tfile url: https://#{@config[:space_id]}.backlog.jp/ViewSharedFile.action?projectKey=#{@config[:project_key]}&sharedFileId=#{file.id}"
+      end
     end
 
     desc 'browse KEY', 'browse an issue'

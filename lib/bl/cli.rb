@@ -113,12 +113,12 @@ module Bl
     end
 
     desc 'list', 'list issues by typical ways'
-    option :all, type: :boolean
-    option :unassigned, type: :boolean
-    option :today, type: :boolean
-    option :overdue, type: :boolean
-    option :priority, type: :boolean
-    option :nocategory, type: :boolean
+    option :all
+    option :unassigned
+    option :today
+    option :overdue
+    option :priority
+    option :nocategory
     def list
       opts = {}
       opts[:statusId] = [1, 2, 3] unless options[:all]
@@ -157,11 +157,22 @@ module Bl
       puts "version: #{body.versions}"
       puts "status: #{body.status.name}"
       puts "milestone: #{body.milestone}"
-      puts "assignee: #{body.assignee.name}"
+      puts "assignee: #{body.assignee&.name}"
       puts "created user: #{body.createdUser.name}"
       puts '--'
       puts "description:"
       puts body.description
+      puts "attachments:"
+      body.attachments.each do |file|
+        puts ['-', file.id, file.name, file.size].join("\t")
+        puts "\tview url: https://#{@config[:space_id]}.backlog.jp/ViewAttachment.action?attachmentId=#{file.id}"
+        puts "\tdownload url: https://#{@config[:space_id]}.backlog.jp/downloadAttachment/#{file.id}/#{file.name}"
+      end
+      puts "shared files:"
+      body.sharedFiles.each do |file|
+        puts ['-', file.id, file.name, file.size].join("\t")
+        puts "\tfile url: https://#{@config[:space_id]}.backlog.jp/ViewSharedFile.action?projectKey=#{@config[:project_key]}&sharedFileId=#{file.id}"
+      end
     end
 
     desc 'browse KEY', 'browse an issue'

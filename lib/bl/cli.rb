@@ -89,12 +89,12 @@ module Bl
 
     desc 'init', 'initialize a default config file'
     def init
-      filename = File.join(Dir.home, Bl::CONFIG_FILE)
-      if File.exist?(filename)
+      filename = ::File.join(Dir.home, Bl::CONFIG_FILE)
+      if ::File.exist?(filename)
         puts "#{filename} exits."
       else
         config = Bl::Config.instance.default_config
-        f = File.new(filename, 'w')
+        f = ::File.new(filename, 'w')
         f.write(config.to_yaml)
         puts "#{filename} generated."
       end

@@ -258,6 +258,19 @@ module Bl
       end
     end
 
+    desc 'user-activities USER_ID', "list user's activities"
+    options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
+    def user_activities(user_id)
+      client.get("/users/#{user_id}/activities").body.each do |a|
+        puts [
+          ACTIVITY_TYPES[a.type],
+          a.content.inspect,
+          a.createdUser.name,
+          a.created
+        ].join("\t")
+      end
+    end
+
     desc 'activities', 'list activities'
     def activities
       client.get('/space/activities').body.each do |a|

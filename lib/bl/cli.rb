@@ -271,6 +271,14 @@ module Bl
       end
     end
 
+    desc 'user-stars-count [USER_ID...]', 'count user stars'
+    options since: :string, until: :string
+    def user_stars_count(*user_ids)
+      user_ids.each do |user_id|
+        p client.get("/users/#{user_id}/stars/count", options.to_h).body.count
+      end
+    end
+
     desc 'activities', 'list activities'
     def activities
       client.get('/space/activities').body.each do |a|

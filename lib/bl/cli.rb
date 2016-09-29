@@ -318,6 +318,9 @@ module Bl
       end
     end
 
+    desc 'space SUBCOMMAND ...ARGS', ''
+    subcommand 'space', Space
+
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 

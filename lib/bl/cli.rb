@@ -49,29 +49,6 @@ module Bl
       assigneeId: :numeric
     }
 
-    ACTIVITY_TYPES = {
-      1 => 'Issue Created',
-      2 => 'Issue Updated',
-      3 => 'Issue Commented',
-      4 => 'Issue Deleted',
-      5 => 'Wiki Created',
-      6 => 'Wiki Updated',
-      7 => 'Wiki Deleted',
-      8 => 'File Added',
-      9 => 'File Updated',
-      10 => 'File Deleted',
-      11 => 'SVN Committed',
-      12 => 'Git Pushed',
-      13 => 'Git Repository Created',
-      14 => 'Issue Multi Updated',
-      15 => 'Project User Added',
-      16 => 'Project User Deleted',
-      17 => 'Comment Notification Added',
-      18 => 'Pull Request Added',
-      19 => 'Pull Request Updated',
-      20 => 'Comment Added on Pull Request'
-    }
-
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -256,12 +233,7 @@ module Bl
     options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
     def user_activities(user_id)
       client.get("/users/#{user_id}/activities").body.each do |a|
-        puts [
-          ACTIVITY_TYPES[a.type],
-          a.content.inspect,
-          a.createdUser.name,
-          a.created
-        ].join("\t")
+        print_activity(a)
       end
     end
 
@@ -276,12 +248,7 @@ module Bl
     desc 'activities', 'list activities'
     def activities
       client.get('/space/activities').body.each do |a|
-        puts [
-          ACTIVITY_TYPES[a.type],
-          a.content.inspect,
-          a.createdUser.name,
-          a.created
-        ].join("\t")
+        print_activity(a)
       end
     end
 

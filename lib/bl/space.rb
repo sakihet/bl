@@ -10,6 +10,7 @@ module Bl
 
     desc 'info', 'show space info'
     def info
+      puts client.get('space').body.inspect
     end
 
     desc 'activities', 'show space activities'

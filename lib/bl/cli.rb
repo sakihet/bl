@@ -100,12 +100,6 @@ module Bl
       end
     end
 
-    desc 'space', 'show space info'
-    def space
-      res = client.get('space').body
-      puts res.inspect
-    end
-
     desc 'count', 'count issues'
     options ISSUES_PARAMS
     def count

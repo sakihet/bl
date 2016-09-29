@@ -245,13 +245,6 @@ module Bl
       end
     end
 
-    desc 'activities', 'list activities'
-    def activities
-      client.get('/space/activities').body.each do |a|
-        print_activity(a)
-      end
-    end
-
     desc 'notifications', 'list notifications'
     def notifications
       client.get('notifications').body.each do |n|

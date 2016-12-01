@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'thor', '~> 0.19.1'
-  spec.add_dependency 'backlog_kit', '~> 0.14.0'
+  spec.add_dependency 'backlog_kit', '~> 0.15.0'
   spec.add_dependency 'paint', '~> 1.0.1'
   spec.add_development_dependency 'bundler', '~> 1.13'
   spec.add_development_dependency 'rake', '~> 11.3'

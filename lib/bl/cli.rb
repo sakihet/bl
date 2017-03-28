@@ -275,6 +275,9 @@ module Bl
     desc 'space SUBCOMMAND ...ARGS', ''
     subcommand 'space', Space
 
+    desc 'users SUBCOMMAND ...ARGS', ''
+    subcommand 'users', Users
+
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 

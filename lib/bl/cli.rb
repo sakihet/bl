@@ -304,5 +304,8 @@ module Bl
 
     desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
     subcommand 'gitrepo', GitRepo
+
+    desc 'webhooks SUBCOMMAND ...ARGS', ''
+    subcommand 'webhooks', Webhooks
   end
 end

@@ -278,6 +278,9 @@ module Bl
     desc 'users SUBCOMMAND ...ARGS', ''
     subcommand 'users', Users
 
+    desc 'groups SUBCOMMAND ...ARGS', ''
+    subcommand 'groups', Groups
+
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 

@@ -310,5 +310,8 @@ module Bl
 
     desc 'notifications SUBCOMMAND ...ARGS', ''
     subcommand 'notifications', Notifications
+
+    desc 'watchings SUBCOMMAND ...ARGS', ''
+    subcommand 'watchings', Watchings
   end
 end

@@ -8,9 +8,11 @@ module Bl
       super
     end
 
-    desc 'list', ''
+    desc 'list', 'list users'
     def list
-      # TODO
+      client.get('users').body.each do |u|
+        puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
+      end
     end
 
     desc 'show', ''
@@ -43,9 +45,12 @@ module Bl
       # TODO
     end
 
-    desc 'activities', ''
-    def activities
-      # TODO
+    desc 'activities USER_ID', "list user's activities"
+    options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
+    def activities(user_id)
+      client.get("/users/#{user_id}/activities").body.each do |a|
+        print_activity(a)
+      end
     end
 
     desc 'stars', ''
@@ -53,9 +58,12 @@ module Bl
       # TODO
     end
 
-    desc 'stars-count', ''
+    desc 'stars-count [USER_ID...]', "count user's stars"
+    options since: :string, until: :string
     def stars_count
-      # TODO
+      user_ids.each do |user_id|
+        p client.get("/users/#{user_id}/stars/count", options.to_h).body.count
+      end
     end
   end
 end

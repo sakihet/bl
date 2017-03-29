@@ -222,29 +222,6 @@ module Bl
       end
     end
 
-    desc 'users', 'list space users'
-    def users
-      client.get('users').body.each do |u|
-        puts [u.id, u.userId, u.name, u.roleType, u.lang, u.mailAddress].join("\t")
-      end
-    end
-
-    desc 'user-activities USER_ID', "list user's activities"
-    options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
-    def user_activities(user_id)
-      client.get("/users/#{user_id}/activities").body.each do |a|
-        print_activity(a)
-      end
-    end
-
-    desc 'user-stars-count [USER_ID...]', 'count user stars'
-    options since: :string, until: :string
-    def user_stars_count(*user_ids)
-      user_ids.each do |user_id|
-        p client.get("/users/#{user_id}/stars/count", options.to_h).body.count
-      end
-    end
-
     desc 'notifications', 'list notifications'
     def notifications
       client.get('notifications').body.each do |n|

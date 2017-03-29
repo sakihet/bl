@@ -307,5 +307,8 @@ module Bl
 
     desc 'webhooks SUBCOMMAND ...ARGS', ''
     subcommand 'webhooks', Webhooks
+
+    desc 'notifications SUBCOMMAND ...ARGS', ''
+    subcommand 'notifications', Notifications
   end
 end

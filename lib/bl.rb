@@ -16,6 +16,11 @@ require 'bl/project'
 require 'bl/recent'
 require 'bl/file'
 require 'bl/gitrepo'
+require 'bl/users'
+require 'bl/groups'
+require 'bl/webhooks'
+require 'bl/notifications'
+require 'bl/watchings'
 require 'bl/cli'
 
 Bl::CLI.start(ARGV)

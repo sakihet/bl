@@ -108,5 +108,14 @@ module Bl
       puts 'members:'
       print_group_members(group.members)
     end
+
+    def print_webhook(webhook)
+      puts [
+        webhook.id,
+        webhook.name,
+        webhook.description,
+        webhook.hookUrl
+      ].join("\t")
+    end
   end
 end

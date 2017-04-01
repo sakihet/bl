@@ -117,5 +117,9 @@ module Bl
         webhook.hookUrl
       ].join("\t")
     end
+
+    def print_watch_target(target)
+      p target
+    end
   end
 end

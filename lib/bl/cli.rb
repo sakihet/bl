@@ -222,13 +222,6 @@ module Bl
       end
     end
 
-    desc 'notifications', 'list notifications'
-    def notifications
-      client.get('notifications').body.each do |n|
-        puts n.pretty_inspect
-      end
-    end
-
     desc 'doctor', 'check issues'
     def doctor
       unassigned_issues = client.get('issues', assigneeId: [-1]).body

@@ -91,5 +91,22 @@ module Bl
         user.mailAddress
       ].join("\t")
     end
+
+    def print_group(group)
+      puts [
+        group.id,
+        group.name
+      ].join("\t")
+    end
+
+    def print_group_members(members)
+      members.map { |m| print_user(m) }
+    end
+
+    def print_group_and_members(group)
+      print_group(group)
+      puts 'members:'
+      print_group_members(group.members)
+    end
   end
 end

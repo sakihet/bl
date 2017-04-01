@@ -80,5 +80,16 @@ module Bl
         a.created
       ].join("\t")
     end
+
+    def print_user(user)
+      puts [
+        user.id,
+        user.userId,
+        user.name,
+        user.roleType,
+        user.lang,
+        user.mailAddress
+      ].join("\t")
+    end
   end
 end

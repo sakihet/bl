@@ -1,5 +1,6 @@
 require 'hirb'
 require 'hirb-unicode'
+require 'json'
 
 module Bl
   class Formatter
@@ -7,8 +8,10 @@ module Bl
       @format = case format
       when 'table'
         Format::Hirb
+      when 'json'
+        Format::Json
       else
-        abort ''
+        abort 'format must be set to \'table\' or \'json\''
       end
     end
 
@@ -18,6 +21,18 @@ module Bl
 
     module Format
       class Hirb < Hirb::Helpers::AutoTable
+      end
+
+      class Json
+        def self.render(objects, fields: [])
+          result = []
+          objects.each do |obj|
+            h = {}
+            fields.map { |f| h.store(f, obj.send(f)) }
+            result << h
+          end
+          result.to_json
+        end
       end
     end
   end

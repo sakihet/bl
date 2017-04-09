@@ -1,6 +1,7 @@
 module Bl
   class Category < Thor
     include Bl::Requestable
+    class_option :format, type: :string, default: 'table', desc: 'set output format'
 
     def initialize(*)
       @config = Bl::Config.instance
@@ -10,9 +11,8 @@ module Bl
 
     desc 'list', 'list categories'
     def list
-      client.get(@url).body.each do |c|
-        puts [c.id, c.name].join("\t")
-      end
+      res = client.get(@url)
+      puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'add [NAME...]', 'add categories'

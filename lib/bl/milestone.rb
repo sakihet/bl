@@ -1,6 +1,7 @@
 module Bl
   class Milestone < Thor
     include Bl::Requestable
+    class_option :format, type: :string, default: 'table', desc: 'set output format'
 
     MILESTONE_PARAMS = {
       description: :string,
@@ -16,17 +17,8 @@ module Bl
 
     desc 'list', 'list milestones'
     def list
-      client.get(@url).body.each do |v|
-        puts [
-          v.id,
-          v.projectId,
-          v.name,
-          v.description,
-          v.startDate,
-          v.releaseDueDate,
-          v.archived
-        ].join("\t")
-      end
+      res = client.get(@url)
+      puts formatter.render(res.body, fields: %i(id projectId name description startDate releaseDueDate archived))
     end
 
     desc 'add [NAME...]', 'add milestones'

@@ -2,6 +2,12 @@ module Bl
   class Milestone < Thor
     include Bl::Requestable
 
+    MILESTONE_PARAMS = {
+      description: :string,
+      startDate: :string,
+      releaseDueDate: :string
+    }
+
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/versions"
@@ -24,9 +30,7 @@ module Bl
     end
 
     desc 'add [NAME...]', 'add milestones'
-    option :description, type: :string
-    option :startDate, type: :string
-    option :releaseDate, type: :string
+    options MILESTONE_PARAMS
     def add(*names)
       names.each do |name|
         res = client.post(
@@ -34,7 +38,7 @@ module Bl
           name: name,
           description: options[:description],
           startDate: options[:startDate],
-          releaseDate: options[:releaseDate]
+          releaseDueDate: options[:releaseDueDate]
         )
         puts "milestone added: #{res.body.id}\t#{res.body.name}"
       end
@@ -42,9 +46,7 @@ module Bl
 
     desc 'update [ID...]', 'update milestones'
     option :name, type: :string
-    option :description, type: :string
-    option :startDate, type: :string
-    option :releaseDate, type: :string
+    options MILESTONE_PARAMS
     def update(*ids)
       ids.each do |id|
         res = client.patch("#{@url}/#{id}", options)

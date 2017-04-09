@@ -21,6 +21,7 @@ require 'bl/groups'
 require 'bl/webhooks'
 require 'bl/notifications'
 require 'bl/watchings'
+require 'bl/formatter'
 require 'bl/cli'
 
 Bl::CLI.start(ARGV)

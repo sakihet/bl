@@ -24,6 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor', '~> 0.19.4'
   spec.add_dependency 'backlog_kit', '~> 0.15.0'
   spec.add_dependency 'paint', '~> 2.0'
+  spec.add_dependency 'hirb', '~> 0.7.3'
+  spec.add_dependency 'hirb-unicode', '~> 0.0.5'
+
   spec.add_development_dependency 'bundler', '~> 1.14.6'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'minitest', '~> 5.10'

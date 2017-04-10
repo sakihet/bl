@@ -1,6 +1,5 @@
 module Bl
-  class Wiki < Thor
-    include Bl::Requestable
+  class Wiki < Command
 
     def initialize(*)
       @config = Bl::Config.instance

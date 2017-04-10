@@ -1,6 +1,5 @@
 module Bl
-  class Project < Thor
-    include Bl::Requestable
+  class Project < Command
 
     def initialize(*)
       @config = Bl::Config.instance

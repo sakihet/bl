@@ -1,7 +1,5 @@
 module Bl
-  class Webhooks < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Webhooks < Command
 
     WEBHOOK_PARAMS = {
       name: :string,

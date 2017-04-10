@@ -1,6 +1,5 @@
 module Bl
-  class Notifications < Thor
-    include Bl::Requestable
+  class Notifications < Command
 
     def initialize(*)
       @config = Bl::Config.instance

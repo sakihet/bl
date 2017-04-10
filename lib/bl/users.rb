@@ -1,7 +1,5 @@
 module Bl
-  class Users < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Users < Command
 
     def initialize(*)
       @config = Bl::Config.instance

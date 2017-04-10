@@ -1,7 +1,5 @@
 module Bl
-  class Space < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Space < Command
 
     def initialize(*)
       @config = Bl::Config.instance

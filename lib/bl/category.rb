@@ -1,7 +1,5 @@
 module Bl
-  class Category < Thor
-    include Bl::Requestable
-    class_option :format, type: :string, default: 'table', desc: 'set output format'
+  class Category < Command
 
     def initialize(*)
       @config = Bl::Config.instance

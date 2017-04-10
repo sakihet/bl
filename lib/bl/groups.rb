@@ -1,7 +1,5 @@
 module Bl
-  class Groups < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Groups < Command
 
     def initialize(*)
       @config = Bl::Config.instance

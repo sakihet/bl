@@ -1,6 +1,5 @@
 module Bl
-  class Recent < Thor
-    include Bl::Requestable
+  class Recent < Command
 
     def initialize(*)
       @config = Bl::Config.instance

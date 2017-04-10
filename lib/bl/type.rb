@@ -1,7 +1,5 @@
 module Bl
-  class Type < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Type < Command
 
     def initialize(*)
       @config = Bl::Config.instance

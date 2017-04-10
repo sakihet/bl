@@ -1,7 +1,5 @@
 module Bl
-  class Milestone < Thor
-    include Bl::Requestable
-    class_option :format, type: :string, default: 'table', desc: 'set output format'
+  class Milestone < Command
 
     MILESTONE_PARAMS = {
       description: :string,

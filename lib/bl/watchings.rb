@@ -1,7 +1,5 @@
 module Bl
-  class Watchings < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class Watchings < Command
 
     WATCHINGS_PARAMS = {
       order: :string,

@@ -1,6 +1,5 @@
 module Bl
-  class GitRepo < Thor
-    include Bl::Requestable
+  class GitRepo < Command
 
     def initialize(*)
       @config = Bl::Config.instance

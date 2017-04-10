@@ -1,6 +1,5 @@
 module Bl
-  class File < Thor
-    include Bl::Requestable
+  class File < Command
 
     def initialize(*)
       @config = Bl::Config.instance

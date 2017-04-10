@@ -1,8 +1,6 @@
 module Bl
 
-  class CLI < Thor
-    include Bl::Requestable
-    include Bl::Formatting
+  class CLI < Command
 
     ISSUES_PARAMS = {
       projectId: :array,

@@ -9,9 +9,8 @@ module Bl
 
     desc 'list', 'list projects'
     def list
-      client.get(@url).body.each do |p|
-        puts [p.id, p.projectKey, p.name].join("\t")
-      end
+      res = client.get(@url)
+      puts formatter.render(res.body, fields: %i(id projectKey name))
     end
 
     desc 'status ID', 'show project status'

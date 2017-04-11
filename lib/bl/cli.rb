@@ -109,9 +109,7 @@ module Bl
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      h = options.to_h
-      h.delete('format')
-      client.get('issues', h).body.map {|i| print_issue(i)}
+      client.get('issues', delete_format(options.to_h)).body.map {|i| print_issue(i)}
     end
 
     desc 'show KEY', "show an issue's details"
@@ -283,5 +281,12 @@ module Bl
 
     desc 'watchings SUBCOMMAND ...ARGS', ''
     subcommand 'watchings', Watchings
+
+    private
+
+    def delete_format(h)
+      h.delete('format')
+      h
+    end
   end
 end

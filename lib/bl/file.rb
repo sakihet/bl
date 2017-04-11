@@ -8,9 +8,8 @@ module Bl
 
     desc 'list PATH', 'list files on PATH'
     def list(path='')
-      client.get("projects/#{@config[:project_key]}/files/metadata/#{path}").body.each do |f|
-        puts [f.id, f.type, f.dir, f.name, f.size, f.created, f.updated].join("\t")
-      end
+      res = client.get("projects/#{@config[:project_key]}/files/metadata/#{path}")
+      puts formatter.render(res.body, fields: %i(id type dir name size created updated))
     end
 
     desc 'get [ID...]', 'get files'

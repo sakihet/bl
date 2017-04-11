@@ -9,15 +9,8 @@ module Bl
 
     desc 'list', 'list git repositories'
     def list
-      client.get(@url).body.each do |repo|
-        puts [
-          repo.id,
-          repo.projectId,
-          repo.name,
-          repo.description,
-          repo.sshUrl
-        ].join("\t")
-      end
+      res = client.get(@url)
+      puts formatter.render(res.body, fields: %i(id projectId name description sshUrl))
     end
 
     desc 'show ID', 'show a git repository'

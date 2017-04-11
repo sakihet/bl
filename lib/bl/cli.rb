@@ -168,7 +168,7 @@ module Bl
     option :comment, type: :string
     def update(*keys)
       keys.each do |k|
-        res = client.patch("issues/#{k}", options.to_h)
+        res = client.patch("issues/#{k}", delete_format(options.to_h))
         puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
       end
     end

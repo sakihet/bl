@@ -201,23 +201,20 @@ module Bl
 
     desc 'statuses', 'list statuses'
     def statuses
-      client.get('statuses').body.each do |s|
-        puts [s.id, colorize_status(s.id, s.name)].join("\t")
-      end
+      res = client.get('statuses')
+      puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'priorities', 'list priorities'
     def priorities
-      client.get('priorities').body.each do |p|
-        puts [p.id, colorize_priority(p.id, p.name)].join("\t")
-      end
+      res = client.get('priorities')
+      puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
-      client.get('resolutions').body.each do |r|
-        puts [r.id, r.name].join("\t")
-      end
+      res = client.get('resolutions')
+      puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'doctor', 'check issues'

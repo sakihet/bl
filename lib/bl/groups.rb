@@ -11,13 +11,13 @@ module Bl
     options order: :string, offset: :numeric, count: :numeric
     def list
       res = client.get(@url, options.to_h)
-      res.body.map { |g| print_group(g) }
+      puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'show GROUP_ID', ''
     def show(id)
       res = client.get("#{@url}/#{id}")
-      print_group_and_members(res.body)
+      puts formatter.render(res.body.members, fields: %i(id userId name roleType lang mailAddress))
     end
 
     desc 'add GROUP_NAME', ''

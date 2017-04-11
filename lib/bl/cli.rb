@@ -109,7 +109,9 @@ module Bl
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      client.get('issues', options.to_h).body.map {|i| print_issue(i)}
+      h = options.to_h
+      h.delete('format')
+      client.get('issues', h).body.map {|i| print_issue(i)}
     end
 
     desc 'show KEY', "show an issue's details"

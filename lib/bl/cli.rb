@@ -157,7 +157,7 @@ module Bl
         issue_default_options = @config[:issue][:default]
         res = client.post(
           'issues',
-          issue_default_options.merge({summary: s}).merge(options)
+          issue_default_options.merge({summary: s}).merge(delete_format(options.to_h))
         )
         puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
       end

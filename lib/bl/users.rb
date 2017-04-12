@@ -9,7 +9,8 @@ module Bl
 
     desc 'list', 'list users'
     def list
-      client.get('users').body.map { |u| print_user(u) }
+      res = client.get('users')
+      puts formatter.render(res.body, fields: %i(id userId name roleType lang mailAddress))
     end
 
     desc 'show USER_ID', ''

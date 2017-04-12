@@ -18,7 +18,7 @@ module Bl
     desc 'list', ''
     def list
       res = client.get(@url)
-      res.body.map { |w| print_webhook(w) }
+      puts formatter.render(res.body, fields: %i(id name description hookUrl))
     end
 
     desc 'show WEBHOOK_ID', ''

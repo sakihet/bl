@@ -9,9 +9,8 @@ module Bl
 
     desc 'list', 'list issue types'
     def list
-      client.get(@url).body.each do |t|
-        puts [t.id, colorize_type(t.name, t.color), t.color].join("\t")
-      end
+      res = client.get(@url)
+      puts formatter.render(res.body, fields: %i(id name color))
     end
 
     desc 'add [NAME...]', 'add types'

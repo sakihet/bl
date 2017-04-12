@@ -78,7 +78,7 @@ module Bl
     desc 'count', 'count issues'
     options ISSUES_PARAMS
     def count
-      puts client.get('issues/count', options.to_h).body.count
+      puts client.get('issues/count', delete_format(options.to_h)).body.count
     end
 
     desc 'list', 'list issues by typical ways'

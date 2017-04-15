@@ -15,12 +15,32 @@ RuboCop::RakeTask.new
 desc 'generate README.md'
 task :readme do
   puts 'generate README.md'
+  File.open('./etc/help.md', 'w') do |f|
+    f.puts('## Help')
+    f.puts("\n")
+    f.puts('```')
+    f.puts(`bl help`)
+    f.puts('```')
+    f.puts("\n")
+    str = <<-EOS
+View global or command specific help:
+
+```
+bl help
+bl help list
+bl help search
+bl help add
+```
+EOS
+    f.puts(str)
+  end
   files = %w(
     overview.md
     index.md
     requirements.md
     installation.md
     configuration.md
+    help.md
     usage.md
     contributing.md
     license.md

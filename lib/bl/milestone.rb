@@ -14,9 +14,15 @@ module Bl
     end
 
     desc 'list', 'list milestones'
+    option :all
     def list
       res = client.get(@url)
-      puts formatter.render(res.body, fields: %i(id projectId name description startDate releaseDueDate archived))
+      if options[:all]
+        body = res.body
+      else
+        body = res.body.select { |m| m.archived == false } unless options[:all]
+      end
+      puts formatter.render(body, fields: %i(id projectId name description startDate releaseDueDate archived))
     end
 
     desc 'add [NAME...]', 'add milestones'

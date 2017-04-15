@@ -7,8 +7,10 @@ bl is a command line tool for Nulab's [Backlog](http://www.backlog.jp/).
 ![License](https://img.shields.io/github/license/sakihet/bl.svg)
 
 ## Table of Contents
+- [Requirements](https://github.com/sakihet/bl#requirements)
 - [Installation](https://github.com/sakihet/bl#installation)
 - [Configuration](https://github.com/sakihet/bl#configuration)
+- [Help](https://github.com/sakihet/bl#help)
 - [Usage](https://github.com/sakihet/bl#usage)
 - [Contributing](https://github.com/sakihet/bl#contributing)
 - [License](https://github.com/sakihet/bl#license)

@@ -1,49 +1,3 @@
-# bl
-
-bl is a command line tool for Nulab's [Backlog](http://www.backlog.jp/).
-
-[![Gem Version](https://badge.fury.io/rb/bl.svg)](https://badge.fury.io/rb/bl)
-[![Dependency Status](https://gemnasium.com/badges/github.com/sakihet/bl.svg)](https://gemnasium.com/github.com/sakihet/bl)
-![License](https://img.shields.io/github/license/sakihet/bl.svg)
-
-## Table of Contents
-- [Installation](https://github.com/sakihet/bl#installation)
-- [Configuration](https://github.com/sakihet/bl#configuration)
-- [Usage](https://github.com/sakihet/bl#usage)
-- [Contributing](https://github.com/sakihet/bl#contributing)
-- [License](https://github.com/sakihet/bl#license)
-
-## Requirements
-
-- ruby 2.3+
-
-## Installation
-
-    gem install bl
-
-## Configuration
-
-bl uses `~/.bl.yml` for configuration.
-
-```
-bl init
-$EDITOR ~/.bl.yml
-```
-
-### .bl.yml Parameters
-
-```
-:space_id: '***'    # your backlog space id
-:api_key: '***'     # your backlog api key
-:project_key: '***' # your backlog project key
-:issue:
-  :default:         # issue default parameters(add command use this for easiness)
-    :projectId:
-    :issueTypeId:
-    :priorityId:
-    :assigneeId:
-```
-
 ## Usage
 
 ```
@@ -142,12 +96,3 @@ List files:
 Download file:
 
     bl file get 12345
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/sakihet/bl.
-
-## License
-
-[MIT](http://opensource.org/licenses/MIT).
-

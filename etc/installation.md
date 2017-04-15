@@ -1,0 +1,3 @@
+## Installation
+
+    gem install bl

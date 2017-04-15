@@ -11,3 +11,25 @@ end
 task default: :test
 
 RuboCop::RakeTask.new
+
+desc 'generate README.md'
+task :readme do
+  puts 'generate README.md'
+  files = %w(
+    overview.md
+    index.md
+    requirements.md
+    installation.md
+    configuration.md
+    usage.md
+    contributing.md
+    license.md
+  )
+  File.open('README.md', 'w') do |f|
+    files.each do |ff|
+      input_file = File.read("./etc/#{ff}")
+      f.puts(input_file)
+      f.puts("\n")
+    end
+  end
+end

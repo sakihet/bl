@@ -10,7 +10,7 @@ module Bl
     desc 'list', 'list users'
     def list
       res = client.get('users')
-      puts formatter.render(res.body, fields: USER_FIELDS)
+      print_response(res)
     end
 
     desc 'show USER_ID', ''
@@ -22,7 +22,8 @@ module Bl
     desc 'add USER_ID PASSWORD NAME MAIL_ADDRESS ROLE_TYPE', ''
     def add(id, pass, name, mail_address, role_type)
       res = client.post("#{@url}", userId: id, password: pass, name: name, mailAddress: mail_address, roleType: role_type)
-      puts formatter.render(res.body, fields: USER_FIELDS)
+      puts 'user added'
+      print_response(res)
     end
 
     desc 'update USER_ID', ''
@@ -30,20 +31,20 @@ module Bl
     def update(id)
       res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'user updated:'
-      puts formatter.render(res.body, fields: USER_FIELDS)
+      print_response(res)
     end
 
     desc 'delete', ''
     def delete(id)
       res = client.delete("#{@url}/#{id}")
       puts 'user deleted'
-      puts formatter.render(res.body, fields: USER_FIELDS)
+      print_response(res)
     end
 
     desc 'myself', ''
     def myself
       res = client.get("#{@url}/myself")
-      puts formatter.render(res.body, fields: USER_FIELDS)
+      print_response(res)
     end
 
     desc 'icon ID', ''
@@ -74,6 +75,12 @@ module Bl
       user_ids.each do |user_id|
         p client.get("/users/#{user_id}/stars/count", options.to_h).body.count
       end
+    end
+
+    private
+
+    def print_response(res)
+      formatter.render(res.body, fields: USER_FIELDS)
     end
   end
 end

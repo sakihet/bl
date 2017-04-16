@@ -166,7 +166,7 @@ module Bl
       allEvent: :boolean,
       activityTypeIds: :array
     }
-    WIKI_FIELDS = %i(id projectId name updated)
+    WIKI_FIELDS = %i(id projectId name created updated)
 
     protected
 

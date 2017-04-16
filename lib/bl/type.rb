@@ -1,6 +1,19 @@
 module Bl
   class Type < Command
 
+    TYPE_COLORS = %w(
+      #ea2c00
+      #e87758
+      #e07b9a
+      #868cb7
+      #3b9dbd
+      #4caf93
+      #b0be3c
+      #eda62a
+      #f42858
+      #393939
+    )
+
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/issueTypes"
@@ -38,6 +51,13 @@ module Bl
       ids.each do |id|
         res = client.delete("#{@url}/#{id}", options)
         puts "type deleted: #{res.body.id}\t#{res.body.name}\t#{res.body.color}"
+      end
+    end
+
+    desc 'colors', 'list colors'
+    def colors
+      TYPE_COLORS.each do |color|
+        puts Paint[color, '#ffffff', color]
       end
     end
   end

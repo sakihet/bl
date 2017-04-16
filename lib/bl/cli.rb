@@ -47,6 +47,18 @@ module Bl
       assigneeId: :numeric
     }
 
+    ISSUE_FIELDS = %i(
+      issueKey
+      summary
+      description
+      startDate
+      dueDate
+      estimatedHours
+      actualHours
+      created
+      updated
+    )
+
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -103,13 +115,15 @@ module Bl
         opts[:order] = "asc"
       end
       opts[:categoryId] = [-1] if options[:nocategory]
-      client.get('issues', opts).body.map {|i| print_issue(i)}
+      res = client.get('issues', opts)
+      puts formatter.render(res.body, fields: ISSUE_FIELDS)
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      client.get('issues', delete_class_options(options.to_h)).body.map {|i| print_issue(i)}
+      res = client.get('issues', delete_class_options(options.to_h))
+      puts formatter.render(res.body, fields: ISSUE_FIELDS)
     end
 
     desc 'show KEY', "show an issue's details"

@@ -28,7 +28,15 @@ module Bl
     }
     CATEGORY_FIELDS = %i(id name displayOrder)
     FILE_FIELDS = %i(id type dir name size created updated)
-    GIT_REPO_FIELDS = %i(id projectId name description sshUrl)
+    GIT_REPO_FIELDS = %i(
+      id
+      projectId
+      name
+      sshUrl
+      pushedAt
+      created
+      updated
+    )
     ISSUE_BASE_ATTRIBUTES = {
       summary: :string,
       description: :string,

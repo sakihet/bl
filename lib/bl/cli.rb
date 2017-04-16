@@ -50,7 +50,6 @@ module Bl
     ISSUE_FIELDS = %i(
       issueKey
       summary
-      description
       startDate
       dueDate
       created

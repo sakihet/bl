@@ -10,7 +10,7 @@ module Bl
     desc 'list', 'list issue types'
     def list
       res = client.get(@url)
-      puts formatter.render(res.body, fields: %i(id name color))
+      print_response(res)
     end
 
     desc 'add [NAME...]', 'add types'
@@ -18,7 +18,8 @@ module Bl
     def add(*names)
       names.each do |name|
         res = client.post(@url, name: name, color: options[:color])
-        puts "type added: #{res.body.id}\t#{res.body.name}\t#{res.body.color}"
+        puts 'type added'
+        print_response(res)
       end
     end
 
@@ -28,7 +29,8 @@ module Bl
     def update(*ids)
       ids.each do |id|
         res = client.patch("#{@url}/#{id}", options)
-        puts "type updated: #{res.body.id}\t#{res.body.name}\t#{res.body.color}"
+        puts 'type updated'
+        print_response(res)
       end
     end
 
@@ -37,7 +39,8 @@ module Bl
     def delete(*ids)
       ids.each do |id|
         res = client.delete("#{@url}/#{id}", options)
-        puts "type deleted: #{res.body.id}\t#{res.body.name}\t#{res.body.color}"
+        puts 'type deleted'
+        print_response
       end
     end
 
@@ -46,6 +49,12 @@ module Bl
       TYPE_COLORS.each do |color|
         puts Paint[color, '#ffffff', color]
       end
+    end
+
+    private
+
+    def print_response(res)
+      puts formatter.render(res.body, fields: %i(id name color))
     end
   end
 end

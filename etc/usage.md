@@ -22,6 +22,13 @@ Edit issue by your favorite $EDITOR:
 
     bl edit ISSUE-12
 
+### Milestone
+
+Add an milestone:
+
+    bl milestone add m1 --releaseDueDate=2017-04-01
+
+
 ### Project
 
 List projects:

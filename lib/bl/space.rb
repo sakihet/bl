@@ -15,7 +15,7 @@ module Bl
     desc 'activities', 'show space activities'
     def activities
       client.get('space/activities').body.each do |a|
-        print_activity(a)
+        p a.pretty_inspect
       end
     end
 

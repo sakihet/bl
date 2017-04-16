@@ -199,32 +199,8 @@ module Bl
       end
     end
 
-    desc 'space SUBCOMMAND ...ARGS', ''
-    subcommand 'space', Space
-
-    desc 'users SUBCOMMAND ...ARGS', ''
-    subcommand 'users', Users
-
-    desc 'groups SUBCOMMAND ...ARGS', ''
-    subcommand 'groups', Groups
-
-    desc 'type SUBCOMMAND ...ARGS', 'manage types'
-    subcommand 'type', Type
-
     desc 'category SUBCOMMAND ...ARGS', 'manage categories'
     subcommand 'category', Category
-
-    desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
-    subcommand 'milestone', Milestone
-
-    desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
-    subcommand 'wiki', Wiki
-
-    desc 'project SUBCOMMAND ...ARGS', 'manage projects'
-    subcommand 'project', Project
-
-    desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
-    subcommand 'recent', Recent
 
     desc 'file SUBCOMMAND ...ARGS', 'manage files'
     subcommand 'file', File
@@ -232,14 +208,38 @@ module Bl
     desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
     subcommand 'gitrepo', GitRepo
 
-    desc 'webhooks SUBCOMMAND ...ARGS', ''
-    subcommand 'webhooks', Webhooks
+    desc 'groups SUBCOMMAND ...ARGS', ''
+    subcommand 'groups', Groups
+
+    desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
+    subcommand 'milestone', Milestone
 
     desc 'notifications SUBCOMMAND ...ARGS', ''
     subcommand 'notifications', Notifications
 
+    desc 'project SUBCOMMAND ...ARGS', 'manage projects'
+    subcommand 'project', Project
+
+    desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
+    subcommand 'recent', Recent
+
+    desc 'space SUBCOMMAND ...ARGS', ''
+    subcommand 'space', Space
+
+    desc 'type SUBCOMMAND ...ARGS', 'manage types'
+    subcommand 'type', Type
+
+    desc 'users SUBCOMMAND ...ARGS', ''
+    subcommand 'users', Users
+
     desc 'watchings SUBCOMMAND ...ARGS', ''
     subcommand 'watchings', Watchings
+
+    desc 'webhooks SUBCOMMAND ...ARGS', ''
+    subcommand 'webhooks', Webhooks
+
+    desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
+    subcommand 'wiki', Wiki
 
   end
 end

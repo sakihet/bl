@@ -158,6 +158,7 @@ module Bl
       resourceAlreadyRead: :boolean,
       issueId: :array
     }
+    WEBHOOK_FIELDS = %i(id name description created updated)
     WEBHOOK_PARAMS = {
       name: :string,
       description: :string,

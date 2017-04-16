@@ -8,7 +8,8 @@ module Bl
 
     desc 'info', 'show space info'
     def info
-      puts client.get('space').body.inspect
+      res = client.get('space')
+      puts formatter.render(res.body, fields: SPACE_FIELDS)
     end
 
     desc 'activities', 'show space activities'

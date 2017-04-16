@@ -112,6 +112,17 @@ module Bl
       {id: 5, name: 'Guest Reporter'},
       {id: 6, name: 'Guest Viewer'}
     ]
+    SPACE_FIELDS = %i(
+      spaceKey
+      name
+      ownerId
+      lang
+      timezone
+      reportSendTime
+      textFormattingRule
+      created
+      updated
+    )
     TPUT_COLS = `tput cols`.to_i
     TYPE_COLORS = %w(
       #e30000

@@ -19,7 +19,7 @@ module Bl
     desc 'list USER_ID', ''
     options WATCHINGS_PARAMS
     def list(id)
-      res = client.get("/users/#{id}/#{@url}", delete_format(options.to_h))
+      res = client.get("/users/#{id}/#{@url}", delete_class_options(options.to_h))
       res.body.map { |t| print_watch_target(t) }
     end
 
@@ -72,11 +72,5 @@ module Bl
       puts 'watch mark as checked'
     end
 
-    private
-
-    def delete_format(h)
-      h.delete('format')
-      h
-    end
   end
 end

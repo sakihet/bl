@@ -78,7 +78,7 @@ module Bl
     desc 'count', 'count issues'
     options ISSUES_PARAMS
     def count
-      puts client.get('issues/count', delete_format(options.to_h)).body.count
+      puts client.get('issues/count', delete_class_options(options.to_h)).body.count
     end
 
     desc 'list', 'list issues by typical ways'
@@ -109,7 +109,7 @@ module Bl
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      client.get('issues', delete_format(options.to_h)).body.map {|i| print_issue(i)}
+      client.get('issues', delete_class_options(options.to_h)).body.map {|i| print_issue(i)}
     end
 
     desc 'show KEY', "show an issue's details"
@@ -157,7 +157,7 @@ module Bl
         issue_default_options = @config[:issue][:default]
         res = client.post(
           'issues',
-          issue_default_options.merge({summary: s}).merge(delete_format(options.to_h))
+          issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
         puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
       end
@@ -168,7 +168,7 @@ module Bl
     option :comment, type: :string
     def update(*keys)
       keys.each do |k|
-        res = client.patch("issues/#{k}", delete_format(options.to_h))
+        res = client.patch("issues/#{k}", delete_class_options(options.to_h))
         puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
       end
     end
@@ -279,11 +279,5 @@ module Bl
     desc 'watchings SUBCOMMAND ...ARGS', ''
     subcommand 'watchings', Watchings
 
-    private
-
-    def delete_format(h)
-      h.delete('format')
-      h
-    end
   end
 end

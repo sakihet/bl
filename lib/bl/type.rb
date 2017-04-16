@@ -2,16 +2,16 @@ module Bl
   class Type < Command
 
     TYPE_COLORS = %w(
-      #ea2c00
-      #e87758
-      #e07b9a
-      #868cb7
-      #3b9dbd
-      #4caf93
-      #b0be3c
-      #eda62a
-      #f42858
-      #393939
+      #e30000
+      #934981
+      #814fbc
+      #007e9a
+      #ff3265
+      #666665
+      #990000
+      #2779ca
+      #7ea800
+      #ff9200
     )
 
     def initialize(*)

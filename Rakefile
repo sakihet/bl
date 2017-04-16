@@ -53,3 +53,40 @@ EOS
     end
   end
 end
+
+desc 'system test'
+task :system_test do
+  ret = true
+  commands = [
+    'category list',
+    'config',
+    'count',
+    'file list',
+    'gitrepo list',
+    'groups list',
+    'help',
+    'list',
+    'milestone list',
+    'notifications list',
+    'priorities',
+    'project list',
+    'resolutions',
+    'roles',
+    'search',
+    'space info',
+    'statuses',
+    'type list',
+    'users list',
+    'webhooks list',
+    'wiki list'
+  ]
+  commands.each do |c|
+    command = 'bl ' + c + ' > /dev/null'
+    system(command)
+    if $?.exited?
+      puts "#{command}: OK"
+    else
+      puts "#{comamnd}: NG"
+    end
+  end
+end

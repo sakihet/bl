@@ -1,6 +1,22 @@
 module Bl
   class Users < Command
 
+    USER_FIELDS = %i(
+      id
+      userId
+      name
+      roleType
+      lang
+      mailAddress
+    )
+
+    USER_PARAMS = {
+      password: :string,
+      name: :string,
+      mailAddress: :string,
+      roleType: :numeric
+    }
+
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'users'
@@ -10,46 +26,40 @@ module Bl
     desc 'list', 'list users'
     def list
       res = client.get('users')
-      puts formatter.render(res.body, fields: %i(id userId name roleType lang mailAddress))
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'show USER_ID', ''
     def show(id)
       res = client.get("#{@url}/#{id}")
-      print_user(res.body)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'add USER_ID PASSWORD NAME MAIL_ADDRESS ROLE_TYPE', ''
     def add(id, pass, name, mail_address, role_type)
       res = client.post("#{@url}", userId: id, password: pass, name: name, mailAddress: mail_address, roleType: role_type)
-      print_user(res.body)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
-    USER_PARAMS = {
-      password: :string,
-      name: :string,
-      mailAddress: :string,
-      roleType: :numeric
-    }
     desc 'update USER_ID', ''
     options USER_PARAMS
     def update(id)
       res = client.patch("#{@url}/#{id}", options.to_h)
       puts 'user updated:'
-      print_user(res.body)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'delete', ''
     def delete(id)
       res = client.delete("#{@url}/#{id}")
       puts 'user deleted'
-      print_user(res.body)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'myself', ''
     def myself
       res = client.get("#{@url}/myself")
-      print_user(res.body)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'icon ID', ''

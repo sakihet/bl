@@ -22,6 +22,7 @@ Commands:
   bl project SUBCOMMAND ...ARGS        # manage projects
   bl recent SUBCOMMAND ...ARGS         # list recent stuff
   bl resolutions                       # list resolutions
+  bl roles                             # list roles
   bl search                            # search issues
   bl show KEY                          # show an issue's details
   bl space SUBCOMMAND ...ARGS          # 

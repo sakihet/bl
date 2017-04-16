@@ -62,16 +62,8 @@ module Bl
 
     desc 'users ID', 'show project users'
     def users(id)
-      client.get("#{@url}/#{id}/users").body.each do |u|
-        puts [
-          u.id,
-          u.userId,
-          u.name,
-          u.roleType,
-          u.lang,
-          u.mailAddress
-        ].join("\t")
-      end
+      res = client.get("#{@url}/#{id}/users")
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     private

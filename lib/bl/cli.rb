@@ -2,69 +2,6 @@ module Bl
 
   class CLI < Command
 
-    ISSUES_PARAMS = {
-      projectId: :array,
-      issueTypeId: :array,
-      categoryId: :array,
-      versionId: :array,
-      milestoneId: :array,
-      statusId: :array,
-      priorityId: :array,
-      assigneeId: :array,
-      createdUserId: :array,
-      resolutionId: :array,
-      parentChild: :numeric,
-      attachment: :boolean,
-      sharedFile: :boolean,
-      sort: :string,
-      order: :string,
-      offset: :numeric,
-      count: :numeric,
-      createdSince: :string,
-      createUntil: :string,
-      updatedSince: :string,
-      updatedUntil: :string,
-      startDateSince: :string,
-      startDateUntil: :string,
-      dueDateSince: :string,
-      dueDateUntil: :string,
-      id: :array,
-      parentIssueId: :array,
-      keyword: :string
-    }
-
-    ISSUE_BASE_ATTRIBUTES = {
-      summary: :string,
-      description: :string,
-      statusId: :numeric,
-      resolutionId: :numeric,
-      dueDate: :string,
-      issueTypeId: :numeric,
-      categoryId: :array,
-      versionId: :array,
-      milestoneId: :array,
-      priorityId: :numeric,
-      assigneeId: :numeric
-    }
-
-    ISSUE_FIELDS = %i(
-      issueKey
-      summary
-      startDate
-      dueDate
-      created
-      updated
-    )
-
-    ROLES = [
-      {id: 1, name: 'Administrator'},
-      {id: 2, name: 'Normal User'},
-      {id: 3, name: 'Reporter'},
-      {id: 4, name: 'Viewer'},
-      {id: 5, name: 'Guest Reporter'},
-      {id: 6, name: 'Guest Viewer'}
-    ]
-
     def initialize(*)
       @config = Bl::Config.instance
       super

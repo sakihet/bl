@@ -1,12 +1,6 @@
 module Bl
   class Milestone < Command
 
-    MILESTONE_PARAMS = {
-      description: :string,
-      startDate: :string,
-      releaseDueDate: :string
-    }
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/versions"
@@ -22,7 +16,7 @@ module Bl
       else
         body = res.body.select { |m| m.archived == false } unless options[:all]
       end
-      puts formatter.render(body, fields: %i(id projectId name description startDate releaseDueDate archived))
+      puts formatter.render(body, fields: MILESTONE_FIELDS)
     end
 
     desc 'add [NAME...]', 'add milestones'

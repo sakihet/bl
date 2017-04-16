@@ -9,7 +9,7 @@ module Bl
     desc 'list PATH', 'list files on PATH'
     def list(path='')
       res = client.get("projects/#{@config[:project_key]}/files/metadata/#{path}")
-      puts formatter.render(res.body, fields: %i(id type dir name size created updated))
+      puts formatter.render(res.body, fields: FILE_FIELDS)
     end
 
     desc 'get [ID...]', 'get files'

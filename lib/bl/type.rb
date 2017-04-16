@@ -1,19 +1,6 @@
 module Bl
   class Type < Command
 
-    TYPE_COLORS = %w(
-      #e30000
-      #934981
-      #814fbc
-      #007e9a
-      #ff3265
-      #666665
-      #990000
-      #2779ca
-      #7ea800
-      #ff9200
-    )
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/issueTypes"

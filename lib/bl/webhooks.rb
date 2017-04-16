@@ -1,14 +1,6 @@
 module Bl
   class Webhooks < Command
 
-    WEBHOOK_PARAMS = {
-      name: :string,
-      description: :string,
-      hookUrl: :string,
-      allEvent: :boolean,
-      activityTypeIds: :array
-    }
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/webhooks"

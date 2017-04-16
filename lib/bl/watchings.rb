@@ -1,15 +1,6 @@
 module Bl
   class Watchings < Command
 
-    WATCHINGS_PARAMS = {
-      order: :string,
-      sort: :string,
-      count: :numeric,
-      offset: :numeric,
-      resourceAlreadyRead: :boolean,
-      issueId: :array
-    }
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'watchings'

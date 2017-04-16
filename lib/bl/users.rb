@@ -1,22 +1,6 @@
 module Bl
   class Users < Command
 
-    USER_FIELDS = %i(
-      id
-      userId
-      name
-      roleType
-      lang
-      mailAddress
-    )
-
-    USER_PARAMS = {
-      password: :string,
-      name: :string,
-      mailAddress: :string,
-      roleType: :numeric
-    }
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'users'

@@ -10,7 +10,7 @@ module Bl
     desc 'list', 'list wikis'
     def list
       res = client.get(@url, projectIdOrKey: @config[:project_key])
-      puts formatter.render(res.body, fields: %i(id projectId name updated))
+      puts formatter.render(res.body, fields: WIKI_FIELDS)
     end
 
     desc 'show ID', "show a wiki's content"

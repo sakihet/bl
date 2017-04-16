@@ -2,29 +2,6 @@ module Bl
   module Formatting
     module_function
 
-    ACTIVITY_TYPES = {
-      1 => 'Issue Created',
-      2 => 'Issue Updated',
-      3 => 'Issue Commented',
-      4 => 'Issue Deleted',
-      5 => 'Wiki Created',
-      6 => 'Wiki Updated',
-      7 => 'Wiki Deleted',
-      8 => 'File Added',
-      9 => 'File Updated',
-      10 => 'File Deleted',
-      11 => 'SVN Committed',
-      12 => 'Git Pushed',
-      13 => 'Git Repository Created',
-      14 => 'Issue Multi Updated',
-      15 => 'Project User Added',
-      16 => 'Project User Deleted',
-      17 => 'Comment Notification Added',
-      18 => 'Pull Request Added',
-      19 => 'Pull Request Updated',
-      20 => 'Comment Added on Pull Request'
-    }
-
     def colorize_type(name, color)
       Paint[name, :white, color]
     end

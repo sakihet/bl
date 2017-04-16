@@ -17,7 +17,7 @@ module Bl
     desc 'show GROUP_ID', ''
     def show(id)
       res = client.get("#{@url}/#{id}")
-      puts formatter.render(res.body.members, fields: %i(id userId name roleType lang mailAddress))
+      puts formatter.render(res.body.members, fields: USER_FIELDS)
     end
 
     desc 'add GROUP_NAME', ''

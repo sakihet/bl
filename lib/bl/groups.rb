@@ -31,7 +31,7 @@ module Bl
     desc 'update GROUP_ID', ''
     options name: :string, members: :array
     def update(id)
-      res = client.patch("#{@url}/#{id}", options.to_h)
+      res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'group updated'
       print_group_and_members(res.body)
     end

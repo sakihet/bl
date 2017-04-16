@@ -56,7 +56,6 @@ Commands:
   bl close [KEY...]                    # close issues
   bl config                            # show config
   bl count                             # count issues
-  bl doctor                            # check issues
   bl edit KEY                          # edit issues' description by $EDITOR
   bl file SUBCOMMAND ...ARGS           # manage files
   bl gitrepo SUBCOMMAND ...ARGS        # show gitrepos

@@ -36,8 +36,8 @@ module Bl
       puts '--milestone--'
       versions = client.get("projects/#{@config[:project_key]}/versions").body
       versions.each do |version|
-        all_issues_count = count_issues(id, versionId: [version.id])
-        closed_issues_count = count_issues(id, versionId: [version.id], statusId: [4])
+        all_issues_count = count_issues(id, milestoneId: [version.id])
+        closed_issues_count = count_issues(id, milestoneId: [version.id], statusId: [4])
         puts "#{version.name}: #{closed_issues_count} / #{all_issues_count}"
       end
       puts '--category--'

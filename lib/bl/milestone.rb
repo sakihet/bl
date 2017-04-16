@@ -45,7 +45,7 @@ module Bl
     options MILESTONE_PARAMS
     def update(*ids)
       ids.each do |id|
-        res = client.patch("#{@url}/#{id}", options)
+        res = client.patch("#{@url}/#{id}", delete_class_options(options))
         puts "milestone updated: #{res.body.id}\t#{res.body.name}"
       end
     end

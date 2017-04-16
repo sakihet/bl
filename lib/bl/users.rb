@@ -44,7 +44,7 @@ module Bl
     desc 'update USER_ID', ''
     options USER_PARAMS
     def update(id)
-      res = client.patch("#{@url}/#{id}", options.to_h)
+      res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'user updated:'
       puts formatter.render(res.body, fields: USER_FIELDS)
     end

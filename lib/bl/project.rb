@@ -1,6 +1,17 @@
 module Bl
   class Project < Command
 
+    PROJECT_FIELDS = %i(
+      id
+      projectKey
+      name
+      chartEnabled
+      subtaskingEnabled
+      projectLeaderCanEditProjectLeader
+      textFormattingRule
+      archived
+    )
+
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'projects'
@@ -10,7 +21,7 @@ module Bl
     desc 'list', 'list projects'
     def list
       res = client.get(@url)
-      puts formatter.render(res.body, fields: %i(id projectKey name))
+      puts formatter.render(res.body, fields: PROJECT_FIELDS)
     end
 
     desc 'status ID', 'show project status'

@@ -1,17 +1,5 @@
 module Bl
   class Project < Command
-
-    PROJECT_FIELDS = %i(
-      id
-      projectKey
-      name
-      chartEnabled
-      subtaskingEnabled
-      projectLeaderCanEditProjectLeader
-      textFormattingRule
-      archived
-    )
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'projects'

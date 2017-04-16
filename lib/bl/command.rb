@@ -26,6 +26,7 @@ module Bl
       19 => 'Pull Request Updated',
       20 => 'Comment Added on Pull Request'
     }
+    CATEGORY_FIELDS = %i(id name displayOrder)
     FILE_FIELDS = %i(id type dir name size created updated)
     GIT_REPO_FIELDS = %i(id projectId name description sshUrl)
     ISSUE_BASE_ATTRIBUTES = {

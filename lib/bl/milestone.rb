@@ -12,11 +12,10 @@ module Bl
     def list
       res = client.get(@url)
       if options[:all]
-        body = res.body
       else
-        body = res.body.select { |m| m.archived == false } unless options[:all]
+        res.body.select! { |m| m.archived == false } unless options[:all]
       end
-      puts formatter.render(body, fields: MILESTONE_FIELDS)
+      print_response(res)
     end
 
     desc 'add [NAME...]', 'add milestones'
@@ -30,7 +29,8 @@ module Bl
           startDate: options[:startDate],
           releaseDueDate: options[:releaseDueDate]
         )
-        puts "milestone added: #{res.body.id}\t#{res.body.name}"
+        puts 'milestone added'
+        print_response(res)
       end
     end
 
@@ -40,7 +40,8 @@ module Bl
     def update(*ids)
       ids.each do |id|
         res = client.patch("#{@url}/#{id}", delete_class_options(options))
-        puts "milestone updated: #{res.body.id}\t#{res.body.name}"
+        puts 'milestone updated'
+        print_response(res)
       end
     end
 
@@ -48,8 +49,15 @@ module Bl
     def delete(*ids)
       ids.each do |id|
         res = client.delete("#{@url}/#{id}")
-        puts "milestone deleted: #{res.body.id}\t#{res.body.name}"
+        puts 'milestone deleted'
+        print_response(res)
       end
+    end
+
+    private
+
+    def print_response(res)
+      puts formatter.render(res.body, fields: MILESTONE_FIELDS)
     end
   end
 end

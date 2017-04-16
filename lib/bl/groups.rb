@@ -23,7 +23,7 @@ module Bl
     desc 'add GROUP_NAME', ''
     options members: :array
     def add(name)
-      res = client.post(@url, {name: name}.merge(options))
+      res = client.post(@url, {name: name}.merge(delete_class_options(options)))
       puts 'group added'
       print_group_and_members(res.body)
     end

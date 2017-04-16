@@ -53,8 +53,6 @@ module Bl
       description
       startDate
       dueDate
-      estimatedHours
-      actualHours
       created
       updated
     )

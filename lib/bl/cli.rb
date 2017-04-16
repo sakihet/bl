@@ -114,14 +114,14 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = client.get('issues', opts)
-      puts formatter.render(res.body, fields: ISSUE_FIELDS)
+      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
       res = client.get('issues', delete_class_options(options.to_h))
-      puts formatter.render(res.body, fields: ISSUE_FIELDS)
+      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
     end
 
     desc 'show KEY', "show an issue's details"

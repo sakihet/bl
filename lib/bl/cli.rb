@@ -56,6 +56,15 @@ module Bl
       updated
     )
 
+    ROLES = [
+      {id: 1, name: 'Administrator'},
+      {id: 2, name: 'Normal User'},
+      {id: 3, name: 'Reporter'},
+      {id: 4, name: 'Viewer'},
+      {id: 5, name: 'Guest Reporter'},
+      {id: 6, name: 'Guest Viewer'}
+    ]
+
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -226,6 +235,11 @@ module Bl
     def resolutions
       res = client.get('resolutions')
       puts formatter.render(res.body, fields: %i(id name))
+    end
+
+    desc 'roles', 'list roles'
+    def roles
+      puts formatter.render(ROLES, fields: %i(id name))
     end
 
     desc 'doctor', 'check issues'

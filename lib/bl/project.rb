@@ -12,6 +12,17 @@ module Bl
       puts formatter.render(res.body, fields: PROJECT_FIELDS)
     end
 
+    desc 'add', 'add project'
+    option :key, required: true, type: :string
+    option :chartEnabled, type: :boolean, default: false
+    option :projectLeaderCanEditProjectLeader, type: :boolean, default: false
+    option :subtaskingEnabled, type: :boolean, default: false
+    option :textFormattingRule, type: :string, default: 'markdown'
+    def add(name)
+      res = client.post(@url, {name: name}.merge(delete_class_options(options.to_h)))
+      puts formatter.render(res.body, fields: PROJECT_FIELDS)
+    end
+
     desc 'status ID', 'show project status'
     def status(id)
       all_issues_count = count_issues(id)

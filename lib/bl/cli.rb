@@ -36,7 +36,13 @@ module Bl
           api_key: api_key
         )
         res = client.get('projects')
-        config[:project_key] = res.body[0].projectKey
+        project_key = res.body[0].projectKey
+        config[:project_key] = project_key
+        config[:issue][:default][:projectId] = res.body[0].id
+        res = client.get("projects/#{project_key}/issueTypes")
+        config[:issue][:default][:issueTypeId] = res.body[0].id
+        res = client.get('priorities')
+        config[:issue][:default][:priorityId] = res.body[1].id
         f.write(config.to_yaml)
         puts "#{filename} generated."
       end

@@ -25,6 +25,18 @@ module Bl
       else
         config = Bl::Config.instance.default_config
         f = ::File.new(filename, 'w')
+        puts 'please input space name: '
+        space_id = STDIN.gets.chomp
+        puts 'plese input api key: '
+        api_key = STDIN.gets.chomp
+        config[:space_id] = space_id.to_s
+        config[:api_key] = api_key.to_s
+        client = BacklogKit::Client.new(
+          space_id: space_id,
+          api_key: api_key
+        )
+        res = client.get('projects')
+        config[:project_key] = res.body[0].projectKey
         f.write(config.to_yaml)
         puts "#{filename} generated."
       end

@@ -39,6 +39,7 @@ module Bl
     )
     ISSUE_BASE_ATTRIBUTES = {
       summary: :string,
+      parentIssueId: :numeric,
       description: :string,
       statusId: :numeric,
       resolutionId: :numeric,

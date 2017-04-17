@@ -90,6 +90,7 @@ module Bl
     desc 'show KEY', "show an issue's details"
     def show(key)
       body = client.get("issues/#{key}").body
+      puts "id: #{body.id}"
       puts "type: #{body.issueType.name}"
       puts "key: #{body.issueKey}"
       puts "created: #{body.created}"

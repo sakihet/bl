@@ -20,6 +20,7 @@ module Bl
     option :textFormattingRule, type: :string, default: 'markdown'
     def add(name)
       res = client.post(@url, {name: name}.merge(delete_class_options(options.to_h)))
+      puts 'project added'
       print_response(res)
     end
 
@@ -27,12 +28,14 @@ module Bl
     options PROJECT_PARAMS
     def update(id)
       res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
+      puts 'project updated'
       print_response(res)
     end
 
     desc 'delete', 'delete project'
     def delete(id)
       res = client.delete("#{@url}/#{id}")
+      puts 'project deleted'
       print_response(res)
     end
 

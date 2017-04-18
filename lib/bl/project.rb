@@ -23,6 +23,13 @@ module Bl
       puts formatter.render(res.body, fields: PROJECT_FIELDS)
     end
 
+    desc 'update', 'update project'
+    options PROJECT_PARAMS
+    def update(id)
+      res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
+      puts formatter.render(res.body, fields: PROJECT_FIELDS)
+    end
+
     desc 'status ID', 'show project status'
     def status(id)
       all_issues_count = count_issues(id)

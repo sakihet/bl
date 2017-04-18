@@ -105,6 +105,14 @@ module Bl
       textFormattingRule
       archived
     )
+    PROJECT_PARAMS = {
+      name: :string,
+      key: :string,
+      chartEnabled: :boolean,
+      projectLeaderCanEditProjectLeader: :boolean,
+      subtaskingEnabled: :boolean,
+      textFormattingRule: :boolean
+    }
     ROLES = [
       {id: 1, name: 'Administrator'},
       {id: 2, name: 'Normal User'},

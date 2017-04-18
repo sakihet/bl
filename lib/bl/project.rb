@@ -9,7 +9,7 @@ module Bl
     desc 'list', 'list projects'
     def list
       res = client.get(@url)
-      puts formatter.render(res.body, fields: PROJECT_FIELDS)
+      print_response(res)
     end
 
     desc 'add', 'add project'
@@ -20,14 +20,14 @@ module Bl
     option :textFormattingRule, type: :string, default: 'markdown'
     def add(name)
       res = client.post(@url, {name: name}.merge(delete_class_options(options.to_h)))
-      puts formatter.render(res.body, fields: PROJECT_FIELDS)
+      print_response(res)
     end
 
     desc 'update', 'update project'
     options PROJECT_PARAMS
     def update(id)
       res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
-      puts formatter.render(res.body, fields: PROJECT_FIELDS)
+      print_response(res)
     end
 
     desc 'status ID', 'show project status'
@@ -82,6 +82,10 @@ module Bl
         'issues/count',
         args
       ).body.count
+    end
+
+    def print_response(res)
+      puts formatter.render(res.body, fields: PROJECT_FIELDS)
     end
   end
 end

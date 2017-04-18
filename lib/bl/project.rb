@@ -30,6 +30,12 @@ module Bl
       print_response(res)
     end
 
+    desc 'delete', 'delete project'
+    def delete(id)
+      res = client.delete("#{@url}/#{id}")
+      print_response(res)
+    end
+
     desc 'status ID', 'show project status'
     def status(id)
       all_issues_count = count_issues(id)

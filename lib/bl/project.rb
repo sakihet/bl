@@ -12,6 +12,12 @@ module Bl
       print_response(res)
     end
 
+    desc 'show', 'show project'
+    def show(id)
+      res = client.get("#{@url}/#{id}")
+      print_response(res)
+    end
+
     desc 'add', 'add project'
     option :key, required: true, type: :string
     option :chartEnabled, type: :boolean, default: false

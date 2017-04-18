@@ -77,14 +77,14 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = client.get('issues', opts)
-      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
+      print_issue_response(res)
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
       res = client.get('issues', delete_class_options(options.to_h))
-      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
+      print_issue_response(res)
     end
 
     desc 'show KEY', "show an issue's details"
@@ -135,7 +135,8 @@ module Bl
           'issues',
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
-        puts "issue added: #{res.body.issueKey}\t#{res.body.summary}"
+        puts 'issue added'
+        print_issue_response(res)
       end
     end
 
@@ -145,7 +146,8 @@ module Bl
     def update(*keys)
       keys.each do |k|
         res = client.patch("issues/#{k}", delete_class_options(options.to_h))
-        puts "issue updated: #{res.body.issueKey}\t#{res.body.summary}"
+        puts 'issue updated'
+        print_issue_response(res)
       end
     end
 
@@ -153,7 +155,8 @@ module Bl
     def close(*keys)
       keys.each do |k|
         res = client.patch("issues/#{k}", statusId: 4)
-        puts "issue closed: #{res.body.issueKey}\t#{res.body.summary}"
+        puts 'issue closed'
+        print_issue_response(res)
       end
     end
 
@@ -207,13 +210,13 @@ module Bl
     desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
     subcommand 'gitrepo', GitRepo
 
-    desc 'groups SUBCOMMAND ...ARGS', ''
+    desc 'groups SUBCOMMAND ...ARGS', 'manage groups'
     subcommand 'groups', Groups
 
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
     subcommand 'milestone', Milestone
 
-    desc 'notifications SUBCOMMAND ...ARGS', ''
+    desc 'notifications SUBCOMMAND ...ARGS', 'manage notifications'
     subcommand 'notifications', Notifications
 
     desc 'project SUBCOMMAND ...ARGS', 'manage projects'
@@ -222,23 +225,28 @@ module Bl
     desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
     subcommand 'recent', Recent
 
-    desc 'space SUBCOMMAND ...ARGS', ''
+    desc 'space SUBCOMMAND ...ARGS', 'manage space'
     subcommand 'space', Space
 
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Type
 
-    desc 'users SUBCOMMAND ...ARGS', ''
+    desc 'users SUBCOMMAND ...ARGS', 'manage users'
     subcommand 'users', Users
 
-    desc 'watchings SUBCOMMAND ...ARGS', ''
+    desc 'watchings SUBCOMMAND ...ARGS', 'manage watchings'
     subcommand 'watchings', Watchings
 
-    desc 'webhooks SUBCOMMAND ...ARGS', ''
+    desc 'webhooks SUBCOMMAND ...ARGS', 'manage webhooks'
     subcommand 'webhooks', Webhooks
 
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
     subcommand 'wiki', Wiki
 
+    private
+
+    def print_issue_response(res)
+      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
+    end
   end
 end

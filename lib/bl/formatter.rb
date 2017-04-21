@@ -4,6 +4,8 @@ require 'json'
 
 module Bl
   class Formatter
+    TPUT_COLS = `tput cols`.to_i
+
     def initialize(format: 'table')
       @format = case format
       when 'table'
@@ -16,7 +18,7 @@ module Bl
     end
 
     def render(*args)
-      @format.render(*args)
+      @format.render(args[0], args[1].merge({max_width: TPUT_COLS}))
     end
 
     module Format

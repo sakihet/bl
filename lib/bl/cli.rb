@@ -246,7 +246,7 @@ module Bl
     private
 
     def print_issue_response(res)
-      puts formatter.render(res.body, fields: ISSUE_FIELDS, max_width: TPUT_COLS)
+      puts formatter.render(res.body, fields: ISSUE_FIELDS)
     end
   end
 end

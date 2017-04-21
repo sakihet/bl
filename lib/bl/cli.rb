@@ -135,7 +135,7 @@ module Bl
           'issues',
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
-        puts 'issue added'
+        puts '💡 issue added'
         print_issue_response(res)
       end
     end
@@ -155,7 +155,7 @@ module Bl
     def close(*keys)
       keys.each do |k|
         res = client.patch("issues/#{k}", statusId: 4)
-        puts 'issue closed'
+        puts '🎉 issue closed'
         print_issue_response(res)
       end
     end

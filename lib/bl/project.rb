@@ -14,8 +14,12 @@ module Bl
 
     desc 'show', 'show project'
     def show(id)
-      res = client.get("#{@url}/#{id}")
-      print_response(res)
+      begin
+        res = client.get("#{@url}/#{id}")
+        print_response(res)
+      rescue => e
+        puts e.message
+      end
     end
 
     desc 'add', 'add project'

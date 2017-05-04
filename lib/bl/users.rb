@@ -80,7 +80,7 @@ module Bl
     private
 
     def print_response(res)
-      formatter.render(res.body, fields: USER_FIELDS)
+      puts formatter.render(res.body, fields: USER_FIELDS)
     end
   end
 end

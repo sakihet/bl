@@ -77,14 +77,14 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = client.get('issues', opts)
-      print_issue_response(res)
+      print_issue_response(printable_issues(res.body))
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
       res = client.get('issues', delete_class_options(options.to_h))
-      print_issue_response(res)
+      print_issue_response(printable_issues(res.body))
     end
 
     desc 'show KEY', "show an issue's details"
@@ -136,7 +136,7 @@ module Bl
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
         puts '💡 issue added'
-        print_issue_response(res)
+        print_issue_response(printable_issues(res.body))
       end
     end
 
@@ -147,7 +147,7 @@ module Bl
       keys.each do |k|
         res = client.patch("issues/#{k}", delete_class_options(options.to_h))
         puts 'issue updated'
-        print_issue_response(res)
+        print_issue_response(printable_issues(res.body))
       end
     end
 
@@ -156,7 +156,7 @@ module Bl
       keys.each do |k|
         res = client.patch("issues/#{k}", statusId: 4)
         puts '🎉 issue closed'
-        print_issue_response(res)
+        print_issue_response(printable_issues(res.body))
       end
     end
 
@@ -246,7 +246,18 @@ module Bl
     private
 
     def print_issue_response(res)
-      puts formatter.render(res.body, fields: ISSUE_FIELDS)
+      puts formatter.render(res, fields: ISSUE_FIELDS)
+    end
+
+    def printable_issues(ary)
+      ary = Array(ary)
+      ary.each do |v|
+        v.issueType = v.issueType.name
+        v.assignee = v.assignee.name if v.assignee
+        v.status = v.status.name
+        v.priority = v.priority.name
+      end
+      ary
     end
   end
 end

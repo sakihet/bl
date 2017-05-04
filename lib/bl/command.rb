@@ -52,8 +52,12 @@ module Bl
       assigneeId: :numeric
     }
     ISSUE_FIELDS = %i(
+      issueType
       issueKey
       summary
+      assignee
+      status
+      priority
       startDate
       dueDate
       created
@@ -132,7 +136,6 @@ module Bl
       created
       updated
     )
-    TPUT_COLS = `tput cols`.to_i
     TYPE_COLORS = %w(
       #e30000
       #934981

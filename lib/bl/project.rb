@@ -91,6 +91,13 @@ module Bl
       puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
+    desc 'image ID', 'get project image file'
+    def image(id)
+      res = client.get("#{@url}/#{id}/image")
+      ::File.open(res.body.filename, 'wb') { |f| f.write(res.body.content) }
+      puts "#{res.body.filename} generated"
+    end
+
     private
 
     def count_issues(project_id, args={})

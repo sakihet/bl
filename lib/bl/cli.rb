@@ -89,32 +89,28 @@ module Bl
 
     desc 'show KEY', "show an issue's details"
     def show(key)
-      body = client.get("issues/#{key}").body
-      puts "id: #{body.id}"
-      puts "type: #{body.issueType.name}"
-      puts "key: #{body.issueKey}"
-      puts "created: #{body.created}"
-      puts "due date: #{body.dueDate}"
-      puts "summary: #{body.summary}"
-      puts "priority: #{body.priority.name}"
-      puts "category: #{body.category}"
-      puts "resolution: #{body.resolution}"
-      puts "version: #{body.versions}"
-      puts "status: #{body.status.name}"
-      puts "milestone: #{body.milestone}"
-      puts "assignee: #{body.assignee&.name}"
-      puts "created user: #{body.createdUser.name}"
+      res  = client.get("issues/#{key}")
+      body = printable_issues(res.body)
+      additional_fileds = %w(
+        description
+        category
+        resolution
+        versions
+        milestone
+        createdUser
+      )
+      fields = ISSUE_FIELDS.concat(additional_fileds)
+      puts formatter.render(body, fields: fields, vertical: true)
+
       puts '--'
-      puts "description:"
-      puts body.description
       puts "attachments:"
-      body.attachments.each do |file|
+      body[0].attachments.each do |file|
         puts ['-', file.id, file.name, file.size].join("\t")
         puts "\tview url: https://#{@config[:space_id]}.backlog.jp/ViewAttachment.action?attachmentId=#{file.id}"
         puts "\tdownload url: https://#{@config[:space_id]}.backlog.jp/downloadAttachment/#{file.id}/#{file.name}"
       end
       puts "shared files:"
-      body.sharedFiles.each do |file|
+      body[0].sharedFiles.each do |file|
         puts ['-', file.id, file.name, file.size].join("\t")
         puts "\tfile url: https://#{@config[:space_id]}.backlog.jp/ViewSharedFile.action?projectKey=#{@config[:project_key]}&sharedFileId=#{file.id}"
       end

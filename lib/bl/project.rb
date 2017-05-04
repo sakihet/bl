@@ -6,6 +6,14 @@ module Bl
       super
     end
 
+    desc 'activities ID', 'show project activities'
+    def activities(id)
+      res = client.get("#{@url}/#{id}/activities")
+      res.body.each do |a|
+        p a.pretty_inspect
+      end
+    end
+
     desc 'list', 'list projects'
     def list
       res = client.get(@url)

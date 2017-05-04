@@ -187,5 +187,9 @@ module Bl
       opts.map { |opt| h.delete(opt) }
       h
     end
+
+    def format_datetime(str)
+      DateTime.parse(str).strftime('%Y-%m-%d %H:%M')
+    end
   end
 end

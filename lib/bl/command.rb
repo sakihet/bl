@@ -136,6 +136,10 @@ module Bl
       created
       updated
     )
+    SPACE_NOTIFICATION_FIELDS = %i(
+      content
+      updated
+    )
     TYPE_COLORS = %w(
       #e30000
       #934981

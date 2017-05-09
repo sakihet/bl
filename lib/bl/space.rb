@@ -28,18 +28,27 @@ module Bl
 
     desc 'get-notification', 'get space notification'
     def get_notification
-      puts client.get('space/notification').body.content
+      res = client.get('space/notification')
+      print_space_notification(res)
     end
 
     desc 'update-notification CONTENT', 'update space notification'
     def update_notification(content)
-      client.put('space/notification', content: content)
+      res = client.put('space/notification', content: content)
+      puts 'space notification updated'
+      print_space_notification(res)
     end
 
     desc 'disk-usage', 'get space disk usage'
     def disk_usage
       capacity = client.get('space/diskUsage').body.capacity
       puts "capacity: #{capacity}"
+    end
+
+    private
+
+    def print_space_notification(res)
+      puts formatter.render(res.body, fields: SPACE_NOTIFICATION_FIELDS)
     end
   end
 end

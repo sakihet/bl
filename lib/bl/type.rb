@@ -28,7 +28,7 @@ module Bl
     option :color, color: :color
     def update(*ids)
       ids.each do |id|
-        res = client.patch("#{@url}/#{id}", options)
+        res = client.patch("#{@url}/#{id}", delete_class_options(options))
         puts 'type updated'
         print_response(res)
       end
@@ -38,7 +38,7 @@ module Bl
     option :substituteIssueTypeId, type: :numeric, required: true
     def delete(*ids)
       ids.each do |id|
-        res = client.delete("#{@url}/#{id}", options)
+        res = client.delete("#{@url}/#{id}", delete_class_options(options))
         puts 'type deleted'
         print_response
       end

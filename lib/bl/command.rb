@@ -125,6 +125,14 @@ module Bl
       {id: 5, name: 'Guest Reporter'},
       {id: 6, name: 'Guest Viewer'}
     ]
+    SPACE_DISK_USAGE = %i(
+      capacity
+      issue
+      wiki
+      file
+      subversion
+      git
+    )
     SPACE_FIELDS = %i(
       spaceKey
       name

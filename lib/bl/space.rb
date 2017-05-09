@@ -41,14 +41,18 @@ module Bl
 
     desc 'disk-usage', 'get space disk usage'
     def disk_usage
-      capacity = client.get('space/diskUsage').body.capacity
-      puts "capacity: #{capacity}"
+      res = client.get('space/diskUsage')
+      print_space_disk_usage(res)
     end
 
     private
 
     def print_space_notification(res)
       puts formatter.render(res.body, fields: SPACE_NOTIFICATION_FIELDS)
+    end
+
+    def print_space_disk_usage(res)
+      puts formatter.render(res.body, fields: SPACE_DISK_USAGE)
     end
   end
 end

@@ -209,7 +209,11 @@ module Bl
     end
 
     def format_datetime(str)
-      DateTime.parse(str).strftime('%Y-%m-%d %H:%M')
+      DateTime.parse(str).strftime('%Y-%m-%d %H:%M') if str
+    end
+
+    def format_date(str)
+      Date.parse(str).strftime('%Y-%m-%d') if  str
     end
   end
 end

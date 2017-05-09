@@ -252,6 +252,8 @@ module Bl
         v.assignee = v.assignee.name if v.assignee
         v.status = v.status.name
         v.priority = v.priority.name
+        v.startDate = format_date(v.startDate)
+        v.dueDate = format_date(v.dueDate)
         v.created = format_datetime(v.created)
         v.updated = format_datetime(v.updated)
       end

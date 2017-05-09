@@ -133,6 +133,14 @@ module Bl
       subversion
       git
     )
+    SPACE_DISK_USAGE_DETAILS_FIELDS = %i(
+      projectId
+      issue
+      wiki
+      file
+      subversion
+      git
+    )
     SPACE_FIELDS = %i(
       spaceKey
       name

@@ -52,7 +52,10 @@ module Bl
     end
 
     def print_space_disk_usage(res)
+      puts 'summary:'
       puts formatter.render(res.body, fields: SPACE_DISK_USAGE)
+      puts 'details:'
+      res.body.details.map { |v| puts formatter.render(v, fields: SPACE_DISK_USAGE_DETAILS_FIELDS) }
     end
   end
 end

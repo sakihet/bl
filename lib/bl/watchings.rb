@@ -10,20 +10,20 @@ module Bl
     desc 'list USER_ID', ''
     options WATCHINGS_PARAMS
     def list(id)
-      res = client.get("/users/#{id}/#{@url}", delete_class_options(options.to_h))
+      res = request(:get, "/users/#{id}/#{@url}", delete_class_options(options.to_h))
       res.body.map { |t| print_watch_target(t) }
     end
 
     desc 'count USER_ID', ''
     options resourceAlreadyRead: :boolean, alreadyRead: :boolean
     def count(id)
-      res = client.get("/users/#{id}/#{@url}/count")
+      res = request(:get, "/users/#{id}/#{@url}/count")
       puts res.body.count
     end
 
     desc 'show WATCHING_ID', ''
     def show(id)
-      res = client.get("watchings/#{id}")
+      res = request(:get, "watchings/#{id}")
       print_watch_target(res.body)
     end
 

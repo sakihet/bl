@@ -8,7 +8,7 @@ module Bl
 
     desc 'activities ID', 'show project activities'
     def activities(id)
-      res = client.get("#{@url}/#{id}/activities")
+      res = request(:get, "#{@url}/#{id}/activities")
       res.body.each do |a|
         p a.pretty_inspect
       end
@@ -16,13 +16,13 @@ module Bl
 
     desc 'list', 'list projects'
     def list
-      res = client.get(@url)
+      res = request(:get, @url)
       print_response(res)
     end
 
     desc 'show', 'show project'
     def show(id)
-      res = client.get("#{@url}/#{id}")
+      res = request(:get, "#{@url}/#{id}")
       print_response(res)
     rescue => e
       puts e.message
@@ -76,14 +76,14 @@ module Bl
       closed_issues_count = count_issues(id, statusId: [4])
       puts "#{closed_issues_count} / #{all_issues_count}"
       puts '--milestone--'
-      versions = client.get("projects/#{@config[:project_key]}/versions").body
+      versions = request(:get, "projects/#{@config[:project_key]}/versions").body
       versions.each do |version|
         all_issues_count = count_issues(id, milestoneId: [version.id])
         closed_issues_count = count_issues(id, milestoneId: [version.id], statusId: [4])
         puts "#{version.name}: #{closed_issues_count} / #{all_issues_count}"
       end
       puts '--category--'
-      categories = client.get("projects/#{@config[:project_key]}/categories").body
+      categories = request(:get, "projects/#{@config[:project_key]}/categories").body
       categories.each do |category|
         all_issues_count = count_issues(id, categoryId: [category.id])
         closed_issues_count = count_issues(id, categoryId: [category.id], statusId: [4])
@@ -93,13 +93,13 @@ module Bl
 
     desc 'users ID', 'show project users'
     def users(id)
-      res = client.get("#{@url}/#{id}/users")
+      res = request(:get, "#{@url}/#{id}/users")
       puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
     desc 'image ID', 'get project image file'
     def image(id)
-      res = client.get("#{@url}/#{id}/image")
+      res = request(:get, "#{@url}/#{id}/image")
       ::File.open(res.body.filename, 'wb') { |f| f.write(res.body.content) }
       puts "#{res.body.filename} generated"
     end
@@ -110,7 +110,7 @@ module Bl
       args = {
         projectId: [project_id],
       }.merge(args)
-      client.get(
+      request(:get, 
         'issues/count',
         args
       ).body.count

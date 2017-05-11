@@ -9,13 +9,13 @@ module Bl
 
     desc 'list', 'list users'
     def list
-      res = client.get('users')
+      res = request(:get, 'users')
       print_response(res)
     end
 
     desc 'show USER_ID', ''
     def show(id)
-      res = client.get("#{@url}/#{id}")
+      res = request(:get, "#{@url}/#{id}")
       puts formatter.render(res.body, fields: USER_FIELDS)
     end
 
@@ -43,20 +43,20 @@ module Bl
 
     desc 'myself', ''
     def myself
-      res = client.get("#{@url}/myself")
+      res = request(:get, "#{@url}/myself")
       print_response(res)
     end
 
     desc 'icon ID', ''
     def icon(id)
-      # res = client.get("#{@url}/#{id}/icon")
+      # res = request(:get, "#{@url}/#{id}/icon")
       # TODO fix nil error
     end
 
     desc 'activities USER_ID', "list user's activities"
     options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
     def activities(user_id)
-      res = client.get("/users/#{user_id}/activities")
+      res = request(:get, "/users/#{user_id}/activities")
       res.body.map { |a| print_activity(a) }
     end
 
@@ -64,7 +64,7 @@ module Bl
     options minId: :numeric, maxId: :numeric, count: :numeric, order: :string
     def stars(*user_ids)
       user_ids.each do |user_id|
-        res = client.get("/users/#{user_id}/stars", options.to_h)
+        res = request(:get, "/users/#{user_id}/stars", options.to_h)
         res.body.map { |s| p s }
       end
     end
@@ -73,7 +73,7 @@ module Bl
     options since: :string, until: :string
     def stars_count(*user_ids)
       user_ids.each do |user_id|
-        p client.get("/users/#{user_id}/stars/count", options.to_h).body.count
+        p request(:get, "/users/#{user_id}/stars/count", options.to_h).body.count
       end
     end
 

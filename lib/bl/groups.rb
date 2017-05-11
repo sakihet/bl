@@ -10,13 +10,13 @@ module Bl
     desc 'list', ''
     options order: :string, offset: :numeric, count: :numeric
     def list
-      res = client.get(@url, options.to_h)
+      res = request(:get, @url, options.to_h)
       puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'show GROUP_ID', ''
     def show(id)
-      res = client.get("#{@url}/#{id}")
+      res = request(:get, "#{@url}/#{id}")
       puts formatter.render(res.body.members, fields: USER_FIELDS)
     end
 

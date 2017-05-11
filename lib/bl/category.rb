@@ -9,7 +9,7 @@ module Bl
 
     desc 'list', 'list categories'
     def list
-      res = client.get(@url)
+      res = request(:get, @url)
       print_response(res)
     end
 

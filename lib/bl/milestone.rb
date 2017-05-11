@@ -10,7 +10,7 @@ module Bl
     desc 'list', 'list milestones'
     option :all
     def list
-      res = client.get(@url)
+      res = request(:get, @url)
       if options[:all]
       else
         res.body.select! { |m| m.archived == false } unless options[:all]

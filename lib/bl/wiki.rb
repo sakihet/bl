@@ -9,13 +9,13 @@ module Bl
 
     desc 'list', 'list wikis'
     def list
-      res = client.get(@url, projectIdOrKey: @config[:project_key])
+      res = request(:get, @url, projectIdOrKey: @config[:project_key])
       puts formatter.render(res.body, fields: WIKI_FIELDS)
     end
 
     desc 'show ID', "show a wiki's content"
     def show(id)
-      body = client.get("#{@url}/#{id}").body
+      body = request(:get, "#{@url}/#{id}").body
       puts "id: #{body.id}"
       puts "projectId: #{body.projectId}"
       puts "name: #{body.name}"
@@ -27,7 +27,7 @@ module Bl
 
     desc 'edit ID', 'edit a wiki by $EDITOR'
     def edit(id)
-      wiki_content = client.get("#{@url}/#{id}").body.content
+      wiki_content = request(:get, "#{@url}/#{id}").body.content
       file = Tempfile.new
       file.puts(wiki_content)
       file.close

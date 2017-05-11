@@ -35,13 +35,13 @@ module Bl
           space_id: space_id,
           api_key: api_key
         )
-        res = client.get('projects')
+        res = request(:get, 'projects')
         project_key = res.body[0].projectKey
         config[:project_key] = project_key
         config[:issue][:default][:projectId] = res.body[0].id
-        res = client.get("projects/#{project_key}/issueTypes")
+        res = request(:get, "projects/#{project_key}/issueTypes")
         config[:issue][:default][:issueTypeId] = res.body[0].id
-        res = client.get('priorities')
+        res = request(:get, 'priorities')
         config[:issue][:default][:priorityId] = res.body[1].id
         f.write(config.to_yaml)
         puts "#{filename} generated."
@@ -51,7 +51,7 @@ module Bl
     desc 'count', 'count issues'
     options ISSUES_PARAMS
     def count
-      puts client.get('issues/count', delete_class_options(options.to_h)).body.count
+      puts request(:get, 'issues/count', delete_class_options(options.to_h)).body.count
     end
 
     desc 'list', 'list issues by typical ways'
@@ -76,20 +76,20 @@ module Bl
         opts[:order] = "asc"
       end
       opts[:categoryId] = [-1] if options[:nocategory]
-      res = client.get('issues', opts)
+      res = request(:get, 'issues', opts)
       print_issue_response(printable_issues(res.body))
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
-      res = client.get('issues', delete_class_options(options.to_h))
+      res = request(:get, 'issues', delete_class_options(options.to_h))
       print_issue_response(printable_issues(res.body))
     end
 
     desc 'show KEY', "show an issue's details"
     def show(key)
-      res  = client.get("issues/#{key}")
+      res  = request(:get, "issues/#{key}")
       body = printable_issues(res.body)
       additional_fileds = %w(
         description
@@ -158,7 +158,7 @@ module Bl
 
     desc 'edit KEY', "edit issues' description by $EDITOR"
     def edit(key)
-      issue_description = client.get("issues/#{key}").body.description
+      issue_description = request(:get, "issues/#{key}").body.description
       file = Tempfile.new
       file.puts(issue_description)
       file.close
@@ -176,19 +176,19 @@ module Bl
 
     desc 'statuses', 'list statuses'
     def statuses
-      res = client.get('statuses')
+      res = request(:get, 'statuses')
       puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'priorities', 'list priorities'
     def priorities
-      res = client.get('priorities')
+      res = request(:get, 'priorities')
       puts formatter.render(res.body, fields: %i(id name))
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
-      res = client.get('resolutions')
+      res = request(:get, 'resolutions')
       puts formatter.render(res.body, fields: %i(id name))
     end
 

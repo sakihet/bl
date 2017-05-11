@@ -8,14 +8,14 @@ module Bl
 
     desc 'list PATH', 'list files on PATH'
     def list(path = '')
-      res = client.get("#{@url}/files/metadata/#{path}")
+      res = request(:get, "#{@url}/files/metadata/#{path}")
       print_response(res)
     end
 
     desc 'get [ID...]', 'get files'
     def get(*ids)
       ids.each do |id|
-        res = client.get("#{@url}/files/#{id}")
+        res = request(:get, "#{@url}/files/#{id}")
         f = ::File.new(res.body.filename, 'w')
         f.write(res.body.content)
         f.close

@@ -10,14 +10,14 @@ module Bl
     desc 'list', ''
     options minId: :numeric, maxId: :numeric, count: :numeric, order: :string
     def list
-      res = client.get(@url, options.to_h)
+      res = request(:get, @url, options.to_h)
       res.body.map { |n| puts n.pretty_inspect }
     end
 
     desc 'count', ''
     options alreadyRead: :boolean, resourceAlreadyRead: :boolean
     def count
-      # puts client.get("#{@url}/count").body.count
+      # puts request(:get, "#{@url}/count").body.count
       # TODO fix nil error
     end
 

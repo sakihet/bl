@@ -9,13 +9,13 @@ module Bl
 
     desc 'list', ''
     def list
-      res = client.get(@url)
+      res = request(:get, @url)
       print_response(res)
     end
 
     desc 'show WEBHOOK_ID', ''
     def show(id)
-      res = client.get("#{@url}/#{id}")
+      res = request(:get, "#{@url}/#{id}")
       print_response(res)
     end
 

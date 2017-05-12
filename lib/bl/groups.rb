@@ -38,7 +38,7 @@ module Bl
 
     desc 'delete GROUP_ID', ''
     def delete(id)
-      res = client.delete("#{@url}/#{id}")
+      res = request(:delete, "#{@url}/#{id}")
       puts 'group deleted'
       print_group_and_members(res.body)
     end

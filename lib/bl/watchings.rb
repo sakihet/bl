@@ -46,7 +46,7 @@ module Bl
 
     desc 'delete WATCHING_ID', ''
     def delete(id)
-      res = client.delete("watchings/#{id}")
+      res = request(:delete, "watchings/#{id}")
       puts 'watch deleted'
       print_watch_target(res.body)
     end

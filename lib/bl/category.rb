@@ -35,7 +35,7 @@ module Bl
     desc 'delete [ID...]', 'delete categories'
     def delete(*ids)
       ids.each do |id|
-        res = client.delete("#{@url}/#{id}")
+        res = request(:delete, "#{@url}/#{id}")
         puts 'category deleted'
         print_response(res)
       end

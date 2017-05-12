@@ -36,7 +36,7 @@ module Bl
 
     desc 'delete', ''
     def delete(id)
-      res = client.delete("#{@url}/#{id}")
+      res = request(:delete, "#{@url}/#{id}")
       puts 'user deleted'
       print_response(res)
     end

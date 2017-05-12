@@ -38,7 +38,7 @@ module Bl
     option :substituteIssueTypeId, type: :numeric, required: true
     def delete(*ids)
       ids.each do |id|
-        res = client.delete("#{@url}/#{id}", delete_class_options(options))
+        res = request(:delete, "#{@url}/#{id}", delete_class_options(options))
         puts 'type deleted'
         print_response
       end

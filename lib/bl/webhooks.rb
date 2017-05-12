@@ -37,7 +37,7 @@ module Bl
 
     desc 'delete WEBHOOK_ID', ''
     def delete(id)
-      res = client.delete("#{@url}/#{id}")
+      res = request(:delete, "#{@url}/#{id}")
       puts 'webhook deleted'
       print_response(res)
     end

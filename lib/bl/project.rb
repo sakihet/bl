@@ -50,7 +50,7 @@ module Bl
 
     desc 'delete', 'delete project'
     def delete(id)
-      res = client.delete("#{@url}/#{id}")
+      res = request(:delete, "#{@url}/#{id}")
       puts 'project deleted'
       print_response(res)
     end

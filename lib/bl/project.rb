@@ -43,7 +43,7 @@ module Bl
     desc 'update', 'update project'
     options PROJECT_PARAMS
     def update(id)
-      res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
+      res = request(:patch, "#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'project updated'
       print_response(res)
     end

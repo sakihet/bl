@@ -29,7 +29,7 @@ module Bl
     desc 'update USER_ID', ''
     options USER_PARAMS
     def update(id)
-      res = client.patch("#{@url}/#{id}", delete_class_options(options.to_h))
+      res = request(:patch, "#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'user updated:'
       print_response(res)
     end

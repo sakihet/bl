@@ -39,7 +39,7 @@ module Bl
     option note: :string
     def update(id)
       # TODO fix conflict with issue update command
-      # res = client.patch("watchings/#{id}", option.to_h)
+      # res = request(:patch, "watchings/#{id}", option.to_h)
       # puts 'watch updated'
       # print_watch_target(res.body)
     end

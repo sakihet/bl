@@ -141,7 +141,7 @@ module Bl
     option :comment, type: :string
     def update(*keys)
       keys.each do |k|
-        res = client.patch("issues/#{k}", delete_class_options(options.to_h))
+        res = request(:patch, "issues/#{k}", delete_class_options(options.to_h))
         puts 'issue updated'
         print_issue_response(printable_issues(res.body))
       end
@@ -150,7 +150,7 @@ module Bl
     desc 'close [KEY...]', 'close issues'
     def close(*keys)
       keys.each do |k|
-        res = client.patch("issues/#{k}", statusId: 4)
+        res = request(:patch, "issues/#{k}", statusId: 4)
         puts '🎉 issue closed'
         print_issue_response(printable_issues(res.body))
       end
@@ -166,7 +166,7 @@ module Bl
         file.open
         system("$EDITOR #{file.path}")
         new_content = file.read
-        client.patch("issues/#{key}", description: new_content)
+        request(:patch, "issues/#{key}", description: new_content)
         puts "issue #{key} updated."
       ensure
         file.close

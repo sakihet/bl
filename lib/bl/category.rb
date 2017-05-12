@@ -26,7 +26,7 @@ module Bl
     option :name, type: :string
     def update(*ids)
       ids.each do |id|
-        res = client.patch("#{@url}/#{id}", delete_class_options(options))
+        res = request(:patch, "#{@url}/#{id}", delete_class_options(options))
         puts 'category updated'
         print_response(res)
       end

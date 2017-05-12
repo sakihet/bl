@@ -35,7 +35,7 @@ module Bl
         file.open
         system("$EDITOR #{file.path}")
         new_content = file.read
-        client.patch("#{@url}/#{id}", content: new_content)
+        request(:patch, "#{@url}/#{id}", content: new_content)
         puts "wiki #{id} updated."
       ensure
         file.close

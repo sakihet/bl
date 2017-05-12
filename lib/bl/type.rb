@@ -28,7 +28,7 @@ module Bl
     option :color, color: :color
     def update(*ids)
       ids.each do |id|
-        res = client.patch("#{@url}/#{id}", delete_class_options(options))
+        res = request(:patch, "#{@url}/#{id}", delete_class_options(options))
         puts 'type updated'
         print_response(res)
       end

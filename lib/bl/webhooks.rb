@@ -30,7 +30,7 @@ module Bl
     desc 'update WEBHOOK_ID', ''
     options WEBHOOK_PARAMS
     def update(id)
-      res = client.patch("#{@url}/#{id}", options.to_h)
+      res = request(:patch, "#{@url}/#{id}", options.to_h)
       puts 'webhook updated'
       print_response(res)
     end

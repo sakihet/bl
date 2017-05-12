@@ -35,7 +35,7 @@ module Bl
     option :subtaskingEnabled, type: :boolean, default: false
     option :textFormattingRule, type: :string, default: 'markdown'
     def add(name)
-      res = client.post(@url, {name: name}.merge(delete_class_options(options.to_h)))
+      res = request(:post, @url, {name: name}.merge(delete_class_options(options.to_h)))
       puts 'project added'
       print_response(res)
     end

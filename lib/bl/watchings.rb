@@ -30,7 +30,7 @@ module Bl
     desc 'add', ''
     options issueIdOrKey: :required, note: :string
     def add
-      res = client.post('watchings', options.to_h)
+      res = request(:post, 'watchings', options.to_h)
       puts 'watch added'
       print_watch_target(res.body)
     end
@@ -53,13 +53,13 @@ module Bl
 
     desc 'mark-as-read WATCHING_ID', ''
     def mark_as_read(id)
-      res = client.post("watchings/#{id}/markAsRead")
+      res = request(:post, "watchings/#{id}/markAsRead")
       puts 'watch mark as read'
     end
 
     desc 'mark-as-checked USER_ID', ''
     def mark_as_checked(id)
-      res = client.post("/users/#{id}/watchings/markAsChecked")
+      res = request(:post, "/users/#{id}/watchings/markAsChecked")
       puts 'watch mark as checked'
     end
 

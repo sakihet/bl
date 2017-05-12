@@ -17,7 +17,7 @@ module Bl
     option :color, type: :string, required: true
     def add(*names)
       names.each do |name|
-        res = client.post(@url, name: name, color: options[:color])
+        res = request(:post, @url, name: name, color: options[:color])
         puts 'type added'
         print_response(res)
       end

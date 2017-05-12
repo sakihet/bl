@@ -22,7 +22,7 @@ module Bl
     desc 'add', ''
     options WEBHOOK_PARAMS
     def add
-      res = client.post(@url, options.to_h)
+      res = request(:post, @url, options.to_h)
       puts 'webhook added'
       print_response(res)
     end

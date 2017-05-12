@@ -23,14 +23,14 @@ module Bl
 
     desc 'mark-as-read', ''
     def mark_as_read
-      res = client.post("#{@url}/markAsRead")
+      res = request(:post, "#{@url}/markAsRead")
       puts 'notifications mark as readed'
       puts res.body.count
     end
 
     desc 'read NOTIFICATIONS_ID', ''
     def read(id)
-      res = client.post("#{@url}/#{id}/markAsRead")
+      res = request(:post, "#{@url}/#{id}/markAsRead")
       puts "notifications #{id} readed"
       puts res.pretty_inspect
     end

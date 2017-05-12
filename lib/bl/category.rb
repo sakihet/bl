@@ -16,7 +16,7 @@ module Bl
     desc 'add [NAME...]', 'add categories'
     def add(*names)
       names.each do |name|
-        res = client.post(@url, name: name)
+        res = request(:post, @url, name: name)
         puts 'category added'
         print_response(res)
       end

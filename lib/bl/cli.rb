@@ -127,7 +127,7 @@ module Bl
     def add(*subjects)
       subjects.each do |s|
         issue_default_options = @config[:issue][:default]
-        res = client.post(
+        res = request(:post, 
           'issues',
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )

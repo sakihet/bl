@@ -22,7 +22,7 @@ module Bl
     options MILESTONE_PARAMS
     def add(*names)
       names.each do |name|
-        res = client.post(
+        res = request(:post, 
           @url,
           name: name,
           description: options[:description],

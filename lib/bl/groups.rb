@@ -1,6 +1,5 @@
 module Bl
   class Groups < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'groups'
@@ -23,7 +22,7 @@ module Bl
     desc 'add GROUP_NAME', ''
     options members: :array
     def add(name)
-      res = request(:post, @url, {name: name}.merge(delete_class_options(options)))
+      res = request(:post, @url, { name: name }.merge(delete_class_options(options)))
       puts 'group added'
       print_group_and_members(res.body)
     end

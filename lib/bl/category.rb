@@ -1,6 +1,5 @@
 module Bl
   class Category < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/categories"

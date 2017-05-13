@@ -110,7 +110,8 @@ module Bl
       args = {
         projectId: [project_id],
       }.merge(args)
-      request(:get, 
+      request(
+        :get,
         'issues/count',
         args
       ).body.count

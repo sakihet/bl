@@ -1,6 +1,5 @@
 module Bl
   class Milestone < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/versions"
@@ -22,7 +21,8 @@ module Bl
     options MILESTONE_PARAMS
     def add(*names)
       names.each do |name|
-        res = request(:post, 
+        res = request(
+          :post,
           @url,
           name: name,
           description: options[:description],

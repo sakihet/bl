@@ -1,7 +1,5 @@
 module Bl
-
   class CLI < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -72,8 +70,8 @@ module Bl
       end
       opts[:dueDateUntil] = Date.today.to_s if options[:overdue]
       if options[:priority]
-        opts[:sort] = "priority"
-        opts[:order] = "asc"
+        opts[:sort] = 'priority'
+        opts[:order] = 'asc'
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = request(:get, 'issues', opts)
@@ -103,13 +101,13 @@ module Bl
       puts formatter.render(body, fields: fields, vertical: true)
 
       puts '--'
-      puts "attachments:"
+      puts 'attachments:'
       body[0].attachments.each do |file|
         puts ['-', file.id, file.name, file.size].join("\t")
         puts "\tview url: https://#{@config[:space_id]}.backlog.jp/ViewAttachment.action?attachmentId=#{file.id}"
         puts "\tdownload url: https://#{@config[:space_id]}.backlog.jp/downloadAttachment/#{file.id}/#{file.name}"
       end
-      puts "shared files:"
+      puts 'shared files:'
       body[0].sharedFiles.each do |file|
         puts ['-', file.id, file.name, file.size].join("\t")
         puts "\tfile url: https://#{@config[:space_id]}.backlog.jp/ViewSharedFile.action?projectKey=#{@config[:project_key]}&sharedFileId=#{file.id}"
@@ -238,6 +236,5 @@ module Bl
 
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
     subcommand 'wiki', Wiki
-
   end
 end

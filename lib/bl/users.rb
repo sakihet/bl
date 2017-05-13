@@ -1,6 +1,5 @@
 module Bl
   class Users < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'users'
@@ -21,7 +20,15 @@ module Bl
 
     desc 'add USER_ID PASSWORD NAME MAIL_ADDRESS ROLE_TYPE', ''
     def add(id, pass, name, mail_address, role_type)
-      res = request(:post, "#{@url}", userId: id, password: pass, name: name, mailAddress: mail_address, roleType: role_type)
+      res = request(
+        :post,
+        @url,
+        userId: id,
+        password: pass,
+        name: name,
+        mailAddress: mail_address,
+        roleType: role_type
+      )
       puts 'user added'
       print_response(res)
     end

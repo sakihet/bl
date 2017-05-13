@@ -8,20 +8,16 @@ module Bl
 
     desc 'issues COUNT', 'list recently viewed issues'
     def issues(count = nil)
-      request(:get,
-        'users/myself/recentlyViewedIssues',
-        count: count
-      ).body.each do |i|
+      res = request(:get, 'users/myself/recentlyViewedIssues', count: count)
+      res.body.each do |i|
         puts [i.issue.issueKey, i.issue.summary].join("\t")
       end
     end
 
     desc 'wikis COUNT', 'list recently viewed wikis'
     def wikis(count = nil)
-      request(:get,
-        'users/myself/recentlyViewedWikis',
-        count: count
-      ).body.each do |w|
+      res = request(:get, 'users/myself/recentlyViewedWikis', count: count)
+      res.body.each do |w|
         puts [w.page.id, w.page.name].join("\t")
       end
     end

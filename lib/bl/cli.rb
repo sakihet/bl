@@ -84,7 +84,7 @@ module Bl
     options ISSUES_PARAMS
     def search
       res = request(:get, 'issues', delete_class_options(options.to_h))
-      print_issue_response(printable_issues(res.body))
+      print_response(:issue, res)
     end
 
     desc 'show KEY', "show an issue's details"

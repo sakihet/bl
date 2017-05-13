@@ -77,7 +77,7 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = request(:get, 'issues', opts)
-      print_issue_response(printable_issues(res.body))
+      print_response(:issue, res)
     end
 
     desc 'search', 'search issues'
@@ -127,7 +127,7 @@ module Bl
     def add(*subjects)
       subjects.each do |s|
         issue_default_options = @config[:issue][:default]
-        res = request(:post, 
+        res = request(:post,
           'issues',
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
@@ -239,25 +239,5 @@ module Bl
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
     subcommand 'wiki', Wiki
 
-    private
-
-    def print_issue_response(res)
-      puts formatter.render(res, fields: ISSUE_FIELDS)
-    end
-
-    def printable_issues(ary)
-      ary = Array(ary)
-      ary.each do |v|
-        v.issueType = v.issueType.name
-        v.assignee = v.assignee.name if v.assignee
-        v.status = v.status.name
-        v.priority = v.priority.name
-        v.startDate = format_date(v.startDate)
-        v.dueDate = format_date(v.dueDate)
-        v.created = format_datetime(v.created)
-        v.updated = format_datetime(v.updated)
-      end
-      ary
-    end
   end
 end

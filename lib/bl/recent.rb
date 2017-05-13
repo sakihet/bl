@@ -8,7 +8,7 @@ module Bl
 
     desc 'issues COUNT', 'list recently viewed issues'
     def issues(count = nil)
-      request(:get, 
+      request(:get,
         'users/myself/recentlyViewedIssues',
         count: count
       ).body.each do |i|
@@ -18,7 +18,7 @@ module Bl
 
     desc 'wikis COUNT', 'list recently viewed wikis'
     def wikis(count = nil)
-      request(:get, 
+      request(:get,
         'users/myself/recentlyViewedWikis',
         count: count
       ).body.each do |w|

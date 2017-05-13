@@ -132,7 +132,7 @@ module Bl
           issue_default_options.merge({summary: s}).merge(delete_class_options(options.to_h))
         )
         puts '💡 issue added'
-        print_issue_response(printable_issues(res.body))
+        print_response(res, :issue)
       end
     end
 
@@ -143,7 +143,7 @@ module Bl
       keys.each do |k|
         res = request(:patch, "issues/#{k}", delete_class_options(options.to_h))
         puts 'issue updated'
-        print_issue_response(printable_issues(res.body))
+        print_response(res, :issue)
       end
     end
 
@@ -152,7 +152,7 @@ module Bl
       keys.each do |k|
         res = request(:patch, "issues/#{k}", statusId: 4)
         puts '🎉 issue closed'
-        print_issue_response(printable_issues(res.body))
+        print_response(res, :issue)
       end
     end
 

@@ -2,7 +2,7 @@ module Bl
   module Printer
     module_function
 
-    def print_response(resource, res)
+    def print_response(res, resource)
       case resource
       when :issue
         puts formatter.render(printable_issues(res.body), fields: ISSUE_FIELDS)

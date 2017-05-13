@@ -77,14 +77,14 @@ module Bl
       end
       opts[:categoryId] = [-1] if options[:nocategory]
       res = request(:get, 'issues', opts)
-      print_response(:issue, res)
+      print_response(res, :issue)
     end
 
     desc 'search', 'search issues'
     options ISSUES_PARAMS
     def search
       res = request(:get, 'issues', delete_class_options(options.to_h))
-      print_response(:issue, res)
+      print_response(res, :issue)
     end
 
     desc 'show KEY', "show an issue's details"
@@ -177,19 +177,19 @@ module Bl
     desc 'statuses', 'list statuses'
     def statuses
       res = request(:get, 'statuses')
-      print_response(:named, res)
+      print_response(res, :named)
     end
 
     desc 'priorities', 'list priorities'
     def priorities
       res = request(:get, 'priorities')
-      print_response(:named, res)
+      print_response(res, :named)
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
       res = request(:get, 'resolutions')
-      print_response(:named, res)
+      print_response(res, :named)
     end
 
     desc 'roles', 'list roles'

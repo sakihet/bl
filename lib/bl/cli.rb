@@ -177,19 +177,19 @@ module Bl
     desc 'statuses', 'list statuses'
     def statuses
       res = request(:get, 'statuses')
-      puts formatter.render(res.body, fields: %i(id name))
+      print_response(:named, res)
     end
 
     desc 'priorities', 'list priorities'
     def priorities
       res = request(:get, 'priorities')
-      puts formatter.render(res.body, fields: %i(id name))
+      print_response(:named, res)
     end
 
     desc 'resolutions', 'list resolutions'
     def resolutions
       res = request(:get, 'resolutions')
-      puts formatter.render(res.body, fields: %i(id name))
+      print_response(:named, res)
     end
 
     desc 'roles', 'list roles'

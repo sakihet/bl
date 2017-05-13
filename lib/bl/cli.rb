@@ -33,13 +33,13 @@ module Bl
           space_id: space_id,
           api_key: api_key
         )
-        res = request(:get, 'projects')
+        res = client.get('projects')
         project_key = res.body[0].projectKey
         config[:project_key] = project_key
         config[:issue][:default][:projectId] = res.body[0].id
-        res = request(:get, "projects/#{project_key}/issueTypes")
+        res = client.get("projects/#{project_key}/issueTypes")
         config[:issue][:default][:issueTypeId] = res.body[0].id
-        res = request(:get, 'priorities')
+        res = client.get('priorities')
         config[:issue][:default][:priorityId] = res.body[1].id
         f.write(config.to_yaml)
         puts "#{filename} generated."

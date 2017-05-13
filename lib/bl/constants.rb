@@ -46,6 +46,7 @@ module Bl
     priorityId: :numeric,
     assigneeId: :numeric
   }
+  ISSUES_COUNT_MAX = 100
   ISSUE_FIELDS = %i(
     issueType
     issueKey

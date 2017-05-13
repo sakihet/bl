@@ -74,6 +74,7 @@ module Bl
         opts[:order] = 'asc'
       end
       opts[:categoryId] = [-1] if options[:nocategory]
+      opts[:count] = ISSUES_COUNT_MAX
       res = request(:get, 'issues', opts)
       print_response(res, :issue)
     end

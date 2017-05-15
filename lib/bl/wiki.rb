@@ -1,6 +1,5 @@
 module Bl
   class Wiki < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = 'wikis'
@@ -10,7 +9,7 @@ module Bl
     desc 'list', 'list wikis'
     def list
       res = request(:get, @url, projectIdOrKey: @config[:project_key])
-      puts formatter.render(res.body, fields: WIKI_FIELDS)
+      print_response(res, :wiki)
     end
 
     desc 'show ID', "show a wiki's content"

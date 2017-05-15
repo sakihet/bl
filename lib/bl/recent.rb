@@ -1,6 +1,5 @@
 module Bl
   class Recent < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       super

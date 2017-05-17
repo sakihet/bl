@@ -45,13 +45,7 @@ module Bl
     desc 'show ID', "show a wiki's content"
     def show(id)
       res = request(:get, "#{@url}/#{id}")
-      puts "id: #{res.body.id}"
-      puts "projectId: #{res.body.projectId}"
-      puts "name: #{res.body.name}"
-      puts "updated: #{res.body.updated}"
-      puts '--'
-      puts 'content:'
-      puts res.body.content
+      puts formatter.render(res.body, fields: WIKI_FIELDS.push(:content), vertical: true)
     end
 
     desc 'tags', 'show wiki tags'

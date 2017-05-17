@@ -44,14 +44,14 @@ module Bl
 
     desc 'show ID', "show a wiki's content"
     def show(id)
-      body = request(:get, "#{@url}/#{id}").body
-      puts "id: #{body.id}"
-      puts "projectId: #{body.projectId}"
-      puts "name: #{body.name}"
-      puts "updated: #{body.updated}"
+      res = request(:get, "#{@url}/#{id}")
+      puts "id: #{res.body.id}"
+      puts "projectId: #{res.body.projectId}"
+      puts "name: #{res.body.name}"
+      puts "updated: #{res.body.updated}"
       puts '--'
       puts 'content:'
-      puts body.content
+      puts res.body.content
     end
 
     desc 'tags', 'show wiki tags'

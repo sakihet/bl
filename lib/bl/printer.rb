@@ -8,6 +8,8 @@ module Bl
         puts formatter.render(printable_issues(res.body), fields: ISSUE_FIELDS)
       when :named
         puts formatter.render(res.body, fields: %i(id name))
+      when :type
+        puts formatter.render(res.body, fields: %i(id name color))
       when :wiki
         puts formatter.render(res.body, fields: WIKI_FIELDS)
       else

@@ -1,6 +1,5 @@
 module Bl
   class Type < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       @url = "projects/#{@config[:project_key]}/issueTypes"
@@ -10,7 +9,8 @@ module Bl
     desc 'list', 'list issue types'
     def list
       res = request(:get, @url)
-      print_response(res)
+      puts 'types:'
+      print_response(res, :type)
     end
 
     desc 'add [NAME...]', 'add types'
@@ -19,7 +19,7 @@ module Bl
       names.each do |name|
         res = request(:post, @url, name: name, color: options[:color])
         puts 'type added'
-        print_response(res)
+        print_response(res, :type)
       end
     end
 
@@ -30,7 +30,7 @@ module Bl
       ids.each do |id|
         res = request(:patch, "#{@url}/#{id}", delete_class_options(options))
         puts 'type updated'
-        print_response(res)
+        print_response(res, :type)
       end
     end
 
@@ -40,7 +40,7 @@ module Bl
       ids.each do |id|
         res = request(:delete, "#{@url}/#{id}", delete_class_options(options))
         puts 'type deleted'
-        print_response
+        print_response(res, :type)
       end
     end
 
@@ -49,12 +49,6 @@ module Bl
       TYPE_COLORS.each do |color|
         puts Paint[color, '#ffffff', color]
       end
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: %i(id name color))
     end
   end
 end

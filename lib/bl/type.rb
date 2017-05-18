@@ -44,8 +44,9 @@ module Bl
       end
     end
 
-    desc 'colors', 'list colors'
+    desc 'colors', 'list available colors'
     def colors
+      puts 'colors:'
       TYPE_COLORS.each do |color|
         puts Paint[color, '#ffffff', color]
       end

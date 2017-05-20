@@ -6,6 +6,8 @@ module Bl
       case resource
       when :issue
         puts formatter.render(printable_issues(res.body), fields: ISSUE_FIELDS)
+      when :milestone
+        puts formatter.render(res.body, fields: MILESTONE_FIELDS)
       when :named
         puts formatter.render(res.body, fields: %i(id name))
       when :type

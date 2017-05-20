@@ -14,7 +14,8 @@ module Bl
       else
         res.body.select! { |m| m.archived == false } unless options[:all]
       end
-      print_response(res)
+      puts 'milestones:'
+      print_response(res, :milestone)
     end
 
     desc 'add [NAME...]', 'add milestones'
@@ -30,7 +31,7 @@ module Bl
           releaseDueDate: options[:releaseDueDate]
         )
         puts 'milestone added'
-        print_response(res)
+        print_response(res, :milestone)
       end
     end
 
@@ -41,7 +42,7 @@ module Bl
       ids.each do |id|
         res = request(:patch, "#{@url}/#{id}", delete_class_options(options))
         puts 'milestone updated'
-        print_response(res)
+        print_response(res, milestone)
       end
     end
 
@@ -50,14 +51,8 @@ module Bl
       ids.each do |id|
         res = request(:delete, "#{@url}/#{id}")
         puts 'milestone deleted'
-        print_response(res)
+        print_response(res, :milestone)
       end
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: MILESTONE_FIELDS)
     end
   end
 end

@@ -9,7 +9,7 @@ module Bl
     desc 'list PATH', 'list files on PATH'
     def list(path = '')
       res = request(:get, "#{@url}/files/metadata/#{path}")
-      print_response(res)
+      print_response(res, :file)
     end
 
     desc 'get [ID...]', 'get files'
@@ -21,12 +21,6 @@ module Bl
         f.close
         puts "file #{id} #{res.body.filename} downloaded."
       end
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: FILE_FIELDS)
     end
   end
 end

@@ -9,7 +9,8 @@ module Bl
     desc 'list', 'list categories'
     def list
       res = request(:get, @url)
-      print_response(res)
+      puts 'categories:'
+      print_response(res, :category)
     end
 
     desc 'add [NAME...]', 'add categories'
@@ -17,7 +18,7 @@ module Bl
       names.each do |name|
         res = request(:post, @url, name: name)
         puts 'category added'
-        print_response(res)
+        print_response(res, :category)
       end
     end
 
@@ -27,7 +28,7 @@ module Bl
       ids.each do |id|
         res = request(:patch, "#{@url}/#{id}", delete_class_options(options))
         puts 'category updated'
-        print_response(res)
+        print_response(res, :category)
       end
     end
 
@@ -36,14 +37,8 @@ module Bl
       ids.each do |id|
         res = request(:delete, "#{@url}/#{id}")
         puts 'category deleted'
-        print_response(res)
+        print_response(res, :category)
       end
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: CATEGORY_FIELDS)
     end
   end
 end

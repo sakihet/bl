@@ -4,6 +4,8 @@ module Bl
 
     def print_response(res, resource)
       case resource
+      when :category
+        puts formatter.render(res.body, fields: CATEGORY_FIELDS)
       when :file
         puts formatter.render(res.body, fields: FILE_FIELDS)
       when :issue

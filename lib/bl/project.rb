@@ -17,13 +17,13 @@ module Bl
     desc 'list', 'list projects'
     def list
       res = request(:get, @url)
-      print_response(res)
+      print_response(res, :project)
     end
 
     desc 'show', 'show project'
     def show(id)
       res = request(:get, "#{@url}/#{id}")
-      print_response(res)
+      print_response(res, :project)
     rescue => e
       puts e.message
     end
@@ -37,7 +37,7 @@ module Bl
     def add(name)
       res = request(:post, @url, {name: name}.merge(delete_class_options(options.to_h)))
       puts 'project added'
-      print_response(res)
+      print_response(res, :project)
     end
 
     desc 'update', 'update project'
@@ -45,14 +45,14 @@ module Bl
     def update(id)
       res = request(:patch, "#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'project updated'
-      print_response(res)
+      print_response(res, :project)
     end
 
     desc 'delete', 'delete project'
     def delete(id)
       res = request(:delete, "#{@url}/#{id}")
       puts 'project deleted'
-      print_response(res)
+      print_response(res, :project)
     end
 
     desc 'status ID', 'show project status'
@@ -117,8 +117,5 @@ module Bl
       ).body.count
     end
 
-    def print_response(res)
-      puts formatter.render(res.body, fields: PROJECT_FIELDS)
-    end
   end
 end

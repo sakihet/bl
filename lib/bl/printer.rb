@@ -16,8 +16,12 @@ module Bl
         puts formatter.render(res.body, fields: MILESTONE_FIELDS)
       when :named
         puts formatter.render(res.body, fields: %i(id name))
+      when :project
+        puts formatter.render(res.body, fields: PROJECT_FIELDS)
       when :type
         puts formatter.render(res.body, fields: %i(id name color))
+      when :user
+        puts formatter.render(res.body, fields: USER_FIELDS)
       when :wiki
         puts formatter.render(res.body, fields: WIKI_FIELDS)
       else

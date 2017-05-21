@@ -9,7 +9,7 @@ module Bl
     desc 'list', 'list users'
     def list
       res = request(:get, 'users')
-      print_response(res)
+      print_response(res, :user)
     end
 
     desc 'show USER_ID', ''
@@ -30,7 +30,7 @@ module Bl
         roleType: role_type
       )
       puts 'user added'
-      print_response(res)
+      print_response(res, :user)
     end
 
     desc 'update USER_ID', ''
@@ -38,20 +38,20 @@ module Bl
     def update(id)
       res = request(:patch, "#{@url}/#{id}", delete_class_options(options.to_h))
       puts 'user updated:'
-      print_response(res)
+      print_response(res, :user)
     end
 
     desc 'delete', ''
     def delete(id)
       res = request(:delete, "#{@url}/#{id}")
       puts 'user deleted'
-      print_response(res)
+      print_response(res, :user)
     end
 
     desc 'myself', ''
     def myself
       res = request(:get, "#{@url}/myself")
-      print_response(res)
+      print_response(res, :user)
     end
 
     desc 'icon ID', ''
@@ -82,12 +82,6 @@ module Bl
       user_ids.each do |user_id|
         p request(:get, "/users/#{user_id}/stars/count", options.to_h).body.count
       end
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: USER_FIELDS)
     end
   end
 end

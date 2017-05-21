@@ -8,6 +8,8 @@ module Bl
         puts formatter.render(res.body, fields: CATEGORY_FIELDS)
       when :file
         puts formatter.render(res.body, fields: FILE_FIELDS)
+      when :gitrepo
+        puts formatter.render(res.body, fields: GIT_REPO_FIELDS)
       when :issue
         puts formatter.render(printable_issues(res.body), fields: ISSUE_FIELDS)
       when :milestone

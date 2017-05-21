@@ -10,19 +10,13 @@ module Bl
     desc 'list', 'list git repositories'
     def list
       res = request(:get, @url)
-      print_response(res)
+      print_response(res, :gitrepo)
     end
 
     desc 'show ID', 'show a git repository'
     def show(id)
       res = request(:get, "#{@url}/#{id}")
-      puts formatter.render(res.body, fields: GIT_REPO_FIELDS, vertical: true)
-    end
-
-    private
-
-    def print_response(res)
-      puts formatter.render(res.body, fields: GIT_REPO_FIELDS)
+      print_response(res, :gitrepo)
     end
   end
 end

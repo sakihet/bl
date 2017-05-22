@@ -18,6 +18,8 @@ module Bl
         puts formatter.render(res.body, fields: %i(id name))
       when :project
         puts formatter.render(res.body, fields: PROJECT_FIELDS)
+      when :pull_request
+        puts formatter.render(res.body, fields: PULL_REQUEST_FIELDS)
       when :type
         puts formatter.render(res.body, fields: %i(id name color))
       when :user

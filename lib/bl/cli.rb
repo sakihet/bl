@@ -217,6 +217,9 @@ module Bl
     desc 'project SUBCOMMAND ...ARGS', 'manage projects'
     subcommand 'project', Project
 
+    desc 'pullrequest SUBCOMMAND ...ARGS', 'manage pull requests'
+    subcommand 'pullrequest', PullRequest
+
     desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
     subcommand 'recent', Recent
 

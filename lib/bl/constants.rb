@@ -113,6 +113,22 @@ module Bl
     subtaskingEnabled: :boolean,
     textFormattingRule: :boolean
   }
+  PULL_REQUEST_FIELDS = %i(
+    id
+    projectId
+    repositoryId
+    number
+    summary
+    description
+    base
+    branch
+    baseCommit
+    branchCommit
+    closeAt
+    mergeAt
+    created
+    updated
+  )
   ROLES = [
     {id: 1, name: 'Administrator'},
     {id: 2, name: 'Normal User'},

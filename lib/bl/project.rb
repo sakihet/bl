@@ -15,8 +15,9 @@ module Bl
     end
 
     desc 'list', 'list projects'
+    option :all
     def list
-      res = request(:get, @url)
+      res = request(:get, @url, archived: options[:all] ? true : false)
       print_response(res, :project)
     end
 

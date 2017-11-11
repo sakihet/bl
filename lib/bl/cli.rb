@@ -197,48 +197,48 @@ module Bl
     end
 
     desc 'category SUBCOMMAND ...ARGS', 'manage categories'
-    subcommand 'category', Category
+    subcommand 'category', Commands::Category
 
     desc 'file SUBCOMMAND ...ARGS', 'manage files'
-    subcommand 'file', File
+    subcommand 'file', Commands::File
 
     desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
-    subcommand 'gitrepo', GitRepo
+    subcommand 'gitrepo', Commands::GitRepo
 
     desc 'groups SUBCOMMAND ...ARGS', 'manage groups'
-    subcommand 'groups', Groups
+    subcommand 'groups', Commands::Groups
 
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
-    subcommand 'milestone', Milestone
+    subcommand 'milestone', Commands::Milestone
 
     desc 'notifications SUBCOMMAND ...ARGS', 'manage notifications'
-    subcommand 'notifications', Notifications
+    subcommand 'notifications', Commands::Notifications
 
     desc 'project SUBCOMMAND ...ARGS', 'manage projects'
-    subcommand 'project', Project
+    subcommand 'project', Commands::Project
 
     desc 'pullrequest SUBCOMMAND ...ARGS', 'manage pull requests'
-    subcommand 'pullrequest', PullRequest
+    subcommand 'pullrequest', Commands::PullRequest
 
     desc 'recent SUBCOMMAND ...ARGS', 'list recent stuff'
-    subcommand 'recent', Recent
+    subcommand 'recent', Commands::Recent
 
     desc 'space SUBCOMMAND ...ARGS', 'manage space'
-    subcommand 'space', Space
+    subcommand 'space', Commands::Space
 
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
-    subcommand 'type', Type
+    subcommand 'type', Commands::Type
 
     desc 'users SUBCOMMAND ...ARGS', 'manage users'
-    subcommand 'users', Users
+    subcommand 'users', Commands::Users
 
     desc 'watchings SUBCOMMAND ...ARGS', 'manage watchings'
-    subcommand 'watchings', Watchings
+    subcommand 'watchings', Commands::Watchings
 
     desc 'webhooks SUBCOMMAND ...ARGS', 'manage webhooks'
-    subcommand 'webhooks', Webhooks
+    subcommand 'webhooks', Commands::Webhooks
 
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
-    subcommand 'wiki', Wiki
+    subcommand 'wiki', Commands::Wiki
   end
 end

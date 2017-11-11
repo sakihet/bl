@@ -1,6 +1,5 @@
 module Bl
   class Space < Command
-
     def initialize(*)
       @config = Bl::Config.instance
       super
@@ -22,7 +21,7 @@ module Bl
     desc 'image', 'get space image file'
     def image
       body = request(:get, 'space/image').body
-      ::File.open(body.filename, "wb") {|f| f.write(body.content)}
+      ::File.open(body.filename, 'wb') { |f| f.write(body.content) }
       puts "#{body.filename} generated."
     end
 
@@ -55,7 +54,10 @@ module Bl
       puts 'summary:'
       puts formatter.render(res.body, fields: SPACE_DISK_USAGE)
       puts 'details:'
-      res.body.details.map { |v| puts formatter.render(v, fields: SPACE_DISK_USAGE_DETAILS_FIELDS) }
+      puts formatter.render(
+        res.body.details,
+        fields: SPACE_DISK_USAGE_DETAILS_FIELDS
+      )
     end
   end
 end

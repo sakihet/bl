@@ -1,7 +1,6 @@
 module Bl
   class Command < Thor
     include Bl::Requestable
-    include Bl::Formatting
     include Bl::Printer
     class_option :format, type: :string, default: 'table', desc: 'set output format'
 

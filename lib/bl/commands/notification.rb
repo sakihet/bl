@@ -1,6 +1,8 @@
 module Bl
   module Commands
     class Notification < Command
+      # TODO:
+
       def initialize(*)
         @config = Bl::Config.instance
         @url = 'notifications'

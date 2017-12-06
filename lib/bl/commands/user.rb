@@ -61,12 +61,13 @@ module Bl
         # TODO fix nil error
       end
 
-      desc 'activities USER_ID', "list user's activities"
-      options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
-      def activities(user_id)
-        res = request(:get, "/users/#{user_id}/activities")
-        res.body.map { |a| print_activity(a) }
-      end
+      # TODO:
+      # desc 'activities USER_ID', "list user's activities"
+      # options activityTypeId: :array, minId: :numeric, maxId: :numeric, count: :numeric, order: :string
+      # def activities(user_id)
+      #   res = request(:get, "/users/#{user_id}/activities")
+      #   res.body.map { |a| print_activity(a) }
+      # end
 
       desc 'stars [USER_ID...]', ''
       options minId: :numeric, maxId: :numeric, count: :numeric, order: :string

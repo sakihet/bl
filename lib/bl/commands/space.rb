@@ -12,12 +12,13 @@ module Bl
         puts formatter.render(res.body, fields: SPACE_FIELDS)
       end
 
-      desc 'activities', 'show space activities'
-      def activities
-        request(:get, 'space/activities').body.each do |a|
-          p a.pretty_inspect
-        end
-      end
+      # TODO:
+      # desc 'activities', 'show space activities'
+      # def activities
+      #   request(:get, 'space/activities').body.each do |a|
+      #     p a.pretty_inspect
+      #   end
+      # end
 
       desc 'image', 'get space image file'
       def image

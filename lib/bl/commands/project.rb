@@ -7,13 +7,14 @@ module Bl
         super
       end
 
-      desc 'activities ID', 'show project activities'
-      def activities(id)
-        res = request(:get, "#{@url}/#{id}/activities")
-        res.body.each do |a|
-          p a.pretty_inspect
-        end
-      end
+      # TODO:
+      # desc 'activities ID', 'show project activities'
+      # def activities(id)
+      #   res = request(:get, "#{@url}/#{id}/activities")
+      #   res.body.each do |a|
+      #     p a.pretty_inspect
+      #   end
+      # end
 
       desc 'list', 'list projects'
       option :all

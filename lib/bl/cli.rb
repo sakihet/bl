@@ -7,7 +7,7 @@ module Bl
 
     desc 'version', 'show version'
     def version
-      puts Bl::VERSION
+      puts Bl.gem_version
     end
 
     desc 'config', 'show config'

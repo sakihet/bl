@@ -5,7 +5,7 @@ require 'bl/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'bl'
-  spec.version       = Bl::VERSION
+  spec.version       = Bl.gem_version
   spec.authors       = ['saki']
   spec.email         = ['sakihet@gmail.com']
 

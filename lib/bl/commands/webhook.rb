@@ -1,6 +1,6 @@
 module Bl
   module Commands
-    class Webhooks < Command
+    class Webhook < Command
       def initialize(*)
         @config = Bl::Config.instance
         @url = "projects/#{@config[:project_key]}/webhooks"

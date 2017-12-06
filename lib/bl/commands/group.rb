@@ -1,6 +1,6 @@
 module Bl
   module Commands
-    class Groups < Command
+    class Group < Command
       def initialize(*)
         @config = Bl::Config.instance
         @url = 'groups'

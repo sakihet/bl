@@ -205,14 +205,14 @@ module Bl
     desc 'gitrepo SUBCOMMAND ...ARGS', 'show gitrepos'
     subcommand 'gitrepo', Commands::GitRepo
 
-    desc 'groups SUBCOMMAND ...ARGS', 'manage groups'
-    subcommand 'groups', Commands::Groups
+    desc 'group SUBCOMMAND ...ARGS', 'manage groups'
+    subcommand 'group', Commands::Group
 
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
     subcommand 'milestone', Commands::Milestone
 
-    desc 'notifications SUBCOMMAND ...ARGS', 'manage notifications'
-    subcommand 'notifications', Commands::Notifications
+    desc 'notification SUBCOMMAND ...ARGS', 'manage notifications'
+    subcommand 'notification', Commands::Notification
 
     desc 'project SUBCOMMAND ...ARGS', 'manage projects'
     subcommand 'project', Commands::Project
@@ -229,14 +229,14 @@ module Bl
     desc 'type SUBCOMMAND ...ARGS', 'manage types'
     subcommand 'type', Commands::Type
 
-    desc 'users SUBCOMMAND ...ARGS', 'manage users'
-    subcommand 'users', Commands::Users
+    desc 'user SUBCOMMAND ...ARGS', 'manage users'
+    subcommand 'user', Commands::User
 
-    desc 'watchings SUBCOMMAND ...ARGS', 'manage watchings'
-    subcommand 'watchings', Commands::Watchings
+    desc 'watching SUBCOMMAND ...ARGS', 'manage watchings'
+    subcommand 'watching', Commands::Watching
 
-    desc 'webhooks SUBCOMMAND ...ARGS', 'manage webhooks'
-    subcommand 'webhooks', Commands::Webhooks
+    desc 'webhook SUBCOMMAND ...ARGS', 'manage webhooks'
+    subcommand 'webhook', Commands::Webhook
 
     desc 'wiki SUBCOMMAND ...ARGS', 'manage wikis'
     subcommand 'wiki', Commands::Wiki

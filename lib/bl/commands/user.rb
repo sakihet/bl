@@ -1,6 +1,6 @@
 module Bl
   module Commands
-    class Users < Command
+    class User < Command
       def initialize(*)
         @config = Bl::Config.instance
         @url = 'users'

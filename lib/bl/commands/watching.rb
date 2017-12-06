@@ -1,6 +1,6 @@
 module Bl
   module Commands
-    class Watchings < Command
+    class Watching < Command
       def initialize(*)
         @config = Bl::Config.instance
         @url = 'watchings'

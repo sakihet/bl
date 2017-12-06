@@ -18,7 +18,9 @@ module Bl
       desc 'list', 'list projects'
       option :all
       def list
-        res = request(:get, @url, archived: options[:all] ? true : false)
+        opts = {}
+        opts[:archived] = false unless options[:all]
+        res = request(:get, @url, opts)
         print_response(res, :project)
       end
 

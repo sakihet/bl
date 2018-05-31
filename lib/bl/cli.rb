@@ -122,6 +122,7 @@ module Bl
     desc 'milestone SUBCOMMAND ...ARGS', 'manage milestones'
     subcommand 'milestone', Commands::Milestone
 
+    # TODO
     # desc 'notification SUBCOMMAND ...ARGS', 'manage notifications'
     # subcommand 'notification', Commands::Notification
 

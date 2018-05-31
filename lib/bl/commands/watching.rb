@@ -10,14 +10,14 @@ module Bl
       desc 'list USER_ID', ''
       options WATCHINGS_PARAMS
       def list(id)
-        res = request(:get, "/users/#{id}/#{@url}", delete_class_options(options.to_h))
+        res = request(:get, "users/#{id}/#{@url}", delete_class_options(options.to_h))
         res.body.map { |t| print_watch_target(t) }
       end
 
       desc 'count USER_ID', ''
       options resourceAlreadyRead: :boolean, alreadyRead: :boolean
       def count(id)
-        res = request(:get, "/users/#{id}/#{@url}/count")
+        res = request(:get, "users/#{id}/#{@url}/count")
         puts res.body.count
       end
 
@@ -53,13 +53,13 @@ module Bl
 
       desc 'mark-as-read WATCHING_ID', ''
       def mark_as_read(id)
-        res = request(:post, "watchings/#{id}/markAsRead")
+        request(:post, "watchings/#{id}/markAsRead")
         puts 'watch mark as read'
       end
 
       desc 'mark-as-checked USER_ID', ''
       def mark_as_checked(id)
-        res = request(:post, "/users/#{id}/watchings/markAsChecked")
+        request(:post, "users/#{id}/watchings/markAsChecked")
         puts 'watch mark as checked'
       end
     end

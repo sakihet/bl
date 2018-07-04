@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'backlog_kit', '~> 0.16.0'
+  spec.add_dependency 'backlog_kit', '~> 0.17.0'
   spec.add_dependency 'hirb', '~> 0.7.3'
   spec.add_dependency 'hirb-unicode-steakknife', '~> 0.0.8'
   spec.add_dependency 'paint', '~> 2.0.1'

@@ -5,7 +5,9 @@ module Bl
     def client
       BacklogKit::Client.new(
         space_id: @config[:space_id],
-        api_key: @config[:api_key]
+        api_key: @config[:api_key],
+        second_level_domain: @config[:second_level_domain],
+        top_level_domain: @config[:top_level_domain]
       )
     end
 

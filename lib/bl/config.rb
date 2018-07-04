@@ -24,6 +24,8 @@ module Bl
       {
         space_id: '',
         api_key: '',
+        second_level_domain: 'backlog',
+        top_level_domain: 'com',
         project_key: '',
         issue: {
           default: {
